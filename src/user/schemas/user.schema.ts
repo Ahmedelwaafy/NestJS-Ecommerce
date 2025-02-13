@@ -1,12 +1,86 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { Role } from '../enums/role.enum';
+import { ActiveStatus } from '../enums/active-status.enum';
+import { Gender } from '../enums/gender.enum';
 
 export type UserDocument = HydratedDocument<User>;
 
-@Schema()
+@Schema({ timestamps: true })
 export class User {
-  @Prop()
+  @Prop({
+    required: true,
+    type: String,
+    min: [3, 'Name must be at least 3 characters long.'],
+    max: [30, 'Name must be at most 30 characters long.'],
+  })
   name: string;
+
+  @Prop({
+    required: true,
+    type: String,
+    unique: true,
+  })
+  email: string;
+
+  @Prop({
+    required: true,
+    type: String,
+    min: [3, 'Password must be at least 3 characters long.'],
+    max: [20, 'Password must be at most 20 characters long.'],
+  })
+  password: string;
+
+  @Prop({
+    required: true,
+    type: String,
+    enum: Role,
+    default: Role.User,
+  })
+  role: Role;
+
+  @Prop({
+    type: String,
+  })
+  avatar?: string;
+
+  @Prop({
+    type: Number,
+    min: [18, 'Age must be at least 18.'],
+    max: [100, 'Age must be at most 100.'],
+  })
+  age?: number;
+
+  @Prop({
+    type: String,
+    match: [
+      /^\+?[1-9]\d{1,14}$/,
+      'Phone number must be a valid international number.',
+    ],
+  })
+  phoneNumber?: string;
+
+  @Prop({
+    type: String,
+  })
+  address?: string;
+
+  @Prop({
+    type: String,
+    enum: ActiveStatus,
+    default: ActiveStatus.Active,
+  })
+  active: ActiveStatus;
+
+  @Prop({
+    type: String,
+  })
+  verificationCode?: string;
+  @Prop({
+    type: String,
+    enum: Gender,
+  })
+  gender?: Gender;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

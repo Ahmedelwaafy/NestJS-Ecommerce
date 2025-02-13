@@ -20,4 +20,7 @@ export function createApp(app: INestApplication) {
   // Instantiate Document
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api', app, document);
+
+  //enable cors
+  app.enableCors();
 }
