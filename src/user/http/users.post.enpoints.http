@@ -1,5 +1,6 @@
 POST http://localhost:3000/users
 Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJyb2xlIjoiYWRtaW4ifQ.mwRIj6zCmVo5Zo5Ey__BkEiOszfshZdsBUHRJZEexfQ
 
 {
   "name": "nono",
