@@ -1,8 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
-import { Role } from '../enums/role.enum';
-import { ActiveStatus } from '../enums/active-status.enum';
 import { Gender } from '../enums/gender.enum';
+import { Role } from '../enums/role.enum';
 
 export type UserDocument = HydratedDocument<User>;
 
@@ -26,7 +25,7 @@ export class User {
   @Prop({
     required: true,
     type: String,
-    min: [3, 'Password must be at least 3 characters long.'],
+    min: [6, 'Password must be at least 6 characters long.'],
     max: [20, 'Password must be at most 20 characters long.'],
   })
   password: string;
@@ -66,11 +65,10 @@ export class User {
   address?: string;
 
   @Prop({
-    type: String,
-    enum: ActiveStatus,
-    default: ActiveStatus.Active,
+    type: Boolean,
+    default: true,
   })
-  active: ActiveStatus;
+  active: boolean;
 
   @Prop({
     type: String,
