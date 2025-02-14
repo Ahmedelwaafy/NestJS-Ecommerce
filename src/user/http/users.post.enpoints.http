@@ -3,7 +3,7 @@ Content-Type: application/json
 
 {
   "name": "vevesw",
-  "active": true,
+  "active": "true",
   "email": "vevesw@xdoe.com",
   "password": "Password123#"
 }

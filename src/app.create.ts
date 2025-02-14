@@ -1,10 +1,22 @@
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 export function createApp(app: INestApplication) {
-  /**
-   * swagger configuration
-   */
+  //* Use validation pipes globally
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
+    }),
+  );
+
+  //*  swagger configuration
+
   const swaggerConfig = new DocumentBuilder()
     .setTitle('NestJs Ecommerce API')
     .setDescription('Use the base API URL as http://localhost:3000')
@@ -17,7 +29,6 @@ export function createApp(app: INestApplication) {
     .setVersion('1.0')
     .build();
 
-  // Instantiate Document
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api', app, document);
 
