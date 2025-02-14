@@ -125,12 +125,6 @@ export class CreateUserDto {
   })
   active?: boolean;
 
-  @ApiPropertyOptional({
-    example: '123456',
-    description: 'The verification code of the user.',
-    minLength: 6,
-    maxLength: 6,
-  })
   @IsOptional()
   @IsString()
   @Length(6, 6, {
