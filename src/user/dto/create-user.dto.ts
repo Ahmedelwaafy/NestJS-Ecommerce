@@ -15,7 +15,7 @@ import {
   MinLength,
 } from 'class-validator';
 import { Gender } from '../enums/gender.enum';
-import { Role } from '../enums/role.enum';
+import { Role } from '../../auth/enums/role.enum';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreateUserDto {

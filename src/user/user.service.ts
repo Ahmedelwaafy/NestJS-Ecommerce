@@ -4,6 +4,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { ActiveUserData } from 'src/auth/interfaces/active-user.interface';
 
 @Injectable()
 export class UserService {
@@ -11,7 +12,8 @@ export class UserService {
     //* injecting user model
     @InjectModel(User.name) private readonly userModel: Model<User>,
   ) {}
-  create(createUserDto: CreateUserDto) {
+  create(createUserDto: CreateUserDto, user: ActiveUserData) {
+    console.log({ user });
     return this.userModel.create(createUserDto);
   }
 

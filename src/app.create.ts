@@ -2,6 +2,9 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 export function createApp(app: INestApplication) {
+
+  app.setGlobalPrefix('api');
+
   //* Use validation pipes globally
 
   app.useGlobalPipes(

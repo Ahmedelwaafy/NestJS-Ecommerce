@@ -1,0 +1,17 @@
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "firstName": "ahmed",
+  "lastName": "Doe",
+  "email": "ahmed@doe.com",
+  "password": "Password123#"
+}
+
+
+POST http://localhost:3000/auth/sign-in
+Content-Type: application/json
+{
+  "email": "ahmed@doe.com",
+  "password": "Password123#"
+}
