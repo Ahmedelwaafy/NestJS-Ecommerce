@@ -41,7 +41,7 @@ export class GetUsersFiltersDto {
     maximum: 100,
   })
   @IsOptional()
-  @Type(() => Number)
+  //@Type(() => Number)
   @IsNumber()
   @Min(18, {
     message: 'Age must be at least 18.',
@@ -52,7 +52,7 @@ export class GetUsersFiltersDto {
   age?: number;
 
   @ApiPropertyOptional({
-    example: 25,
+    example: "mohammed",
     description: 'search query.',
     minimum: 18,
     maximum: 100,

@@ -4,8 +4,8 @@ Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3OD
 
 {
   "name": "fefe",
-  "active": "true",
-  "email": "sssfxss@dxdxsoe.com",
+  "age": 66,
+  "email": "sssfxsss@dxdxsoe.com",
   "password": "Password123#"
 }
 
