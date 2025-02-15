@@ -27,9 +27,9 @@ export class UserController {
   @UseGuards(AuthGuard)
   create(
     @Body() createUserDto: CreateUserDto,
-    @ActiveUser() user: ActiveUserData,
+    //@ActiveUser() user: ActiveUserData,
   ) {
-    return this.userService.create(createUserDto, user);
+    return this.userService.create(createUserDto);
   }
 
   @Get()
