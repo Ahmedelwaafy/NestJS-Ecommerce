@@ -10,11 +10,15 @@ import environmentValidation from './config/environment.validation';
 import jwtConfig from './config/jwt.config';
 import { DataResponseInterceptor } from './common/interceptors/data-response/data-response.interceptor';
 import { APP_INTERCEPTOR } from '@nestjs/core';
+import { PaginationModule } from './common/pagination/pagination.module';
 
 const ENV = process.env.NODE_ENV;
 //console.log({ ENV });
 @Module({
   imports: [
+    UserModule,
+    AuthModule,
+    PaginationModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: !ENV ? '.env' : `.env.${ENV}`,
@@ -28,7 +32,6 @@ const ENV = process.env.NODE_ENV;
         dbName: configService.get<string>('database.dbName'),
       }),
     }),
-    UserModule,
     JwtModule.registerAsync({
       global: true,
       inject: [ConfigService],
@@ -41,7 +44,6 @@ const ENV = process.env.NODE_ENV;
         },
       }),
     }),
-    AuthModule,
   ],
   controllers: [],
   providers: [

@@ -8,6 +8,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -19,6 +20,7 @@ import { Roles } from '../auth/decorators/roles.decorator';
 import { ActiveUser } from 'src/auth/decorators/active-user.decorator';
 import { ActiveUserData } from 'src/auth/interfaces/active-user.interface';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
+import { GetUsersDto } from './dto/get-users.dto';
 
 @Controller('v1/users')
 @ApiTags('Users')
@@ -45,8 +47,11 @@ export class UserController {
     status: 200,
     description: 'Users fetched successfully',
   })
-  findAll() {
-    return this.userService.findAll();
+  @Roles(['admin'])
+  @UseGuards(AuthGuard)
+  findAll(@Query() getUsersQuery: GetUsersDto) {
+    const { limit, page, ...filters } = getUsersQuery;
+    return this.userService.findAll({ page, limit }, filters);
   }
 
   @Get(':id')
