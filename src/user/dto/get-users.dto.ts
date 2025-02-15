@@ -1,19 +1,20 @@
 import { ApiPropertyOptional, IntersectionType } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
 import {
   IsBoolean,
-  IsDate,
   IsEnum,
   IsNumber,
   IsOptional,
   IsString,
   Max,
-  Min,
+  Min
 } from 'class-validator';
 import { Role } from 'src/auth/enums/role.enum';
+import { Sort } from 'src/common/enums';
 import { PaginationQueryDto } from 'src/common/pagination/dto/pagination-query.dto';
 
-export class GetUsersFiltersDto {
+
+
+export class GetUsersBaseDto {
   @ApiPropertyOptional({
     example: Role.User,
     description: 'role query.',
@@ -21,7 +22,16 @@ export class GetUsersFiltersDto {
   })
   @IsOptional()
   @IsEnum(Role)
-  role: Role;
+  role?: Role;
+
+  @ApiPropertyOptional({
+    example: Sort.asc,
+    description: 'sort query.',
+    enum: Sort,
+  })
+  @IsOptional()
+  @IsEnum(Sort)
+  sort?: Sort = Sort.desc;
 
   @ApiPropertyOptional({
     example: true,
@@ -52,7 +62,7 @@ export class GetUsersFiltersDto {
   age?: number;
 
   @ApiPropertyOptional({
-    example: "mohammed",
+    example: 'mohammed',
     description: 'search query.',
     minimum: 18,
     maximum: 100,
@@ -63,6 +73,6 @@ export class GetUsersFiltersDto {
 }
 
 export class GetUsersDto extends IntersectionType(
-  GetUsersFiltersDto,
+  GetUsersBaseDto,
   PaginationQueryDto,
 ) {}

@@ -1,5 +1,11 @@
 import { User } from './schemas/user.schema';
-import { Injectable } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  NotFoundException,
+  RequestTimeoutException,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
@@ -8,7 +14,9 @@ import { CreateUserProvider } from './providers/create-user.provider';
 import { PaginationService } from 'src/common/pagination/providers/pagination.service';
 import { PaginationQueryDto } from 'src/common/pagination/dto/pagination-query.dto';
 import { Paginated } from 'src/common/pagination/interfaces/paginated.interface';
-import { GetUsersFiltersDto } from './dto/get-users.dto';
+import { GetUsersBaseDto, GetUsersDto } from './dto/get-users.dto';
+import { FindUserByIdProvider } from './providers/find-user-by-id.provider';
+import { HashingProvider } from 'src/auth/providers/hashing.provider';
 
 @Injectable()
 export class UserService {
@@ -16,7 +24,10 @@ export class UserService {
     //* injecting user model
     @InjectModel(User.name) private readonly userModel: Model<User>,
     private readonly createUserProvider: CreateUserProvider,
+    private readonly findUserByIdProvider: FindUserByIdProvider,
     private readonly paginationService: PaginationService,
+    @Inject(forwardRef(() => HashingProvider))
+    private readonly hashingProvider: HashingProvider,
   ) {}
 
   create(createUserDto: CreateUserDto) {
@@ -26,27 +37,27 @@ export class UserService {
   // Example with different filter scenarios
   async findAll(
     paginationQuery: PaginationQueryDto,
-    getUsersFiltersQuery?: GetUsersFiltersDto,
+    getUsersQuery?: GetUsersBaseDto,
   ): Promise<Paginated<User>> {
     const filters: Record<string, any> = {};
-    //console.log({ getUsersFiltersQuery }); // if not passed any => { getUsersFiltersQuery: {} }
+    //console.log({ getUsersQuery }); // if not passed any => { getUsersQuery: {} }
     // Build filters dynamically
-    if (getUsersFiltersQuery?.role) {
-      filters.role = getUsersFiltersQuery.role;
+    if (getUsersQuery?.role) {
+      filters.role = getUsersQuery.role;
     }
 
-    if (getUsersFiltersQuery?.active !== undefined) {
-      filters.active = getUsersFiltersQuery.active;
+    if (getUsersQuery?.active !== undefined) {
+      filters.active = getUsersQuery.active;
     }
 
-    if (getUsersFiltersQuery?.age) {
-      filters.age = getUsersFiltersQuery.age;
+    if (getUsersQuery?.age) {
+      filters.age = getUsersQuery.age;
     }
 
-    if (getUsersFiltersQuery?.search) {
+    if (getUsersQuery?.search) {
       filters.$or = [
-        { name: { $regex: getUsersFiltersQuery.search, $options: 'i' } },
-        { email: { $regex: getUsersFiltersQuery.search, $options: 'i' } },
+        { name: { $regex: getUsersQuery.search, $options: 'i' } },
+        { email: { $regex: getUsersQuery.search, $options: 'i' } },
       ];
     }
 
@@ -56,19 +67,43 @@ export class UserService {
       {
         filters,
         select: '-password -__v',
+        ...(getUsersQuery?.sort && { sort: getUsersQuery.sort }),
       },
     );
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: string) {
+    const user = await this.findUserByIdProvider.findById(id);
+    return user;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    await this.findUserByIdProvider.findById(id);
+    if (updateUserDto.password) {
+      updateUserDto.password = await this.hashingProvider.hashPassword(
+        updateUserDto.password,
+      );
+    }
+    try {
+      const updatedUser = await this.userModel
+        .findByIdAndUpdate(id, updateUserDto, { new: true })
+        .select('-password -__v');
+      return updatedUser;
+    } catch {
+      throw new RequestTimeoutException('an error occurred', {
+        description: 'unable to connect to the database',
+      });
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: string) {
+    await this.findUserByIdProvider.findById(id);
+    try {
+      await this.userModel.findByIdAndUpdate(id, { active: false });
+    } catch {
+      throw new RequestTimeoutException('an error occurred', {
+        description: 'unable to connect to the database',
+      });
+    }
   }
 }

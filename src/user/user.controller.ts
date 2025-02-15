@@ -11,7 +11,14 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiOperation,
+  ApiParam,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserService } from './user.service';
@@ -21,6 +28,7 @@ import { ActiveUser } from 'src/auth/decorators/active-user.decorator';
 import { ActiveUserData } from 'src/auth/interfaces/active-user.interface';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
 import { GetUsersDto } from './dto/get-users.dto';
+import { Role } from 'src/auth/enums/role.enum';
 
 @Controller('v1/users')
 @ApiTags('Users')
@@ -31,6 +39,14 @@ export class UserController {
   @Roles(['admin'])
   @UseGuards(AuthGuard)
   @HttpCode(HttpStatus.CREATED)
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description: 'User created successfully',
+  })
+  @ApiOperation({
+    summary: 'Creates a new user',
+    description: 'Creates a new user',
+  })
   @ResponseMessage('User created successfully')
   create(
     @Body() createUserDto: CreateUserDto,
@@ -55,17 +71,61 @@ export class UserController {
   }
 
   @Get(':id')
+  @ApiOperation({
+    summary: 'Fetches a user by its id',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'User fetched successfully',
+  })
+  @ApiParam({
+    name: 'id',
+    description: 'User id',
+    type: String,
+  })
+  @Roles(['admin'])
+  @UseGuards(AuthGuard)
   findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
+    return this.userService.findOne(id);
   }
 
   @Patch(':id')
+  @Roles(['admin'])
+  @UseGuards(AuthGuard)
+  @ApiOperation({
+    summary: 'Updates a user by its id',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'User updated successfully',
+  })
+  @ApiParam({
+    name: 'id',
+    description: 'User id',
+    type: String,
+  })
+  @ResponseMessage('User updated successfully')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
+    return this.userService.update(id, updateUserDto);
   }
 
   @Delete(':id')
+  @Roles(['admin'])
+  @UseGuards(AuthGuard)
+  @ApiOperation({
+    summary: 'Deletes a user by its id',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'User deleted successfully',
+  })
+  @ApiParam({
+    name: 'id',
+    description: 'User id',
+    type: String,
+  })
+  @ResponseMessage('User deleted successfully')
   remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+    return this.userService.remove(id);
   }
 }

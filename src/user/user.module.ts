@@ -6,6 +6,7 @@ import { User, UserSchema } from './schemas/user.schema';
 import { AuthModule } from 'src/auth/auth.module';
 import { CreateUserProvider } from './providers/create-user.provider';
 import { PaginationModule } from 'src/common/pagination/pagination.module';
+import { FindUserByIdProvider } from './providers/find-user-by-id.provider';
 
 @Module({
   imports: [
@@ -14,6 +15,6 @@ import { PaginationModule } from 'src/common/pagination/pagination.module';
     forwardRef(() => AuthModule),
   ],
   controllers: [UserController],
-  providers: [UserService, CreateUserProvider],
+  providers: [UserService, CreateUserProvider, FindUserByIdProvider],
 })
 export class UserModule {}

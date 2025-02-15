@@ -5,6 +5,7 @@ import { REQUEST } from '@nestjs/core';
 import { Model } from 'mongoose';
 import { PaginationQueryDto } from '../dto/pagination-query.dto';
 import { Paginated } from '../interfaces/paginated.interface';
+import { Sort } from 'src/common/enums';
 
 @Injectable()
 export class PaginationService {
@@ -19,6 +20,7 @@ export class PaginationService {
     options?: {
       filters?: Record<string, any>;
       select?: string;
+      sort?: Sort; // default value set in the dto
     },
   ): Promise<Paginated<T>> {
     const { page = 1, limit = 10 } = paginationQuery;
@@ -28,7 +30,13 @@ export class PaginationService {
     const selectFields = options?.select || '-__v';
 
     const [results, totalItems] = await Promise.all([
-      model.find(query).skip(skip).limit(limit).select(selectFields).exec(),
+      model
+        .find(query)
+        .skip(skip)
+        .limit(limit)
+        .select(selectFields)
+        .sort({ createdAt: options.sort })
+        .exec(),
       model.countDocuments(query).exec(),
     ]);
 
