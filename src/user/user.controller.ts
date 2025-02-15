@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
+  HttpStatus,
   Param,
   Patch,
   Post,
@@ -16,6 +18,7 @@ import { AuthGuard } from '../auth/gaurds/auth.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { ActiveUser } from 'src/auth/decorators/active-user.decorator';
 import { ActiveUserData } from 'src/auth/interfaces/active-user.interface';
+import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
 
 @Controller('v1/users')
 @ApiTags('Users')
@@ -25,6 +28,8 @@ export class UserController {
   @Post()
   @Roles(['admin'])
   @UseGuards(AuthGuard)
+  @HttpCode(HttpStatus.CREATED)
+  @ResponseMessage('User created successfully')
   create(
     @Body() createUserDto: CreateUserDto,
     //@ActiveUser() user: ActiveUserData,

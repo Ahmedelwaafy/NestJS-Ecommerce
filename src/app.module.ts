@@ -8,6 +8,8 @@ import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
 import environmentValidation from './config/environment.validation';
 import jwtConfig from './config/jwt.config';
+import { DataResponseInterceptor } from './common/interceptors/data-response/data-response.interceptor';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 
 const ENV = process.env.NODE_ENV;
 //console.log({ ENV });
@@ -42,6 +44,11 @@ const ENV = process.env.NODE_ENV;
     AuthModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: DataResponseInterceptor,
+    },
+  ],
 })
 export class AppModule {}
