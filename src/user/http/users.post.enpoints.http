@@ -1,0 +1,32 @@
+POST http://localhost:3000/api/v1/users
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJyb2xlIjoiYWRtaW4ifQ.mwRIj6zCmVo5Zo5Ey__BkEiOszfshZdsBUHRJZEexfQ
+
+{
+  "name": "fefe",
+  "age": 66,
+  "email": "ssszfxssss@dxdxsoe.com",
+  "password": "Password123#"
+}
+
+
+POST http://localhost:3000/users/create-many
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE2LCJlbWFpbCI6ImFobWVkQGRvZS5jb20iLCJpYXQiOjE3MzgyMTg0MTYsImV4cCI6MTczODIyMjAxNiwiYXVkIjoibG9jYWxob3N0OjMwMDAiLCJpc3MiOiJsb2NhbGhvc3Q6MzAwMCJ9.tpJXesmaOjUuWD7CO6sucveq_eQtXdgQKu8U9kv-8V0
+{
+  "users":
+  [
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "johckn@doe.com",
+      "password": "Password123#"
+    }, 
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "johnnx@doe.com",
+      "password": "Password123#"
+    }
+]
+}
