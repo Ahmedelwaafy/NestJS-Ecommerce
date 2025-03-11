@@ -96,10 +96,12 @@ export class UserService {
     }
   }
 
-  async remove(id: string) {
+  async deactivate(id: string) {
     await this.findUserByIdProvider.findById(id);
     try {
-      await this.userModel.findByIdAndUpdate(id, { active: false });
+      return await this.userModel
+        .findByIdAndUpdate(id, { active: false })
+        .select('-password -__v');
     } catch {
       throw new RequestTimeoutException('an error occurred', {
         description: 'unable to connect to the database',

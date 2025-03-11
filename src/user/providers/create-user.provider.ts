@@ -5,11 +5,11 @@ import {
   Injectable,
   RequestTimeoutException,
 } from '@nestjs/common';
-import { HashingProvider } from '../../auth/providers/hashing.provider';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from '../schemas/user.schema';
 import { Model } from 'mongoose';
+import { HashingProvider } from 'src/auth/providers/hashing.provider';
 
 @Injectable()
 export class CreateUserProvider {

@@ -125,7 +125,60 @@ export class UserController {
     type: String,
   })
   @ResponseMessage('User deleted successfully')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(id);
+  deactivate(@Param('id') id: string) {
+    return this.userService.deactivate(id);
+  }
+}
+
+@Controller('v1/user/profile')
+@ApiTags('user Profile')
+export class UserProfileController {
+  constructor(private readonly userService: UserService) {}
+
+  @Get()
+  @ApiOperation({
+    summary: 'User fetches his data',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Data fetched successfully',
+  })
+  @Roles(['user']) //don't add admin because user and admin ave different secrets, so there will be issue in the guard if we use ['user', 'admin']
+  @UseGuards(AuthGuard)
+  getMyProfile(@ActiveUser('_id') _id: ActiveUserData['_id']) {
+    //console.log('user id', _id);
+    return this.userService.findOne(_id);
+  }
+
+  @Patch()
+  @ApiOperation({
+    summary: 'User updates his data',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Data updated successfully',
+  })
+  @Roles(['user'])
+  @UseGuards(AuthGuard)
+  updateMyProfile(
+    @ActiveUser('_id') _id: ActiveUserData['_id'],
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
+    return this.userService.update(_id, updateUserDto);
+  }
+
+  @Delete()
+  @ApiOperation({
+    summary: 'User deactivates his data',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Account deactivated successfully',
+  })
+  @Roles(['user'])
+  @UseGuards(AuthGuard)
+  @ResponseMessage('Account deactivated successfully')
+  deactivateMyProfile(@ActiveUser('_id') _id: ActiveUserData['_id']) {
+    return this.userService.deactivate(_id);
   }
 }

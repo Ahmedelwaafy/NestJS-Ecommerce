@@ -3,3 +3,10 @@ Content-Type: application/json
 Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJyb2xlIjoiYWRtaW4ifQ.mwRIj6zCmVo5Zo5Ey__BkEiOszfshZdsBUHRJZEexfQ
 
 
+
+
+DELETE http://localhost:3000/api/v1/user/profile
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2IwMmVhZDY0ZTAwZGYzMDZmODlhMmUiLCJuYW1lIjoiSm9obiBEb2UiLCJyb2xlIjoidXNlciIsImlhdCI6MTUxNjIzOTAyMn0.7GcpfbZmqruPCRR61Ko19YS7wAsu-xwk-MIx3qUGjWM
+
+

@@ -5,3 +5,13 @@ Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3OD
 {
   "active": true
 }
+
+
+PATCH http://localhost:3000/api/v1/user/profile
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2IwMmVhZDY0ZTAwZGYzMDZmODlhMmUiLCJuYW1lIjoiSm9obiBEb2UiLCJyb2xlIjoidXNlciIsImlhdCI6MTUxNjIzOTAyMn0.7GcpfbZmqruPCRR61Ko19YS7wAsu-xwk-MIx3qUGjWM
+
+{
+   "phoneNumber": "0106603193",
+    "email": "tetox@dxdoe.com"
+}

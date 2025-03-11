@@ -5,6 +5,7 @@ import {
   IsNotEmpty,
   IsNumber,
   IsOptional,
+  IsPhoneNumber,
   IsString,
   IsUrl,
   Length,
@@ -101,9 +102,7 @@ export class CreateUserDto {
   })
   @IsOptional()
   @IsString()
-  @Matches(/^\+?[1-9]\d{1,14}$/, {
-    message: 'Phone number must be a valid international number.',
-  })
+  @IsPhoneNumber('EG', { message: 'Phone number is not valid, use valid egyptian phone number' })
   phoneNumber?: string;
 
   @ApiPropertyOptional({
