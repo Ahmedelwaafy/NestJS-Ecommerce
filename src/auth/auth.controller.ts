@@ -1,6 +1,4 @@
-import {
-  Controller
-} from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { AuthService } from './providers/auth.service';
 
 @Controller('auth')

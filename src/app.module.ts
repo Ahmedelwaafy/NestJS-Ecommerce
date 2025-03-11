@@ -36,7 +36,8 @@ const ENV = process.env.NODE_ENV;
       global: true,
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
-        secret: configService.get<string>('jwt.secret'),
+        // Use userSecret as the default
+        secret: configService.get<string>('jwt.userSecret'),
         signOptions: {
           expiresIn: `${configService.get<number>('jwt.accessTokenTtl')}s`,
           audience: configService.get<string>('jwt.audience'),

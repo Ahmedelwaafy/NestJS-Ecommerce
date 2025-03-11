@@ -25,8 +25,6 @@ export class User {
   @Prop({
     required: true,
     type: String,
-    min: [6, 'Password must be at least 6 characters long.'],
-    max: [20, 'Password must be at most 20 characters long.'],
   })
   password: string;
 
