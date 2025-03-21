@@ -143,7 +143,7 @@ export class UserProfileController {
     status: 200,
     description: 'Data fetched successfully',
   })
-  @Roles(['user']) //don't add admin because user and admin ave different secrets, so there will be issue in the guard if we use ['user', 'admin']
+  @Roles(['user']) //don't add admin because user and admin have different secrets, so there will be issue in the guard if we use ['user', 'admin']
   @UseGuards(AuthGuard)
   getMyProfile(@ActiveUser('_id') _id: ActiveUserData['_id']) {
     //console.log('user id', _id);

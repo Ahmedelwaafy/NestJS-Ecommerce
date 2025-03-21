@@ -1,6 +1,5 @@
 #!/bin/bash
 
-pnpm run ts
 # Step 1: Add and commit changes
 git add -A
 git commit -m "$1"

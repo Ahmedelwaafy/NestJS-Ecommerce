@@ -17,7 +17,11 @@ import { Paginated } from 'src/common/pagination/interfaces/paginated.interface'
 import { GetUsersBaseDto, GetUsersDto } from './dto/get-users.dto';
 import { FindUserByIdProvider } from './providers/find-user-by-id.provider';
 import { HashingProvider } from 'src/auth/providers/hashing.provider';
+import { FindUserByEmailProvider } from './providers/find-user-by-email.provider';
 
+/**
+ * UserService
+ */
 @Injectable()
 export class UserService {
   constructor(
@@ -25,6 +29,7 @@ export class UserService {
     @InjectModel(User.name) private readonly userModel: Model<User>,
     private readonly createUserProvider: CreateUserProvider,
     private readonly findUserByIdProvider: FindUserByIdProvider,
+    private readonly findUserByEmailProvider: FindUserByEmailProvider,
     private readonly paginationService: PaginationService,
     @Inject(forwardRef(() => HashingProvider))
     private readonly hashingProvider: HashingProvider,
@@ -76,7 +81,9 @@ export class UserService {
     const user = await this.findUserByIdProvider.findById(id);
     return user;
   }
-
+  public async findOneByEmail(email: string, includePassword = false) {
+    return this.findUserByEmailProvider.findOneByEmail(email, includePassword);
+  }
   async update(id: string, updateUserDto: UpdateUserDto) {
     await this.findUserByIdProvider.findById(id);
     if (updateUserDto.password) {
