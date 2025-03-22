@@ -1,18 +1,19 @@
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { RefreshTokenDto } from './dto/refresh-token.dto';
-import { SignInDto } from './dto/signin.dto';
 import {
   Body,
   Controller,
   HttpCode,
   HttpStatus,
   Post,
+  Req,
   Res,
 } from '@nestjs/common';
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Request, Response } from 'express';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
-import { Response } from 'express';
 import { AuthService } from './auth.service';
+import { SignInDto } from './dto/signin.dto';
 import { SignUpDto } from './dto/signup.dto';
+import { Role } from './enums/role.enum';
 
 /**
  * AuthController
@@ -85,5 +86,26 @@ export class AuthController {
   @ResponseMessage('Signed out successfully')
   async signOut(@Res({ passthrough: true }) response: Response) {
     return this.authService.signOut(response);
+  }
+
+  /**
+   * //***** refresh user token ******
+   */
+  @Post('refresh-token')
+  @HttpCode(HttpStatus.OK)
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Access token generated successfully',
+  })
+  @ApiOperation({
+    summary: 'Generate new access token',
+    description: 'Generate new access token',
+  })
+  @ResponseMessage('Access token generated successfully')
+  async refreshToken(
+    @Req() request: Request,
+    @Res({ passthrough: true }) response: Response,
+  ) {
+    return await this.authService.refreshToken(request, response, Role.User);
   }
 }

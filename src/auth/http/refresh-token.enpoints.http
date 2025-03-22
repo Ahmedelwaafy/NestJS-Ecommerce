@@ -1,7 +1,5 @@
 
 
-POST http://localhost:3000/auth/refresh-token
+POST http://localhost:3000/api/v1/auth/refresh-token
 Content-Type: application/json
-{
-  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE2LCJpYXQiOjE3MzgzMTE5NTIsImV4cCI6MTczODM5ODM1MiwiYXVkIjoibG9jYWxob3N0OjMwMDAiLCJpc3MiOiJsb2NhbGhvc3Q6MzAwMCJ9.WOSgRQ-4Q1ircdpKXhme8FSKbLqfeZC0jV5SZD7MHro"
-}
+cookie: refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGVhMzdjZmU1YmVhYjIyY2QyZjJlNyIsImlhdCI6MTc0MjY1NTgxNywiZXhwIjoxNzQyNzQyMjE3LCJhdWQiOiJsb2NhbGhvc3Q6MzAwMCIsImlzcyI6ImxvY2FsaG9zdDozMDAwIn0.f4tOkwKlbZZyMTjQYOjvzHIBQtjJQRq50w9JrMgok6U

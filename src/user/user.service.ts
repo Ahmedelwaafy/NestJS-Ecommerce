@@ -78,8 +78,7 @@ export class UserService {
   }
 
   async findOne(id: string) {
-    const user = await this.findUserByIdProvider.findById(id);
-    return user;
+    return await this.findUserByIdProvider.findById(id);
   }
   public async findOneByEmail(email: string, includePassword = false) {
     return this.findUserByEmailProvider.findOneByEmail(email, includePassword);

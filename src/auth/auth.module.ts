@@ -8,6 +8,7 @@ import { UserModule } from 'src/user/user.module';
 import { SignInProvider } from './providers/sign-in.provider';
 import { GenerateTokensProvider } from './providers/generate-tokens.provider';
 import { SignOutProvider } from './providers/sign-out.provider';
+import { RefreshTokenProvider } from './providers/refresh-token.provider';
 
 @Module({
   controllers: [AuthController],
@@ -21,6 +22,7 @@ import { SignOutProvider } from './providers/sign-out.provider';
     SignInProvider,
     SignOutProvider,
     GenerateTokensProvider,
+    RefreshTokenProvider,
   ],
   imports: [forwardRef(() => UserModule)],
   exports: [AuthService, HashingProvider, AuthGuard],

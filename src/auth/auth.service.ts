@@ -1,10 +1,11 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
-import { SignInDto } from './dto/signin.dto';
-import { Response } from 'express';
-import { SignInProvider } from './providers/sign-in.provider';
+import { Request, Response } from 'express';
 import { UserService } from 'src/user/user.service';
+import { SignInDto } from './dto/signin.dto';
 import { SignUpDto } from './dto/signup.dto';
 import { Role } from './enums/role.enum';
+import { RefreshTokenProvider } from './providers/refresh-token.provider';
+import { SignInProvider } from './providers/sign-in.provider';
 import { SignOutProvider } from './providers/sign-out.provider';
 
 /**
@@ -18,6 +19,7 @@ export class AuthService {
 
     private readonly signInProvider: SignInProvider,
     private readonly signOutProvider: SignOutProvider,
+    private readonly refreshTokenProvider: RefreshTokenProvider,
   ) {}
 
   /**
@@ -39,5 +41,16 @@ export class AuthService {
    */
   public async signOut(response: Response) {
     return await this.signOutProvider.signOut(response);
+  }
+
+  /**
+   * //***** refreshToken ******
+   */
+  public async refreshToken(request: Request, response: Response, role: Role) {
+    return await this.refreshTokenProvider.refreshToken(
+      request,
+      response,
+      role,
+    );
   }
 }
