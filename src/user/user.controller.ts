@@ -145,9 +145,9 @@ export class UserProfileController {
   })
   @Roles(['user']) //don't add admin because user and admin have different secrets, so there will be issue in the guard if we use ['user', 'admin']
   @UseGuards(AuthGuard)
-  getMyProfile(@ActiveUser('_id') _id: ActiveUserData['_id']) {
+  getMyProfile(@ActiveUser('id') id: ActiveUserData['id']) {
     //console.log('user id', _id);
-    return this.userService.findOne(_id);
+    return this.userService.findOne(id);
   }
 
   @Patch()
@@ -161,10 +161,10 @@ export class UserProfileController {
   @Roles(['user'])
   @UseGuards(AuthGuard)
   updateMyProfile(
-    @ActiveUser('_id') _id: ActiveUserData['_id'],
+    @ActiveUser('id') id: ActiveUserData['id'],
     @Body() updateUserDto: UpdateUserDto,
   ) {
-    return this.userService.update(_id, updateUserDto);
+    return this.userService.update(id, updateUserDto);
   }
 
   @Delete()
@@ -178,7 +178,7 @@ export class UserProfileController {
   @Roles(['user'])
   @UseGuards(AuthGuard)
   @ResponseMessage('Account deactivated successfully')
-  deactivateMyProfile(@ActiveUser('_id') _id: ActiveUserData['_id']) {
-    return this.userService.deactivate(_id);
+  deactivateMyProfile(@ActiveUser('id') id: ActiveUserData['id']) {
+    return this.userService.deactivate(id);
   }
 }
