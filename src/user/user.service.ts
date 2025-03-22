@@ -106,7 +106,7 @@ export class UserService {
     await this.findUserByIdProvider.findById(id);
     try {
       return await this.userModel
-        .findByIdAndUpdate(id, { active: false })
+        .findByIdAndUpdate(id, { active: false }, { new: true })
         .select('-password -__v');
     } catch {
       throw new RequestTimeoutException('an error occurred', {

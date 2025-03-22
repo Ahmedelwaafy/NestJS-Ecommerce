@@ -7,6 +7,8 @@ import { Role } from './enums/role.enum';
 import { RefreshTokenProvider } from './providers/refresh-token.provider';
 import { SignInProvider } from './providers/sign-in.provider';
 import { SignOutProvider } from './providers/sign-out.provider';
+import { ResetPasswordDto } from './dto/reset-password-dto.dto copy';
+import { ResetPasswordProvider } from './providers/reset-password.provider';
 
 /**
  * AuthService
@@ -20,6 +22,7 @@ export class AuthService {
     private readonly signInProvider: SignInProvider,
     private readonly signOutProvider: SignOutProvider,
     private readonly refreshTokenProvider: RefreshTokenProvider,
+    private readonly resetPasswordProvider: ResetPasswordProvider,
   ) {}
 
   /**
@@ -52,5 +55,12 @@ export class AuthService {
       response,
       role,
     );
+  }
+
+  /**
+   * //***** resetPassword ******
+   */
+  public async resetPassword(resetPasswordDto: ResetPasswordDto) {
+    return await this.resetPasswordProvider.resetPassword(resetPasswordDto);
   }
 }

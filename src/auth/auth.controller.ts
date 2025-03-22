@@ -14,6 +14,7 @@ import { AuthService } from './auth.service';
 import { SignInDto } from './dto/signin.dto';
 import { SignUpDto } from './dto/signup.dto';
 import { Role } from './enums/role.enum';
+import { ResetPasswordDto } from './dto/reset-password-dto.dto copy';
 
 /**
  * AuthController
@@ -108,4 +109,27 @@ export class AuthController {
   ) {
     return await this.authService.refreshToken(request, response, Role.User);
   }
+
+  /**
+   * //***** reset password ******
+   */
+  @Post('reset-password')
+  @HttpCode(HttpStatus.CREATED)
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description: 'Code sent to your mail successfully',
+  })
+  @ApiOperation({
+    summary: 'Reset password',
+    description: 'Reset password',
+  })
+  @ApiBody({
+    description: 'User details for signup',
+    type: ResetPasswordDto,
+  })
+  @ResponseMessage('Code sent to your mail successfully')
+  async resetPassword(@Body() resetPasswordDto: ResetPasswordDto) {
+    return this.authService.resetPassword(resetPasswordDto);
+  }
+  //TODO: refresh admin token, access the token from the authorization bearer as well as http-only cookie, whereas mobile apps don't have cookies
 }

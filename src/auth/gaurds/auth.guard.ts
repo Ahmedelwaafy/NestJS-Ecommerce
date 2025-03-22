@@ -44,15 +44,17 @@ export class AuthGuard implements CanActivate {
           ? this.configService.get('jwt.userSecret')
           : this.configService.get('jwt.adminSecret'),
       });
-      //console.log({ roles, token, payload });
-
+      console.log({ roles, token, payload });
+      
+      //* handle if the role is altered manually, like from https://jwt.io/
       if (!roles.includes(payload?.role)) {
         throw new UnauthorizedException('unauthorized role');
       }
       // 💡 We're assigning the payload to the request object here
       // so that we can access it in our route handlers
       request[REQUEST_USER_KEY] = payload;
-    } catch {
+    } catch (error) {
+      console.log(error);
       throw new UnauthorizedException('invalid token');
     }
     return true;
