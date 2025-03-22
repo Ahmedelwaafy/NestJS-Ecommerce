@@ -22,6 +22,9 @@ import { SignUpDto } from './dto/signup.dto';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  /**
+   * //***** signIn ******
+   */
   @Post('sign-in')
   @HttpCode(HttpStatus.OK)
   @ApiResponse({
@@ -44,6 +47,9 @@ export class AuthController {
     return this.authService.signIn(signInDto, response);
   }
 
+  /**
+   * //***** signUp ******
+   */
   @Post('sign-up')
   @HttpCode(HttpStatus.CREATED)
   @ApiResponse({
@@ -61,5 +67,23 @@ export class AuthController {
   @ResponseMessage('Account created successfully')
   async signUp(@Body() signUpDto: SignUpDto) {
     return this.authService.signUp(signUpDto);
+  }
+
+  /**
+   * //***** signOut ******
+   */
+  @Post('sign-out')
+  @HttpCode(HttpStatus.OK)
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Signed out successfully',
+  })
+  @ApiOperation({
+    summary: 'Sign out',
+    description: 'Sign out',
+  })
+  @ResponseMessage('Signed out successfully')
+  async signOut(@Res({ passthrough: true }) response: Response) {
+    return this.authService.signOut(response);
   }
 }

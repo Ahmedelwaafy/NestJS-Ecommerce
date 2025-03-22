@@ -5,6 +5,7 @@ import { SignInProvider } from './providers/sign-in.provider';
 import { UserService } from 'src/user/user.service';
 import { SignUpDto } from './dto/signup.dto';
 import { Role } from './enums/role.enum';
+import { SignOutProvider } from './providers/sign-out.provider';
 
 /**
  * AuthService
@@ -16,19 +17,27 @@ export class AuthService {
     private readonly userService: UserService,
 
     private readonly signInProvider: SignInProvider,
+    private readonly signOutProvider: SignOutProvider,
   ) {}
 
   /**
-   * signIn
+   * //***** signIn ******
    */
   public async signIn(signInDto: SignInDto, response: Response) {
     return await this.signInProvider.signIn(signInDto, response);
   }
 
   /**
-   * signUp
+   * //***** signUp ******
    */
   public async signUp(signUpDto: SignUpDto) {
     return await this.userService.create({ ...signUpDto, role: Role.User });
+  }
+
+  /**
+   * //***** signOut ******
+   */
+  public async signOut(response: Response) {
+    return await this.signOutProvider.signOut(response);
   }
 }

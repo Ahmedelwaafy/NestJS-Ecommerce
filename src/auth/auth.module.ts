@@ -7,6 +7,7 @@ import { BcryptProvider } from './providers/bcrypt.provider';
 import { UserModule } from 'src/user/user.module';
 import { SignInProvider } from './providers/sign-in.provider';
 import { GenerateTokensProvider } from './providers/generate-tokens.provider';
+import { SignOutProvider } from './providers/sign-out.provider';
 
 @Module({
   controllers: [AuthController],
@@ -18,6 +19,7 @@ import { GenerateTokensProvider } from './providers/generate-tokens.provider';
     },
     AuthGuard,
     SignInProvider,
+    SignOutProvider,
     GenerateTokensProvider,
   ],
   imports: [forwardRef(() => UserModule)],
