@@ -10,9 +10,9 @@ import {
   Res,
 } from '@nestjs/common';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
-import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
+import { SignUpDto } from './dto/signup.dto';
 
 /**
  * AuthController
@@ -42,5 +42,24 @@ export class AuthController {
     @Res({ passthrough: true }) response: Response,
   ) {
     return this.authService.signIn(signInDto, response);
+  }
+
+  @Post('sign-up')
+  @HttpCode(HttpStatus.CREATED)
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description: 'Account created successfully',
+  })
+  @ApiOperation({
+    summary: 'Create a new account',
+    description: 'Create a new account',
+  })
+  @ApiBody({
+    description: 'User details for signup',
+    type: SignUpDto,
+  })
+  @ResponseMessage('Account created successfully')
+  async signUp(@Body() signUpDto: SignUpDto) {
+    return this.authService.signUp(signUpDto);
   }
 }
