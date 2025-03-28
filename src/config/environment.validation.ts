@@ -13,4 +13,8 @@ export default Joi.object({
   JWT_REFRESH_TOKEN_TTL: Joi.number().required(),
   MONGODB_URI: Joi.string().required(),
   MONGODB_DATABASE: Joi.string().required(),
+  MAIL_SERVICE: Joi.string().required(),
+  SMTP_USERNAME: Joi.string().required(),
+  SMTP_PASSWORD: Joi.string().required(),
+  OTP_TTL: Joi.number().required(),
 });

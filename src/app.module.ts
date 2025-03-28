@@ -13,6 +13,7 @@ import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { PaginationModule } from './common/pagination/pagination.module';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import securityConfig from './config/security.config';
+import { MailModule } from './mail/mail.module';
 
 const ENV = process.env.NODE_ENV;
 //console.log({ ENV });
@@ -47,6 +48,7 @@ const ENV = process.env.NODE_ENV;
         },
       }),
     }),
+    MailModule,
   ],
   controllers: [],
   providers: [

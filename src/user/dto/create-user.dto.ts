@@ -102,7 +102,9 @@ export class CreateUserDto {
   })
   @IsOptional()
   @IsString()
-  @IsPhoneNumber('EG', { message: 'Phone number is not valid, use valid egyptian phone number' })
+  @IsPhoneNumber('EG', {
+    message: 'Phone number is not valid, use valid egyptian phone number',
+  })
   phoneNumber?: string;
 
   @ApiPropertyOptional({
@@ -124,12 +126,37 @@ export class CreateUserDto {
   })
   active?: boolean;
 
+  @ApiPropertyOptional({
+    example: '123456',
+    description: 'The verification code of password resetting for the user.',
+    type: 'number',
+  })
   @IsOptional()
-  @IsString()
+  @IsNumber()
   @Length(6, 6, {
     message: 'Verification code must be at least 6 characters long.',
   })
-  verificationCode?: string;
+  verificationCode?: number;
+
+  @ApiPropertyOptional({
+    example: '2023-01-01T00:00:00.000Z',
+    description: 'The date and time when the password reset token expires.',
+    type: 'string',
+    format: 'date-time',
+  })
+  @IsOptional()
+  @IsString()
+  passwordResetExpires?: Date;
+
+  @ApiPropertyOptional({
+    example: '2023-01-01T00:00:00.000Z',
+    description: 'The date and time when the password was last changed.',
+    type: 'string',
+    format: 'date-time',
+  })
+  @IsOptional()
+  @IsString()
+  passwordChangedAt?: Date;
 
   @ApiPropertyOptional({
     example: Gender.Male,
