@@ -7,8 +7,10 @@ import { Role } from './enums/role.enum';
 import { RefreshTokenProvider } from './providers/refresh-token.provider';
 import { SignInProvider } from './providers/sign-in.provider';
 import { SignOutProvider } from './providers/sign-out.provider';
-import { ResetPasswordDto } from './dto/reset-password-dto.dto copy';
-import { ResetPasswordProvider } from './providers/reset-password.provider';
+import { ResetPasswordDto } from './dto/reset-password.dto';
+import { ForgetPasswordProvider } from './providers/forget-password.provider';
+import { ForgetPasswordDto } from './dto/forget-password.dto';
+import { VerifyOtpDto } from './dto/verify-otp.dto';
 
 /**
  * AuthService
@@ -22,7 +24,7 @@ export class AuthService {
     private readonly signInProvider: SignInProvider,
     private readonly signOutProvider: SignOutProvider,
     private readonly refreshTokenProvider: RefreshTokenProvider,
-    private readonly resetPasswordProvider: ResetPasswordProvider,
+    private readonly forgetPasswordProvider: ForgetPasswordProvider,
   ) {}
 
   /**
@@ -58,9 +60,21 @@ export class AuthService {
   }
 
   /**
+   * //***** forgetPassword ******
+   */
+  public async forgetPassword(forgetPasswordDto: ForgetPasswordDto) {
+    return await this.forgetPasswordProvider.forgetPassword(forgetPasswordDto);
+  }
+  /**
+   * //***** verifyOtp ******
+   */
+  public async verifyOtp(verifyOtpDto: VerifyOtpDto) {
+    return await this.forgetPasswordProvider.verifyOtp(verifyOtpDto);
+  }
+  /**
    * //***** resetPassword ******
    */
   public async resetPassword(resetPasswordDto: ResetPasswordDto) {
-    return await this.resetPasswordProvider.resetPassword(resetPasswordDto);
+    return await this.forgetPasswordProvider.resetPassword(resetPasswordDto);
   }
 }

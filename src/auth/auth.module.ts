@@ -9,7 +9,7 @@ import { SignInProvider } from './providers/sign-in.provider';
 import { GenerateTokensProvider } from './providers/generate-tokens.provider';
 import { SignOutProvider } from './providers/sign-out.provider';
 import { RefreshTokenProvider } from './providers/refresh-token.provider';
-import { ResetPasswordProvider } from './providers/reset-password.provider';
+import { ForgetPasswordProvider } from './providers/forget-password.provider';
 
 @Module({
   controllers: [AuthController],
@@ -24,7 +24,7 @@ import { ResetPasswordProvider } from './providers/reset-password.provider';
     SignOutProvider,
     GenerateTokensProvider,
     RefreshTokenProvider,
-    ResetPasswordProvider,
+    ForgetPasswordProvider,
   ],
   imports: [forwardRef(() => UserModule)],
   exports: [AuthService, HashingProvider, AuthGuard],

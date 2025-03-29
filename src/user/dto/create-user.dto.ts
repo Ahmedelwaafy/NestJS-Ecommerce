@@ -133,10 +133,7 @@ export class CreateUserDto {
   })
   @IsOptional()
   @IsNumber()
-  @Length(6, 6, {
-    message: 'Verification code must be at least 6 characters long.',
-  })
-  verificationCode?: number;
+  PasswordVerificationCode?: number;
 
   @ApiPropertyOptional({
     example: '2023-01-01T00:00:00.000Z',
@@ -146,7 +143,15 @@ export class CreateUserDto {
   })
   @IsOptional()
   @IsString()
-  passwordResetExpires?: Date;
+  passwordVerificationCodeExpiresAt?: Date;
+
+  @ApiPropertyOptional({
+    description: 'The token of password resetting for the user.',
+    type: 'string',
+  })
+  @IsOptional()
+  @IsString()
+  passwordResetToken?: string;
 
   @ApiPropertyOptional({
     example: '2023-01-01T00:00:00.000Z',

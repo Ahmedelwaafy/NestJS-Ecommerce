@@ -31,16 +31,16 @@ export class MailService {
       );
     }
   }
-  public async sendResetPasswordOtp(user: User): Promise<void> {
+  public async sendForgetPasswordOtp(user: User): Promise<void> {
     try {
       await this.mailerService.sendMail({
         to: user.email,
-        subject: 'E-Commerce-NestJS - Reset Password OTP',
-        template: './reset-password',
+        subject: 'E-Commerce-NestJS - Forget Password OTP',
+        template: './forget-password',
         context: {
           name: user?.name,
           email: user?.email,
-          otp: user?.verificationCode,
+          otp: user?.PasswordVerificationCode,
         },
       });
     } catch (error) {
