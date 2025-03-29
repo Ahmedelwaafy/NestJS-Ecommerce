@@ -178,5 +178,26 @@ export class AuthController {
   async resetPassword(@Body() resetPasswordDto: ResetPasswordDto) {
     return this.authService.resetPassword(resetPasswordDto);
   }
+  /**
+   * //***** resend otp ******
+   */
+  @Post('resend-otp')
+  @HttpCode(HttpStatus.OK)
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'A new otp code has been sent to your email successfully',
+  })
+  @ApiOperation({
+    summary: 'resend the otp',
+    description: 'Send the email to resend the otp',
+  })
+  @ApiBody({
+    description: 'User email for resend otp',
+    type: ResetPasswordDto,
+  })
+  @ResponseMessage('A new otp code has been sent to your email successfully')
+  async resendOtp(@Body() resendOtpDto: ForgetPasswordDto) {
+    return this.authService.forgetPassword(resendOtpDto);
+  }
   //TODO: refresh admin token, access the token from the authorization bearer as well as http-only cookie, whereas mobile apps don't have cookies
 }
