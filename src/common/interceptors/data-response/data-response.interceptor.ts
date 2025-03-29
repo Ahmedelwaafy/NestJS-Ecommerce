@@ -13,7 +13,7 @@ export class DataResponseInterceptor implements NestInterceptor {
   constructor(private readonly reflector: Reflector) {}
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
-    const message =
+    const msg =
       this.reflector.get<string>(RESPONSE_MESSAGE, context.getHandler()) ||
       'Operation successful';
 
@@ -22,7 +22,7 @@ export class DataResponseInterceptor implements NestInterceptor {
     return next.handle().pipe(
       map((data) => ({
         status,
-        message,
+        msg,
         data,
       })),
     );

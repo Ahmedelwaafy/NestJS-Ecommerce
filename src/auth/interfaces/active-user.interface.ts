@@ -1,5 +1,5 @@
 export interface ActiveUserData {
-  _id: string;
-  sub: string;
+  id: string;
   email: string;
+  role:string
 }

@@ -17,7 +17,12 @@ import { Paginated } from 'src/common/pagination/interfaces/paginated.interface'
 import { GetUsersBaseDto, GetUsersDto } from './dto/get-users.dto';
 import { FindUserByIdProvider } from './providers/find-user-by-id.provider';
 import { HashingProvider } from 'src/auth/providers/hashing.provider';
+import { FindUserByEmailProvider } from './providers/find-user-by-email.provider';
+import { ExcludedUserFields, ExcludedFields } from './utils';
 
+/**
+ * UserService
+ */
 @Injectable()
 export class UserService {
   constructor(
@@ -25,6 +30,7 @@ export class UserService {
     @InjectModel(User.name) private readonly userModel: Model<User>,
     private readonly createUserProvider: CreateUserProvider,
     private readonly findUserByIdProvider: FindUserByIdProvider,
+    private readonly findUserByEmailProvider: FindUserByEmailProvider,
     private readonly paginationService: PaginationService,
     @Inject(forwardRef(() => HashingProvider))
     private readonly hashingProvider: HashingProvider,
@@ -73,12 +79,22 @@ export class UserService {
   }
 
   async findOne(id: string) {
-    const user = await this.findUserByIdProvider.findById(id);
-    return user;
+    return await this.findUserByIdProvider.findById(id);
   }
-
-  async update(id: string, updateUserDto: UpdateUserDto) {
+  public async findOneByEmail(
+    email: string,
+    includedFields?: ExcludedFields[],
+  ) {
+    return this.findUserByEmailProvider.findOneByEmail(email, includedFields);
+  }
+  async update(
+    id: string,
+    updateUserDto: UpdateUserDto,
+    includedFields?: ExcludedFields[],
+  ) {
+    //check if user exits, and if not throw error
     await this.findUserByIdProvider.findById(id);
+
     if (updateUserDto.password) {
       updateUserDto.password = await this.hashingProvider.hashPassword(
         updateUserDto.password,
@@ -87,7 +103,7 @@ export class UserService {
     try {
       const updatedUser = await this.userModel
         .findByIdAndUpdate(id, updateUserDto, { new: true })
-        .select('-password -__v');
+        .select(ExcludedUserFields(includedFields));
       return updatedUser;
     } catch {
       throw new RequestTimeoutException('an error occurred', {
@@ -100,8 +116,8 @@ export class UserService {
     await this.findUserByIdProvider.findById(id);
     try {
       return await this.userModel
-        .findByIdAndUpdate(id, { active: false })
-        .select('-password -__v');
+        .findByIdAndUpdate(id, { active: false }, { new: true })
+        .select(ExcludedUserFields());
     } catch {
       throw new RequestTimeoutException('an error occurred', {
         description: 'unable to connect to the database',

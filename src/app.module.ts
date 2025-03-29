@@ -9,8 +9,11 @@ import databaseConfig from './config/database.config';
 import environmentValidation from './config/environment.validation';
 import jwtConfig from './config/jwt.config';
 import { DataResponseInterceptor } from './common/interceptors/data-response/data-response.interceptor';
-import { APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { PaginationModule } from './common/pagination/pagination.module';
+import { HttpExceptionFilter } from './common/filters/http-exception.filter';
+import securityConfig from './config/security.config';
+import { MailModule } from './mail/mail.module';
 
 const ENV = process.env.NODE_ENV;
 //console.log({ ENV });
@@ -22,7 +25,7 @@ const ENV = process.env.NODE_ENV;
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: !ENV ? '.env' : `.env.${ENV}`,
-      load: [appConfig, databaseConfig, jwtConfig],
+      load: [appConfig, databaseConfig, jwtConfig, securityConfig],
       validationSchema: environmentValidation,
     }),
     MongooseModule.forRootAsync({
@@ -45,12 +48,17 @@ const ENV = process.env.NODE_ENV;
         },
       }),
     }),
+    MailModule,
   ],
   controllers: [],
   providers: [
     {
       provide: APP_INTERCEPTOR,
       useClass: DataResponseInterceptor,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
     },
   ],
 })

@@ -71,7 +71,23 @@ export class User {
   @Prop({
     type: String,
   })
-  verificationCode?: string;
+  PasswordVerificationCode?: number;
+
+  @Prop({
+    type: Date,
+  })
+  passwordVerificationCodeExpiresAt?: Date;
+
+  @Prop({
+    type: String,
+  })
+  passwordResetToken?: string;
+
+  @Prop({
+    type: Date,
+  })
+  passwordChangedAt?: Date;
+
   @Prop({
     type: String,
     enum: Gender,
