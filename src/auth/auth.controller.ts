@@ -159,23 +159,24 @@ export class AuthController {
   /**
    * //***** reset password ******
    */
-  /* @Post('reset-password')
-  @HttpCode(HttpStatus.CREATED)
+  @Post('reset-password')
+  @HttpCode(HttpStatus.OK)
   @ApiResponse({
-    status: HttpStatus.CREATED,
-    description: 'Code sent to your mail successfully',
+    status: HttpStatus.OK,
+    description: 'Password has been reset successfully',
   })
   @ApiOperation({
-    summary: 'Get Reset password otp code ',
-    description: 'Send the email to get the reset password otp code',
+    summary: 'reset the password',
+    description:
+      'Send the email along with the new passwords to reset the password',
   })
   @ApiBody({
-    description: 'User email for reset password',
+    description: 'User email along with the new passwords for reset password',
     type: ResetPasswordDto,
   })
-  @ResponseMessage('Code sent to your mail successfully')
+  @ResponseMessage('Password has been reset successfully')
   async resetPassword(@Body() resetPasswordDto: ResetPasswordDto) {
     return this.authService.resetPassword(resetPasswordDto);
-  } */
+  }
   //TODO: refresh admin token, access the token from the authorization bearer as well as http-only cookie, whereas mobile apps don't have cookies
 }

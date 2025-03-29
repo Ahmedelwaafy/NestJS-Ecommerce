@@ -6,6 +6,7 @@ import {
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDocument } from '../schemas/user.schema';
+import { ExcludedUserFields } from '../utils';
 
 @Injectable()
 export class FindUserByIdProvider {
@@ -16,7 +17,7 @@ export class FindUserByIdProvider {
   async findById(id: string) {
      let user: UserDocument;
     try {
-      user = await this.userModel.findById(id).select('-password -__v');
+      user = await this.userModel.findById(id).select(ExcludedUserFields());
     } catch (error) {
       throw new RequestTimeoutException('an error occurred', {
         description: error.message || 'unable to connect to the database',

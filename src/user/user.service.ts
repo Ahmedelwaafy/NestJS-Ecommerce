@@ -18,6 +18,7 @@ import { GetUsersBaseDto, GetUsersDto } from './dto/get-users.dto';
 import { FindUserByIdProvider } from './providers/find-user-by-id.provider';
 import { HashingProvider } from 'src/auth/providers/hashing.provider';
 import { FindUserByEmailProvider } from './providers/find-user-by-email.provider';
+import { ExcludedUserFields } from './utils';
 
 /**
  * UserService
@@ -93,7 +94,7 @@ export class UserService {
     try {
       const updatedUser = await this.userModel
         .findByIdAndUpdate(id, updateUserDto, { new: true })
-        .select('-password -__v');
+        .select(ExcludedUserFields());
       return updatedUser;
     } catch {
       throw new RequestTimeoutException('an error occurred', {
@@ -107,7 +108,7 @@ export class UserService {
     try {
       return await this.userModel
         .findByIdAndUpdate(id, { active: false }, { new: true })
-        .select('-password -__v');
+        .select(ExcludedUserFields());
     } catch {
       throw new RequestTimeoutException('an error occurred', {
         description: 'unable to connect to the database',

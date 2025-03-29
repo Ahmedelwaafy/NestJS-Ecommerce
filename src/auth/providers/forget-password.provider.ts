@@ -5,14 +5,15 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { UserService } from 'src/user/user.service';
-import { ForgetPasswordDto } from '../dto/forget-password.dto';
+import { JwtService } from '@nestjs/jwt';
 import { MailService } from 'src/mail/providers/mail.service';
+import { UserService } from 'src/user/user.service';
+import { PASSWORD_RESET_PURPOSE } from '../constants/auth.constants';
+import { ForgetPasswordDto } from '../dto/forget-password.dto';
 import { ResetPasswordDto } from '../dto/reset-password.dto';
 import { VerifyOtpDto } from '../dto/verify-otp.dto';
-import { JwtService } from '@nestjs/jwt';
 import { Role } from '../enums/role.enum';
-import { PASSWORD_RESET_PURPOSE } from '../constants/auth.constants';
+import { User } from 'src/user/schemas/user.schema';
 
 /**
  * ForgetPasswordProvider
@@ -57,15 +58,10 @@ export class ForgetPasswordProvider {
    * verifyOtp method
    */
   public async verifyOtp(verifyOtpDto: VerifyOtpDto) {
-    const user = await this.userService.findOneByEmail(verifyOtpDto.email);
-
-    /*  console.log(
-      user,
-      user.passwordVerificationCodeExpiresAt,
-      new Date(),
-      user.passwordVerificationCodeExpiresAt < new Date(),
-    ); */
-    if (!user) {
+    let user;
+    try {
+      user = await this.userService.findOneByEmail(verifyOtpDto.email);
+    } catch {
       // Don't reveal if email exists or not for security
       throw new BadRequestException('Invalid OTP verification attempt');
     }
@@ -101,11 +97,11 @@ export class ForgetPasswordProvider {
           user.role === Role.User
             ? this.configService.get('jwt.userSecret')
             : this.configService.get('jwt.adminSecret'),
-        expiresIn: '1m',
+        expiresIn: '10m',
       },
     );
 
-    // Clear OTP after successful verification to prevent reuse, and store reset token
+    // Clear OTP after successful verification to prevent reuse, and store reset token to check against its string structure in the reset password method to prevent using another valid token like the login token
     const updatedUser = await this.userService.update(user._id.toString(), {
       PasswordVerificationCode: null,
       passwordVerificationCodeExpiresAt: null,
@@ -155,10 +151,15 @@ export class ForgetPasswordProvider {
       );
     }
 
-    // Check if token is for password reset
+    // store the new password, update method hashing the password internally
+    const updatedUser = await this.userService.update(user._id.toString(), {
+      passwordResetToken: null,
+      passwordChangedAt: new Date(),
+      password: resetPasswordDto.password,
+    });
 
-    // send otp to the user's email
-
-    return;
+    return {
+      updatedUser,
+    };
   }
 }

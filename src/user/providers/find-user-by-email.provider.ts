@@ -6,6 +6,7 @@ import {
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDocument } from '../schemas/user.schema';
+import { ExcludedUserFields } from '../utils';
 
 @Injectable()
 export class FindUserByEmailProvider {
@@ -16,14 +17,9 @@ export class FindUserByEmailProvider {
   async findOneByEmail(email: string, includePassword = false) {
     let user: UserDocument;
     try {
-      const query = this.userModel.findOne({ email });
-
-      // Only exclude password when not needed
-      if (!includePassword) {
-        query.select('-password -__v');
-      }
-
-      user = await query;
+      user = await this.userModel
+        .findOne({ email })
+        .select(ExcludedUserFields(includePassword ? ['password'] : []));
     } catch (error) {
       throw new RequestTimeoutException('an error occurred', {
         description: error.message || 'unable to connect to the database',
