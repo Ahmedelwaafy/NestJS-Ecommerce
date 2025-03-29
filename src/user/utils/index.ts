@@ -1,5 +1,19 @@
-export function ExcludedUserFields(includedFields: string[] = []): string {
-  // Base excluded fields (everything is excluded by default)
+import { User } from '../schemas/user.schema';
+
+export type ExcludedFields =
+  | 'password'
+  | '__v'
+  | 'PasswordVerificationCode'
+  | 'passwordVerificationCodeExpiresAt'
+  | 'passwordResetToken'
+  | 'passwordChangedAt'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'active';
+export function ExcludedUserFields(
+  includedFields: ExcludedFields[] = [],
+): string {
+  // Base excluded fields (default exclusions)
   const excludedFields = new Set([
     '-password',
     '-__v',

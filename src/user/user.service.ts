@@ -18,7 +18,7 @@ import { GetUsersBaseDto, GetUsersDto } from './dto/get-users.dto';
 import { FindUserByIdProvider } from './providers/find-user-by-id.provider';
 import { HashingProvider } from 'src/auth/providers/hashing.provider';
 import { FindUserByEmailProvider } from './providers/find-user-by-email.provider';
-import { ExcludedUserFields } from './utils';
+import { ExcludedUserFields, ExcludedFields } from './utils';
 
 /**
  * UserService
@@ -81,11 +81,20 @@ export class UserService {
   async findOne(id: string) {
     return await this.findUserByIdProvider.findById(id);
   }
-  public async findOneByEmail(email: string, includePassword = false) {
-    return this.findUserByEmailProvider.findOneByEmail(email, includePassword);
+  public async findOneByEmail(
+    email: string,
+    includedFields?: ExcludedFields[],
+  ) {
+    return this.findUserByEmailProvider.findOneByEmail(email, includedFields);
   }
-  async update(id: string, updateUserDto: UpdateUserDto) {
+  async update(
+    id: string,
+    updateUserDto: UpdateUserDto,
+    includedFields?: ExcludedFields[],
+  ) {
+    //check if user exits, and if not throw error
     await this.findUserByIdProvider.findById(id);
+
     if (updateUserDto.password) {
       updateUserDto.password = await this.hashingProvider.hashPassword(
         updateUserDto.password,
@@ -94,7 +103,7 @@ export class UserService {
     try {
       const updatedUser = await this.userModel
         .findByIdAndUpdate(id, updateUserDto, { new: true })
-        .select(ExcludedUserFields());
+        .select(ExcludedUserFields(includedFields));
       return updatedUser;
     } catch {
       throw new RequestTimeoutException('an error occurred', {

@@ -46,6 +46,7 @@ export class ResetPasswordDto {
     example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...',
     description: 'Reset token received after OTP verification',
   })
+  @IsNotEmpty({ message: 'Password Reset Token is required.' })
   @IsString()
-  resetToken: string;
+  passwordResetToken: string;
 }

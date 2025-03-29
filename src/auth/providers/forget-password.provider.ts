@@ -41,12 +41,16 @@ export class ForgetPasswordProvider {
     );
 
     // save otp in the database
-    const updatedUser = await this.userService.update(user._id.toString(), {
-      PasswordVerificationCode,
-      passwordVerificationCodeExpiresAt: new Date(
-        Date.now() + this.configService.get('appConfig.otpTtl'),
-      ),
-    });
+    const updatedUser = await this.userService.update(
+      user._id.toString(),
+      {
+        PasswordVerificationCode,
+        passwordVerificationCodeExpiresAt: new Date(
+          Date.now() + this.configService.get('appConfig.otpTtl'),
+        ),
+      },
+      ['PasswordVerificationCode'],
+    );
 
     // send otp to the user's email
 
@@ -60,7 +64,10 @@ export class ForgetPasswordProvider {
   public async verifyOtp(verifyOtpDto: VerifyOtpDto) {
     let user;
     try {
-      user = await this.userService.findOneByEmail(verifyOtpDto.email);
+      user = await this.userService.findOneByEmail(verifyOtpDto.email, [
+        'PasswordVerificationCode',
+        'passwordVerificationCodeExpiresAt',
+      ]);
     } catch {
       // Don't reveal if email exists or not for security
       throw new BadRequestException('Invalid OTP verification attempt');
@@ -86,7 +93,7 @@ export class ForgetPasswordProvider {
     }
 
     // Generate reset token (valid for 10 minutes)
-    const resetToken = await this.jwtService.signAsync(
+    const passwordResetToken = await this.jwtService.signAsync(
       {
         userId: user._id.toString(),
         email: user.email,
@@ -102,13 +109,13 @@ export class ForgetPasswordProvider {
     );
 
     // Clear OTP after successful verification to prevent reuse, and store reset token to check against its string structure in the reset password method to prevent using another valid token like the login token
-    const updatedUser = await this.userService.update(user._id.toString(), {
+    await this.userService.update(user._id.toString(), {
       PasswordVerificationCode: null,
       passwordVerificationCodeExpiresAt: null,
-      passwordResetToken: resetToken,
+      passwordResetToken,
     });
 
-    return { updatedUser };
+    return { passwordResetToken };
   }
 
   /**
@@ -116,10 +123,12 @@ export class ForgetPasswordProvider {
    */
   public async resetPassword(resetPasswordDto: ResetPasswordDto) {
     // find user by email
-    const user = await this.userService.findOneByEmail(resetPasswordDto.email);
+    const user = await this.userService.findOneByEmail(resetPasswordDto.email, [
+      'passwordResetToken',
+    ]);
 
     // Verify the reset token
-    if (user.passwordResetToken !== resetPasswordDto.resetToken) {
+    if (user.passwordResetToken !== resetPasswordDto.passwordResetToken) {
       throw new BadRequestException('Invalid reset token');
     }
 
@@ -127,7 +136,7 @@ export class ForgetPasswordProvider {
 
     try {
       const decoded = await this.jwtService.verifyAsync(
-        resetPasswordDto.resetToken,
+        resetPasswordDto.passwordResetToken,
         {
           secret:
             user.role === Role.User
@@ -135,7 +144,7 @@ export class ForgetPasswordProvider {
               : this.configService.get('jwt.adminSecret'),
         },
       );
-      console.log({ decoded });
+      //console.log({ decoded });
 
       /*  if (decoded.purpose !== PASSWORD_RESET_PURPOSE) {
         throw new BadRequestException('Invalid reset purpose');
@@ -145,7 +154,7 @@ export class ForgetPasswordProvider {
         throw new BadRequestException('Invalid reset attempt');
       } */
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       throw new BadRequestException(
         'Invalid reset token, try getting another otp code',
       );
@@ -157,9 +166,7 @@ export class ForgetPasswordProvider {
       passwordChangedAt: new Date(),
       password: resetPasswordDto.password,
     });
-
-    return {
-      updatedUser,
-    };
+    //console.log({ updatedUser });
+    return;
   }
 }

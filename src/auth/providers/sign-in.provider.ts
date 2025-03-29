@@ -38,7 +38,9 @@ export class SignInProvider {
    */
   public async signIn(signInDto: SignInDto, response: Response) {
     // find user by email
-    const user = await this.userService.findOneByEmail(signInDto.email, true);
+    const user = await this.userService.findOneByEmail(signInDto.email, [
+      'password',
+    ]);
 
     // compare password to the hash
     const isEqual = await this.hashingProvider.comparePassword(
