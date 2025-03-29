@@ -10,6 +10,9 @@ import { PaginationService } from 'src/common/pagination/providers/pagination.se
 import { Category } from './schemas/category.schema';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
+import { PaginationQueryDto } from 'src/common/pagination/dto/pagination-query.dto';
+import { GetCategoriesBaseDto } from './dto/get-categories.dto';
+import { Paginated } from 'src/common/pagination/interfaces/paginated.interface';
 
 @Injectable()
 export class CategoryService {
@@ -19,6 +22,12 @@ export class CategoryService {
 
     private readonly paginationService: PaginationService,
   ) {}
+
+  /**
+   *//***** Create Category ******
+   * @param createCategoryDto
+   * @returns Category
+   */
   async create(createCategoryDto: CreateCategoryDto) {
     const category = await this.findOneByName(createCategoryDto.name);
 
@@ -38,8 +47,39 @@ export class CategoryService {
     }
   }
 
-  findAll() {
-    return `This action returns all category`;
+  /**
+   *//***** Get All Categories ******
+   * @param paginationQuery
+   * @param getCategoriesQuery
+   * @returns Paginated<Category>
+   */
+  async findAll(
+    paginationQuery: PaginationQueryDto,
+    getCategoriesQuery?: GetCategoriesBaseDto,
+  ): Promise<Paginated<Category>> {
+    const filters: Record<string, any> = {};
+
+    // Build filters dynamically
+
+    if (getCategoriesQuery?.active !== undefined) {
+      filters.active = getCategoriesQuery.active;
+    }
+
+    if (getCategoriesQuery?.search) {
+      filters.$or = [
+        { name: { $regex: getCategoriesQuery.search, $options: 'i' } },
+      ];
+    }
+
+    return this.paginationService.paginateQuery(
+      paginationQuery,
+      this.categoryModel,
+      {
+        filters,
+        select: ' -__v',
+        ...(getCategoriesQuery?.sort && { sort: getCategoriesQuery.sort }),
+      },
+    );
   }
 
   async findOne(id: number) {

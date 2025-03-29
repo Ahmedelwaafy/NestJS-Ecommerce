@@ -9,6 +9,7 @@ import {
   UseGuards,
   HttpCode,
   HttpStatus,
+  Query,
 } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
@@ -17,6 +18,7 @@ import { Roles } from 'src/auth/decorators/roles.decorator';
 import { AuthGuard } from 'src/auth/gaurds/auth.guard';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
+import { GetCategoriesDto } from './dto/get-categories.dto';
 
 @Controller('v1/category')
 export class CategoryController {
@@ -40,8 +42,19 @@ export class CategoryController {
   }
 
   @Get()
-  findAll() {
-    return this.categoryService.findAll();
+  @ApiOperation({
+    summary: 'Get all categories',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Categories fetched successfully',
+  })
+  @Roles(['admin'])
+  @UseGuards(AuthGuard)
+  findAll(@Query() getCategoriesQuery: GetCategoriesDto) {
+    const { limit, page, ...filters } = getCategoriesQuery;
+
+    return this.categoryService.findAll({ page, limit }, filters);
   }
 
   @Get(':id')
