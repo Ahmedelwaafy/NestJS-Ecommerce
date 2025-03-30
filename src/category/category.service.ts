@@ -18,13 +18,17 @@ import { I18nHelperService } from 'src/i18n/providers/I18n-helper-service';
 
 @Injectable()
 export class CategoryService {
+  private t;
   constructor(
     //* injecting category model
     @InjectModel(Category.name) private readonly categoryModel: Model<Category>,
 
     private readonly paginationService: PaginationService,
     private readonly i18nHelper: I18nHelperService,
-  ) {}
+  ) {
+    // Set up namespace name globally per class
+    this.t = this.i18nHelper.createNamespaceTranslator('category').t;
+  }
 
   /**
    *//***** Create Category ******
@@ -36,9 +40,7 @@ export class CategoryService {
 
     // handle exception if category already exists
     if (category) {
-      throw new BadRequestException(
-        this.i18nHelper.t('category.already_exist'),
-      );
+      throw new BadRequestException(this.t('already_exist'));
     }
 
     // create new category
