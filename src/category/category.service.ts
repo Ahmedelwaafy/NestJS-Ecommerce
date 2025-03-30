@@ -13,6 +13,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { PaginationQueryDto } from 'src/common/pagination/dto/pagination-query.dto';
 import { GetCategoriesBaseDto } from './dto/get-categories.dto';
 import { Paginated } from 'src/common/pagination/interfaces/paginated.interface';
+import { I18nContext, I18nService } from 'nestjs-i18n';
 
 @Injectable()
 export class CategoryService {
@@ -21,6 +22,7 @@ export class CategoryService {
     @InjectModel(Category.name) private readonly categoryModel: Model<Category>,
 
     private readonly paginationService: PaginationService,
+    private readonly i18n: I18nService,
   ) {}
 
   /**
@@ -33,7 +35,9 @@ export class CategoryService {
 
     // handle exception if category already exists
     if (category) {
-      throw new BadRequestException('category already exists');
+      throw new BadRequestException(
+        this.i18n.t('category.already_exist', { lang: I18nContext.current().lang }),
+      );
     }
 
     // create new category
