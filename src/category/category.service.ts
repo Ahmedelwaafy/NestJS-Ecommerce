@@ -40,7 +40,9 @@ export class CategoryService {
 
     // handle exception if category already exists
     if (category) {
-      throw new BadRequestException(this.t('already_exist'));
+      throw new BadRequestException(
+        this.t('already_exist'),
+      );
     }
 
     // create new category

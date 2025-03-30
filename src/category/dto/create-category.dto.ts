@@ -1,5 +1,13 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsBoolean, IsOptional, IsString, MinLength, MaxLength, IsUrl } from 'class-validator';
+import {
+  IsBoolean,
+  IsOptional,
+  IsString,
+  MinLength,
+  MaxLength,
+  IsUrl,
+} from 'class-validator';
+import { i18nValidationMessage } from 'nestjs-i18n';
 
 export class CreateCategoryDto {
   @ApiProperty({
@@ -9,7 +17,9 @@ export class CreateCategoryDto {
     example: 'Electronics',
   })
   @IsString()
-  @MinLength(3, { message: 'Name must be at least 3 characters long.' })
+  @MinLength(3, {
+    message: i18nValidationMessage('validation.MinLength'),
+  })
   @MaxLength(30, { message: 'Name must be at most 30 characters long.' })
   name: string;
 
@@ -30,4 +40,3 @@ export class CreateCategoryDto {
   @IsBoolean()
   active: boolean = true;
 }
-
