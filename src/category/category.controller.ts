@@ -16,7 +16,7 @@ import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { AuthGuard } from 'src/auth/gaurds/auth.guard';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
 import { GetCategoriesDto } from './dto/get-categories.dto';
 
@@ -49,8 +49,7 @@ export class CategoryController {
     status: 200,
     description: 'Categories fetched successfully',
   })
-  @Roles(['admin'])
-  @UseGuards(AuthGuard)
+  @ResponseMessage('all categories data fetched successfully')
   findAll(@Query() getCategoriesQuery: GetCategoriesDto) {
     const { limit, page, ...filters } = getCategoriesQuery;
 
@@ -58,8 +57,21 @@ export class CategoryController {
   }
 
   @Get(':id')
+  @ApiOperation({
+    summary: 'Fetches a category by its id',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Category fetched successfully',
+  })
+  @ApiParam({
+    name: 'id',
+    description: 'Category id',
+    type: String,
+  })
+  @ResponseMessage('Category data fetched successfully')
   findOne(@Param('id') id: string) {
-    return this.categoryService.findOne(+id);
+    return this.categoryService.findOne(id);
   }
 
   @Patch(':id')
@@ -67,7 +79,7 @@ export class CategoryController {
     @Param('id') id: string,
     @Body() updateCategoryDto: UpdateCategoryDto,
   ) {
-    return this.categoryService.update(+id, updateCategoryDto);
+    return this.categoryService.update(id, updateCategoryDto);
   }
 
   @Delete(':id')

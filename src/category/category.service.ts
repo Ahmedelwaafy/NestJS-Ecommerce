@@ -82,7 +82,12 @@ export class CategoryService {
     );
   }
 
-  async findOne(id: number) {
+  /**
+   *//***** Get Single Categories ******
+   * @param id
+   * @returns Category
+   */
+  async findOne(id: string) {
     let category: Category;
     try {
       category = await this.categoryModel.findById(id);
@@ -109,8 +114,23 @@ export class CategoryService {
     return category;
   }
 
-  update(id: number, updateCategoryDto: UpdateCategoryDto) {
-    return `This action updates a #${id} category`;
+  async update(id: string, updateCategoryDto: UpdateCategoryDto) {
+    //check if the category exists
+    await this.findOne(id);
+
+    //update the category
+    try {
+      const updatedCategory = await this.categoryModel.findByIdAndUpdate(
+        id,
+        updateCategoryDto,
+        { new: true },
+      );
+      return updatedCategory;
+    } catch {
+      throw new RequestTimeoutException('an error occurred', {
+        description: 'unable to connect to the database',
+      });
+    }
   }
 
   remove(id: number) {
