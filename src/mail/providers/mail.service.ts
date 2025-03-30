@@ -44,6 +44,7 @@ export class MailService {
         },
       });
     } catch (error) {
+      console.log({ error });
       if (error.response.statusCode === 400) {
         throw new BadRequestException(error.response.message);
       }

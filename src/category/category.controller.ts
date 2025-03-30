@@ -24,6 +24,9 @@ import { GetCategoriesDto } from './dto/get-categories.dto';
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
+  /**
+   * //***** Create a Category ******
+   */
   @Post()
   @Roles(['admin'])
   @UseGuards(AuthGuard)
@@ -45,6 +48,9 @@ export class CategoryController {
     return this.categoryService.create(createCategoryDto);
   }
 
+  /**
+   * //***** Get all Category ******
+   */
   @Get()
   @ApiOperation({
     summary: 'Get all categories',
@@ -60,6 +66,9 @@ export class CategoryController {
     return this.categoryService.findAll({ page, limit }, filters);
   }
 
+  /**
+   * //***** Get a Category ******
+   */
   @Get(':id')
   @ApiOperation({
     summary: 'Fetches a category by its id',
@@ -78,6 +87,9 @@ export class CategoryController {
     return this.categoryService.findOne(id);
   }
 
+  /**
+   * //***** Update a Category ******
+   */
   @Patch(':id')
   @Roles(['admin'])
   @UseGuards(AuthGuard)
@@ -105,6 +117,9 @@ export class CategoryController {
     return this.categoryService.update(id, updateCategoryDto);
   }
 
+  /**
+   * //***** Delete a Category ******
+   */
   @Delete(':id')
   @Roles(['admin'])
   @UseGuards(AuthGuard)
@@ -125,6 +140,9 @@ export class CategoryController {
     return this.categoryService.deactivate(id);
   }
 
+  /**
+   * //***** Restore a Category ******
+   */
   @Patch('restore/:id')
   @Roles(['admin'])
   @UseGuards(AuthGuard)

@@ -16,5 +16,5 @@ git push origin development
 git checkout auth-model
 
 
-# Step 5: ./git-automation.sh "finish auth-model"
+# Step 5: ./git-automation.sh "finish categories-model"
 #git merge development
