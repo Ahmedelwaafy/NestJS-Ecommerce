@@ -1,12 +1,9 @@
 GET http://localhost:3000/api/v1/category/
 ?limit=10
 &page=1&sort=desc&search=cosmetics
-cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4ifQ.uLUQKCAZ3c_a94nMsfDMCYLRNHdkET0xoLd-DVVj4Aw
 
 
 
 GET http://localhost:3000/api/v1/category/67e871d13746b70ecf6b111c
-cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4ifQ.uLUQKCAZ3c_a94nMsfDMCYLRNHdkET0xoLd-DVVj4Aw
-
 
 
