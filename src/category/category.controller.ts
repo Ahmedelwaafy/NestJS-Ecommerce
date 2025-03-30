@@ -16,7 +16,7 @@ import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { AuthGuard } from 'src/auth/gaurds/auth.guard';
-import { ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
 import { GetCategoriesDto } from './dto/get-categories.dto';
 
@@ -35,6 +35,10 @@ export class CategoryController {
   @ApiOperation({
     summary: 'Creates a new category',
     description: 'Creates a new category',
+  })
+  @ApiBody({
+    description: 'Category details',
+    type: CreateCategoryDto,
   })
   @ResponseMessage('category created successfully')
   create(@Body() createCategoryDto: CreateCategoryDto) {
@@ -75,6 +79,25 @@ export class CategoryController {
   }
 
   @Patch(':id')
+  @Roles(['admin'])
+  @UseGuards(AuthGuard)
+  @ApiOperation({
+    summary: 'Updates a category by its id',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Category updated successfully',
+  })
+  @ApiParam({
+    name: 'id',
+    description: 'Category id',
+    type: String,
+  })
+  @ApiBody({
+    description: 'Category details',
+    type: UpdateCategoryDto,
+  })
+  @ResponseMessage('Category updated successfully')
   update(
     @Param('id') id: string,
     @Body() updateCategoryDto: UpdateCategoryDto,
@@ -83,7 +106,42 @@ export class CategoryController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.categoryService.remove(+id);
+  @Roles(['admin'])
+  @UseGuards(AuthGuard)
+  @ApiOperation({
+    summary: 'Deletes a category by its id',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Category deleted successfully',
+  })
+  @ApiParam({
+    name: 'id',
+    description: 'Category id',
+    type: String,
+  })
+  @ResponseMessage('Category deleted successfully')
+  deactivate(@Param('id') id: string) {
+    return this.categoryService.deactivate(id);
+  }
+
+  @Patch('restore/:id')
+  @Roles(['admin'])
+  @UseGuards(AuthGuard)
+  @ApiOperation({
+    summary: 'Restores a category by its id',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Category restored successfully',
+  })
+  @ApiParam({
+    name: 'id',
+    description: 'Category id',
+    type: String,
+  })
+  @ResponseMessage('Category restored successfully')
+  activate(@Param('id') id: string) {
+    return this.categoryService.activate(id);
   }
 }

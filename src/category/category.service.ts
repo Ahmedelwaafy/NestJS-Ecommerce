@@ -83,7 +83,7 @@ export class CategoryService {
   }
 
   /**
-   *//***** Get Single Categories ******
+   *//***** Get Single Category ******
    * @param id
    * @returns Category
    */
@@ -101,6 +101,12 @@ export class CategoryService {
     }
     return category;
   }
+
+  /**
+   *//***** Get Single Category ******
+   * @param name
+   * @returns Category
+   */
   async findOneByName(name: string) {
     let category: Category;
     try {
@@ -114,6 +120,11 @@ export class CategoryService {
     return category;
   }
 
+  /**
+   *//***** Update Single Category ******
+   * @param id
+   * @returns Category
+   */
   async update(id: string, updateCategoryDto: UpdateCategoryDto) {
     //check if the category exists
     await this.findOne(id);
@@ -133,7 +144,19 @@ export class CategoryService {
     }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} category`;
+  /**
+   *//***** Deactivate Single Category ******
+   * @param id
+   */
+  async deactivate(id: string) {
+    await this.update(id, { active: false });
+  }
+
+  /**
+   *//***** Activate Single Category ******
+   * @param id
+   */
+  async activate(id: string) {
+    await this.update(id, { active: true });
   }
 }
