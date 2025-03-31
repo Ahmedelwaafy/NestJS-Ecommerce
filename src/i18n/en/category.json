@@ -1,5 +1,20 @@
 {
-  "already_exist": "Category already exist",
-  "EMAIL_NOT_FORMATTED": "Email is not formatted correctly",
-  "fetched_successfully": "Category data fetched successfully"
+  "controller": {
+    "CREATED_SUCCESSFULLY": "Category created successfully",
+    "UPDATED_SUCCESSFULLY": "Category updated successfully",
+    "DELETED_SUCCESSFULLY": "Category deleted successfully",
+    "RESTORED_SUCCESSFULLY": "Category restored successfully",
+    "GET_ALL_SUCCESSFULLY": "Categories fetched successfully",
+    "GET_ONE_SUCCESSFULLY": "Category fetched successfully"
+  },
+  "service": {
+    "ALREADY_EXISTS": "A category with the same name already exists",
+    "fetched_successfully": "Category data fetched successfully",
+    "ERROR_OCCURRED": "an error occurred",
+    "NOT_FOUND": "Category not found",
+    "DATABASE_CONNECTION_FAILED": "unable to connect to the database"
+  },
+  "dto": {
+    "IMAGE_IS_STRING": "Image URL must be a string."
+  }
 }

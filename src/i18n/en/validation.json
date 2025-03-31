@@ -1,4 +1,9 @@
 {
-  "NOT_EMPTY": "{property} cannot be empty!",
-  "IS_STRING": "{property} must be a string!"
+  "EN_NAME_NOT_EMPTY": "English name is required",
+  "EN_NAME_IS_STRING": "English name must be string",
+  "AR_NAME_NOT_EMPTY": "Arabic name is required",
+  "AR_NAME_IS_STRING": "Arabic name must be string",
+  "SORT_NOT_VALID": "Sort must be 'asc' or 'desc'",
+  "ACTIVE_IS_BOOLEAN": "Active status must be a boolean",
+  "SEARCH_IS_STRING": "Search must be a string"
 }

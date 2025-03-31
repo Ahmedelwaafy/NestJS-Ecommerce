@@ -6,13 +6,19 @@ import { Model } from 'mongoose';
 import { PaginationQueryDto } from '../dto/pagination-query.dto';
 import { Paginated } from '../interfaces/paginated.interface';
 import { Sort } from 'src/common/enums';
+import { I18nHelperService } from 'src/i18n/providers/I18n-helper-service';
 
 @Injectable()
 export class PaginationService {
+  private lang: string;
+
   constructor(
     @Inject(REQUEST)
     private readonly request: Request,
-  ) {}
+    private readonly i18nHelper: I18nHelperService,
+  ) {
+    this.lang = this.i18nHelper.createNamespaceTranslator('').lang;
+  }
 
   public async paginateQuery<T>(
     paginationQuery: PaginationQueryDto,
@@ -47,9 +53,14 @@ export class PaginationService {
     const totalPages = Math.ceil(totalItems / limit);
     const nextPage = page === totalPages ? page : page + 1;
     const previousPage = page === 1 ? 1 : page - 1;
+    
+    const localizedResults = model.schema.methods.toJSONLocalizedOnly(
+      results,
+      this.lang,
+    );
 
     return {
-      data: results,
+      data: localizedResults,
       meta: {
         itemsPerPage: limit,
         totalItems,

@@ -26,7 +26,7 @@ export class CreateCategoryDto {
     example: 'https://example.com/image.jpg',
   })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'category.dto.IMAGE_IS_STRING' })
   @IsUrl()
   image?: string;
 
@@ -35,6 +35,8 @@ export class CreateCategoryDto {
     example: true,
   })
   @IsOptional()
-  @IsBoolean()
-  active: boolean = true;
+  @IsBoolean({
+    message: 'validation.ACTIVE_IS_BOOLEAN',
+  })
+  active: boolean;
 }

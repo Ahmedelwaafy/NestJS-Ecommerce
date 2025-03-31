@@ -14,17 +14,17 @@ import { I18nHelperService } from 'src/i18n/providers/I18n-helper-service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { GetCategoriesBaseDto } from './dto/get-categories.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-import { Category } from './schemas/category.schema';
+import { Category, CategoryDocument } from './schemas/category.schema';
 import { TFunction } from 'src/i18n/types';
 
 @Injectable()
 export class CategoryService {
   private t: TFunction;
   private lang: string;
+
   constructor(
     //* injecting category model
     @InjectModel(Category.name) private readonly categoryModel: Model<Category>,
-
     private readonly paginationService: PaginationService,
     private readonly i18nHelper: I18nHelperService,
   ) {
@@ -43,7 +43,7 @@ export class CategoryService {
 
     // handle exception if category already exists
     if (category) {
-      throw new BadRequestException(this.t('already_exist'));
+      throw new BadRequestException(this.t('service.ALREADY_EXISTS'));
     }
 
     // create new category
@@ -51,8 +51,9 @@ export class CategoryService {
       const newCategory = await this.categoryModel.create(createCategoryDto);
       return newCategory;
     } catch (error) {
-      throw new RequestTimeoutException('an error occurred', {
-        description: error.message || 'unable to connect to the database',
+      throw new RequestTimeoutException(this.t('service.ERROR_OCCURRED'), {
+        description:
+          error.message || this.t('service.DATABASE_CONNECTION_FAILED'),
       });
     }
   }
@@ -102,12 +103,13 @@ export class CategoryService {
     try {
       category = await this.categoryModel.findById(id);
     } catch (error) {
-      throw new RequestTimeoutException('an error occurred', {
-        description: error.message || 'unable to connect to the database',
+      throw new RequestTimeoutException(this.t('service.ERROR_OCCURRED'), {
+        description:
+          error.message || this.t('service.DATABASE_CONNECTION_FAILED'),
       });
     }
     if (!category) {
-      throw new NotFoundException('category not found');
+      throw new NotFoundException(this.t('service.NOT_FOUND'));
     }
     const localizedCategory =
       this.categoryModel.schema.methods.toJSONLocalizedOnly(
@@ -115,7 +117,7 @@ export class CategoryService {
         this.lang,
       );
 
-    return { category, localizedCategory };
+    return localizedCategory;
   }
 
   /**
@@ -124,14 +126,15 @@ export class CategoryService {
    * @returns Category
    */
   async findOneByName(name: LocalizedFieldDto) {
-    let category: Category;
+    let category: CategoryDocument;
     try {
       category = await this.categoryModel.findOne({
         $or: [{ 'name.en': name.en }, { 'name.ar': name.ar }],
       });
     } catch (error) {
-      throw new RequestTimeoutException('an error occurred', {
-        description: error.message || 'unable to connect to the database',
+      throw new RequestTimeoutException(this.t('service.ERROR_OCCURRED'), {
+        description:
+          error.message || this.t('service.DATABASE_CONNECTION_FAILED'),
       });
     }
 
@@ -147,6 +150,15 @@ export class CategoryService {
     //check if the category exists
     await this.findOne(id);
 
+    if (updateCategoryDto?.name) {
+      const categoryNameTaken = await this.findOneByName(
+        updateCategoryDto.name,
+      );
+      //console.log({ categoryNameTaken });
+      if (categoryNameTaken && categoryNameTaken._id.toString() !== id) {//prevent duplicate categories names, while allowing changing only en or ar values
+        throw new BadRequestException(this.t('service.ALREADY_EXISTS'));
+      }
+    }
     //update the category
     try {
       const updatedCategory = await this.categoryModel.findByIdAndUpdate(
@@ -155,9 +167,10 @@ export class CategoryService {
         { new: true },
       );
       return updatedCategory;
-    } catch {
-      throw new RequestTimeoutException('an error occurred', {
-        description: 'unable to connect to the database',
+    } catch (error) {
+      throw new RequestTimeoutException(this.t('service.ERROR_OCCURRED'), {
+        description:
+          error.message || this.t('service.DATABASE_CONNECTION_FAILED'),
       });
     }
   }

@@ -1,3 +1,6 @@
 {
-  "operation_succeeded": "تمت العملية بنجاح"
+  "operation_succeeded": "تمت العملية بنجاح",
+  "ERROR_OCCURRED": "an error occurred",
+  "NOT_FOUND": "not found",
+  "DATABASE_CONNECTION_FAILED": "unable to connect to the database"
 }

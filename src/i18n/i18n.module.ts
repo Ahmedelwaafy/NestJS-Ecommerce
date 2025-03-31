@@ -1,5 +1,5 @@
 import { Global, Module } from '@nestjs/common';
-import { AcceptLanguageResolver, I18nModule, QueryResolver } from 'nestjs-i18n';
+import { AcceptLanguageResolver, HeaderResolver, I18nModule, QueryResolver } from 'nestjs-i18n';
 import * as path from 'path';
 import { I18nHelperService } from './providers/I18n-helper-service';
 
@@ -8,7 +8,7 @@ import { I18nHelperService } from './providers/I18n-helper-service';
  * the module, but now we are creating our custom LocalizationModule, so we need to define it as
  * a global module explicitly to use the custom I18nHelperService everywhere also
  */
-@Global() 
+@Global()
 @Module({
   imports: [
     I18nModule.forRoot({
@@ -17,10 +17,7 @@ import { I18nHelperService } from './providers/I18n-helper-service';
         path: path.join(process.cwd(), 'dist/i18n/'),
         watch: true,
       },
-      resolvers: [
-        { use: QueryResolver, options: ['lang'] },
-        AcceptLanguageResolver,
-      ],
+      resolvers: [new HeaderResolver(['lang'])],
     }),
   ],
   providers: [I18nHelperService],

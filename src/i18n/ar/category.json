@@ -1,5 +1,20 @@
 {
-  "already_exist": "هذا التصنيف موجود ",
-  "EMAIL_NOT_FORMATTED": "الايميل غير صحيح",
-  "fetched_successfully": "تم الحصول على بيانات التصنيف بنجاح"
+  "controller": {
+    "CREATED_SUCCESSFULLY": "تم انشاء التصنيف بنجاح",
+    "UPDATED_SUCCESSFULLY": "تم تحديث التصنيف بنجاح",
+    "DELETED_SUCCESSFULLY": "تم حذف التصنيف بنجاح",
+    "RESTORED_SUCCESSFULLY": "تم استعادة التصنيف بنجاح",
+    "GET_ALL_SUCCESSFULLY": "تم جلب التصنيفات بنجاح",
+    "GET_ONE_SUCCESSFULLY": "تم جلب التصنيف بنجاح"
+  },
+  "service": {
+    "ALREADY_EXISTS": "يوجد تصنيف بهذا الاسم",
+    "fetched_successfully": "تم جلب بيانات التصنيف بنجاح",
+    "ERROR_OCCURRED": "حدث خطأ ما",
+    "NOT_FOUND": "التصنيف غير موجودة",
+    "DATABASE_CONNECTION_FAILED": "غير قادر على الاتصال بقاعدة البيانات"
+  },
+  "dto": {
+    "IMAGE_IS_STRING": "يجب أن يكون رابط الصورة سلاسل نصية."
+  }
 }

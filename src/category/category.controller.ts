@@ -43,7 +43,7 @@ export class CategoryController {
     description: 'Category details',
     type: CreateCategoryDto,
   })
-  @ResponseMessage('category created successfully')
+  @ResponseMessage('category.controller.CREATED_SUCCESSFULLY')
   create(@Body() createCategoryDto: CreateCategoryDto) {
     return this.categoryService.create(createCategoryDto);
   }
@@ -59,7 +59,7 @@ export class CategoryController {
     status: 200,
     description: 'Categories fetched successfully',
   })
-  @ResponseMessage('all categories data fetched successfully')
+  @ResponseMessage('category.controller.GET_ALL_SUCCESSFULLY')
   findAll(@Query() getCategoriesQuery: GetCategoriesDto) {
     const { limit, page, ...filters } = getCategoriesQuery;
 
@@ -82,8 +82,7 @@ export class CategoryController {
     description: 'Category id',
     type: String,
   })
-  @ResponseMessage('category.fetched_successfully')
-  
+  @ResponseMessage('category.controller.GET_ONE_SUCCESSFULLY')
   findOne(@Param('id') id: string) {
     return this.categoryService.findOne(id);
   }
@@ -110,7 +109,7 @@ export class CategoryController {
     description: 'Category details',
     type: UpdateCategoryDto,
   })
-  @ResponseMessage('Category updated successfully')
+  @ResponseMessage('category.controller.UPDATED_SUCCESSFULLY')
   update(
     @Param('id') id: string,
     @Body() updateCategoryDto: UpdateCategoryDto,
@@ -136,7 +135,7 @@ export class CategoryController {
     description: 'Category id',
     type: String,
   })
-  @ResponseMessage('Category deleted successfully')
+  @ResponseMessage('category.controller.DELETED_SUCCESSFULLY')
   deactivate(@Param('id') id: string) {
     return this.categoryService.deactivate(id);
   }
@@ -159,7 +158,7 @@ export class CategoryController {
     description: 'Category id',
     type: String,
   })
-  @ResponseMessage('Category restored successfully')
+  @ResponseMessage('category.controller.RESTORED_SUCCESSFULLY')
   activate(@Param('id') id: string) {
     return this.categoryService.activate(id);
   }

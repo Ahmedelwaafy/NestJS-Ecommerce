@@ -16,5 +16,5 @@ git push origin development
 git checkout categories-model
 
 
-# Step 5: ./git-automation.sh "finish categories-model"
+# Step 5: ./git-automation.sh "add localization to categories module"
 #git merge development

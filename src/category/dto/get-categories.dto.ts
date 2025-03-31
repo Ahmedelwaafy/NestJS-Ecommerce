@@ -15,7 +15,7 @@ export class GetCategoriesBaseDto {
     enum: Sort,
   })
   @IsOptional()
-  @IsEnum(Sort)
+  @IsEnum(Sort, { message: 'validation.SORT_NOT_VALID' })
   sort?: Sort = Sort.desc;
 
   @ApiPropertyOptional({
@@ -25,7 +25,7 @@ export class GetCategoriesBaseDto {
   })
   @IsOptional()
   @IsBoolean({
-    message: 'Active status must be true or false.',
+    message: 'validation.ACTIVE_IS_BOOLEAN',
   })
   active?: boolean;
 
@@ -34,7 +34,9 @@ export class GetCategoriesBaseDto {
     description: 'search query.',
   })
   @IsOptional()
-  @IsString()
+  @IsString({
+    message: 'validation.SEARCH_IS_STRING',
+  })
   search?: string;
 }
 
