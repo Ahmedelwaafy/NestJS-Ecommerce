@@ -20,6 +20,7 @@ import { LocalizedFieldDto } from 'src/common/dto/localized-field.dto';
 @Injectable()
 export class CategoryService {
   private t;
+  private lang;
   constructor(
     //* injecting category model
     @InjectModel(Category.name) private readonly categoryModel: Model<Category>,
@@ -29,6 +30,7 @@ export class CategoryService {
   ) {
     // Set up namespace name globally per class
     this.t = this.i18nHelper.createNamespaceTranslator('category').t;
+    this.lang = this.i18nHelper.createNamespaceTranslator('category').lang;
   }
 
   /**
@@ -109,7 +111,13 @@ export class CategoryService {
     if (!category) {
       throw new NotFoundException('category not found');
     }
-    return category;
+    const localizedCategory =
+      this.categoryModel.schema.methods.toJSONLocalizedOnly(
+        category,
+        this.lang,
+      );
+
+    return { category, localizedCategory };
   }
 
   /**
