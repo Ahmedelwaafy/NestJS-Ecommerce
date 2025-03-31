@@ -1,1 +1,4 @@
-{ "already_exist": "Category already exist from translations" }
+{
+  "already_exist": "Category already exist from translations",
+  "EMAIL": "الايميل غير صحيح"
+}

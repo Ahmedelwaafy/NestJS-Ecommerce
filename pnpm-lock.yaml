@@ -56,9 +56,12 @@ importers:
       mongoose:
         specifier: ^8.10.0
         version: 8.10.0
+      mongoose-i18n-localize:
+        specifier: ^0.3.0
+        version: 0.3.0
       nestjs-i18n:
-        specifier: ^10.5.1
-        version: 10.5.1(@nestjs/common@10.4.15(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.4.15(@nestjs/common@10.4.15(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.4.15)(reflect-metadata@0.2.2)(rxjs@7.8.1))(class-validator@0.14.1)(rxjs@7.8.1)
+        specifier: 10.3.7
+        version: 10.3.7(@nestjs/common@10.4.15(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.4.15(@nestjs/common@10.4.15(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.4.15)(reflect-metadata@0.2.2)(rxjs@7.8.1))(class-validator@0.14.1)(rxjs@7.8.1)
       nodemailer:
         specifier: ^6.10.0
         version: 6.10.0
@@ -1403,6 +1406,10 @@ packages:
 
   cookie-signature@1.0.6:
     resolution: {integrity: sha512-QADzlaHc8icV8I7vbaJXJwod9HWYp8uCqf1xa4OfNu1T7JVxQIrUgOWtHdNDtPiywmFbiS12VjotIXLrKM3orQ==}
+
+  cookie@0.5.0:
+    resolution: {integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==}
+    engines: {node: '>= 0.6'}
 
   cookie@0.7.1:
     resolution: {integrity: sha512-6DnInpx7SJ2AK3+CTUE/ZM0vWTUboZCegxhC2xiIydHR9jNuTAASBrfEpHhiGOZw/nX51bHt6YQl8jsGo4y/0w==}
@@ -2799,6 +2806,9 @@ packages:
       socks:
         optional: true
 
+  mongoose-i18n-localize@0.3.0:
+    resolution: {integrity: sha512-1imPY6AQ2lT9FIy+V7cm3RByFdRveuWyvFMBDsAWK3/UICUfYdA1X/zwESvAlpfem+N2dM0XyCcQS0Logz+CDQ==}
+
   mongoose@8.10.0:
     resolution: {integrity: sha512-nLhk3Qrv6q/HpD2k1O7kbBqsq+/kmKpdv5KJ+LLhQlII3e1p/SSLoLP6jMuSiU6+iLK7zFw4T1niAk3mA3QVug==}
     engines: {node: '>=16.20.1'}
@@ -2838,9 +2848,9 @@ packages:
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
-  nestjs-i18n@10.5.1:
-    resolution: {integrity: sha512-cJJFz+RUfav23QACpGCq1pdXNLYC3tBesrP14RGoE/YYcD4xosQPX2eyjvDNuo0Ti63Xtn6j57wDNEUKrZqmSw==}
-    engines: {node: '>=18'}
+  nestjs-i18n@10.3.7:
+    resolution: {integrity: sha512-zapq3b9sKonfD8C2OL6AdZTJzhjQQHeUJ4dWnI2TEnVe2g3k41+ibrNRDvUlbb3YsIMolvhgV4PKMDAZRCvtoQ==}
+    engines: {node: '>=16'}
     peerDependencies:
       '@nestjs/common': '*'
       '@nestjs/core': '*'
@@ -5428,6 +5438,8 @@ snapshots:
 
   cookie-signature@1.0.6: {}
 
+  cookie@0.5.0: {}
+
   cookie@0.7.1: {}
 
   cookie@0.7.2: {}
@@ -7364,6 +7376,8 @@ snapshots:
       bson: 6.10.2
       mongodb-connection-string-url: 3.0.2
 
+  mongoose-i18n-localize@0.3.0: {}
+
   mongoose@8.10.0:
     dependencies:
       bson: 6.10.2
@@ -7415,14 +7429,14 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  nestjs-i18n@10.5.1(@nestjs/common@10.4.15(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.4.15(@nestjs/common@10.4.15(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.4.15)(reflect-metadata@0.2.2)(rxjs@7.8.1))(class-validator@0.14.1)(rxjs@7.8.1):
+  nestjs-i18n@10.3.7(@nestjs/common@10.4.15(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.4.15(@nestjs/common@10.4.15(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.4.15)(reflect-metadata@0.2.2)(rxjs@7.8.1))(class-validator@0.14.1)(rxjs@7.8.1):
     dependencies:
       '@nestjs/common': 10.4.15(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1)
       '@nestjs/core': 10.4.15(@nestjs/common@10.4.15(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.4.15)(reflect-metadata@0.2.2)(rxjs@7.8.1)
       accept-language-parser: 1.5.0
       chokidar: 3.6.0
       class-validator: 0.14.1
-      cookie: 0.7.2
+      cookie: 0.5.0
       iterare: 1.2.1
       js-yaml: 4.1.0
       rxjs: 7.8.1

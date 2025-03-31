@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import * as mongooseI18n from 'mongoose-i18n-localize';
 
 export type CategoryDocument = HydratedDocument<Category>;
 
@@ -8,8 +9,7 @@ export class Category {
   @Prop({
     required: true,
     type: String,
-    min: [3, 'Name must be at least 3 characters long.'],
-    max: [30, 'Name must be at most 30 characters long.'],
+    i18n: true,
   })
   name: string;
 
@@ -25,4 +25,10 @@ export class Category {
   active: boolean;
 }
 
-export const CategorySchema = SchemaFactory.createForClass(Category);
+const CategorySchema = SchemaFactory.createForClass(Category);
+
+CategorySchema.plugin(mongooseI18n, {
+  locales: ['en', 'ar'],
+});
+
+export { CategorySchema };

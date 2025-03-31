@@ -1,27 +1,25 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import {
   IsBoolean,
   IsOptional,
   IsString,
-  MinLength,
-  MaxLength,
   IsUrl,
+  ValidateNested
 } from 'class-validator';
-import { i18nValidationMessage } from 'nestjs-i18n';
+import { LocalizedFieldDto } from 'src/common/dto/localized-field.dto';
 
 export class CreateCategoryDto {
   @ApiProperty({
     description: 'The name of the category.',
-    minLength: 3,
-    maxLength: 30,
-    example: 'Electronics',
+    example: {
+      en: 'Clothing',
+      ar: 'ملابس',
+    },
   })
-  @IsString()
-  @MinLength(3, {
-    message: i18nValidationMessage('validation.MinLength'),
-  })
-  @MaxLength(30, { message: 'Name must be at most 30 characters long.' })
-  name: string;
+  @Type(() => LocalizedFieldDto)
+  @ValidateNested()
+  name: LocalizedFieldDto;
 
   @ApiPropertyOptional({
     description: 'The image URL of the category.',

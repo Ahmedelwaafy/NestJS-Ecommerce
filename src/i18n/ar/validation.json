@@ -1,8 +1,4 @@
 {
-  "MinLength": "يجب أن يكون الاسم 3 أحرف على الأقل.",
-  "NOT_EMPTY": "{property} cannot be empty",
-  "INVALID_EMAIL": "email is invalid",
-  "INVALID_BOOLEAN": "{property} is not a boolean",
-  "MIN": "{property} with value: \"{value}\" needs to be at least {constraints.0}, ow and {message}",
-  "MAX": "{property} with value: \"{value}\" needs to be less than {constraints.0}, ow and {message}"
+  "NOT_EMPTY": "{property} لا يمكن ان يكون فارغ",
+  "IS_STRING": "{property} يجب ان يكون نص"
 }

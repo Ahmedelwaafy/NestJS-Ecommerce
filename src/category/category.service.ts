@@ -15,6 +15,7 @@ import { GetCategoriesBaseDto } from './dto/get-categories.dto';
 import { Paginated } from 'src/common/pagination/interfaces/paginated.interface';
 import { I18nContext, I18nService } from 'nestjs-i18n';
 import { I18nHelperService } from 'src/i18n/providers/I18n-helper-service';
+import { LocalizedFieldDto } from 'src/common/dto/localized-field.dto';
 
 @Injectable()
 export class CategoryService {
@@ -116,10 +117,12 @@ export class CategoryService {
    * @param name
    * @returns Category
    */
-  async findOneByName(name: string) {
+  async findOneByName(name: LocalizedFieldDto) {
     let category: Category;
     try {
-      category = await this.categoryModel.findOne({ name });
+      category = await this.categoryModel.findOne({
+        $or: [{ 'name.en': name.en }, { 'name.ar': name.ar }],
+      });
     } catch (error) {
       throw new RequestTimeoutException('an error occurred', {
         description: error.message || 'unable to connect to the database',
