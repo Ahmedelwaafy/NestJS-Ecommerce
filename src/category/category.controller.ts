@@ -82,7 +82,8 @@ export class CategoryController {
     description: 'Category id',
     type: String,
   })
-  @ResponseMessage('Category data fetched successfully')
+  @ResponseMessage('category.fetched_successfully')
+  
   findOne(@Param('id') id: string) {
     return this.categoryService.findOne(id);
   }

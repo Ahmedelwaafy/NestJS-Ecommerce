@@ -1,4 +1,5 @@
 {
   "already_exist": "هذا التصنيف موجود ",
-  "EMAIL_NOT_FORMATTED": "الايميل غير صحيح"
+  "EMAIL_NOT_FORMATTED": "الايميل غير صحيح",
+  "fetched_successfully": "تم الحصول على بيانات التصنيف بنجاح"
 }

@@ -1,4 +1,5 @@
 {
   "already_exist": "Category already exist",
-  "EMAIL_NOT_FORMATTED": "Email is not formatted correctly"
+  "EMAIL_NOT_FORMATTED": "Email is not formatted correctly",
+  "fetched_successfully": "Category data fetched successfully"
 }

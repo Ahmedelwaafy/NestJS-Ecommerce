@@ -4,23 +4,23 @@ import {
   NotFoundException,
   RequestTimeoutException,
 } from '@nestjs/common';
-import { CreateCategoryDto } from './dto/create-category.dto';
-import { UpdateCategoryDto } from './dto/update-category.dto';
-import { PaginationService } from 'src/common/pagination/providers/pagination.service';
-import { Category } from './schemas/category.schema';
-import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { PaginationQueryDto } from 'src/common/pagination/dto/pagination-query.dto';
-import { GetCategoriesBaseDto } from './dto/get-categories.dto';
-import { Paginated } from 'src/common/pagination/interfaces/paginated.interface';
-import { I18nContext, I18nService } from 'nestjs-i18n';
-import { I18nHelperService } from 'src/i18n/providers/I18n-helper-service';
+import { Model } from 'mongoose';
 import { LocalizedFieldDto } from 'src/common/dto/localized-field.dto';
+import { PaginationQueryDto } from 'src/common/pagination/dto/pagination-query.dto';
+import { Paginated } from 'src/common/pagination/interfaces/paginated.interface';
+import { PaginationService } from 'src/common/pagination/providers/pagination.service';
+import { I18nHelperService } from 'src/i18n/providers/I18n-helper-service';
+import { CreateCategoryDto } from './dto/create-category.dto';
+import { GetCategoriesBaseDto } from './dto/get-categories.dto';
+import { UpdateCategoryDto } from './dto/update-category.dto';
+import { Category } from './schemas/category.schema';
+import { TFunction } from 'src/i18n/types';
 
 @Injectable()
 export class CategoryService {
-  private t;
-  private lang;
+  private t: TFunction;
+  private lang: string;
   constructor(
     //* injecting category model
     @InjectModel(Category.name) private readonly categoryModel: Model<Category>,
@@ -43,9 +43,7 @@ export class CategoryService {
 
     // handle exception if category already exists
     if (category) {
-      throw new BadRequestException(
-        this.t('already_exist'),
-      );
+      throw new BadRequestException(this.t('already_exist'));
     }
 
     // create new category
