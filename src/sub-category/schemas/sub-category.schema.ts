@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
 import * as mongooseI18n from 'mongoose-i18n-localize';
 import { Category } from 'src/category/schemas/category.schema';
+import { locales } from 'src/i18n/constants';
 
 export type SubCategoryDocument = HydratedDocument<SubCategory>;
 
@@ -33,7 +34,7 @@ export class SubCategory {
 const SubCategorySchema = SchemaFactory.createForClass(SubCategory);
 
 SubCategorySchema.plugin(mongooseI18n, {
-  locales: ['en', 'ar'],
+  locales,
 });
 
 export { SubCategorySchema };

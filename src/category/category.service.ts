@@ -78,7 +78,8 @@ export class CategoryService {
 
     if (getCategoriesQuery?.search) {
       filters.$or = [
-        { name: { $regex: getCategoriesQuery.search, $options: 'i' } },
+        { 'name.en': { $regex: getCategoriesQuery.search, $options: 'i' } },
+        { 'name.ar': { $regex: getCategoriesQuery.search, $options: 'i' } },
       ];
     }
 

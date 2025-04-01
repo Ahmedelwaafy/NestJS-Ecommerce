@@ -3,10 +3,10 @@ import { HydratedDocument } from 'mongoose';
 import * as mongooseI18n from 'mongoose-i18n-localize';
 import { locales } from 'src/i18n/constants';
 
-export type CategoryDocument = HydratedDocument<Category>;
+export type BrandDocument = HydratedDocument<Brand>;
 
 @Schema({ timestamps: true })
-export class Category {
+export class Brand {
   @Prop({
     required: true,
     type: String,
@@ -28,10 +28,10 @@ export class Category {
   active: boolean;
 }
 
-const CategorySchema = SchemaFactory.createForClass(Category);
+const BrandSchema = SchemaFactory.createForClass(Brand);
 
-CategorySchema.plugin(mongooseI18n, {
+BrandSchema.plugin(mongooseI18n, {
   locales,
 });
 
-export { CategorySchema };
+export { BrandSchema };

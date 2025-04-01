@@ -96,7 +96,8 @@ export class SubCategoryService {
 
     if (getSubCategoriesQuery?.search) {
       filters.$or = [
-        { name: { $regex: getSubCategoriesQuery.search, $options: 'i' } },
+        { 'name.en': { $regex: getSubCategoriesQuery.search, $options: 'i' } },
+        { 'name.ar': { $regex: getSubCategoriesQuery.search, $options: 'i' } },
       ];
     }
 

@@ -1,6 +1,6 @@
 GET http://localhost:3000/api/v1/category/
 ?limit=10
-&page=1&sort=desc&search=shir
+&page=1&sort=desc
 lang: ar
 
 
