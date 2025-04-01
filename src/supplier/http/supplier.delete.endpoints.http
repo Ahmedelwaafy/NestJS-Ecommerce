@@ -1,4 +1,4 @@
-DELETE http://localhost:3000/api/v1/supplier/67eb7a7ea03bccd0dc806442
+DELETE http://localhost:3000/api/v1/supplier/67ebb269cbdcf775a5f32073
 cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4ifQ.uLUQKCAZ3c_a94nMsfDMCYLRNHdkET0xoLd-DVVj4Aw
 lang: ar
 
