@@ -6,20 +6,20 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { CategoryService } from 'src/category/category.service';
+import { BaseFiltersDto } from 'src/common/dto/base-filters.dto';
 import { LocalizedFieldDto } from 'src/common/dto/localized-field.dto';
 import { PaginationQueryDto } from 'src/common/pagination/dto/pagination-query.dto';
 import { Paginated } from 'src/common/pagination/interfaces/paginated.interface';
 import { PaginationService } from 'src/common/pagination/providers/pagination.service';
 import { I18nHelperService } from 'src/i18n/providers/I18n-helper-service';
+import { TFunction } from 'src/i18n/types';
 import { CreateSubCategoryDto } from './dto/create-sub-category.dto';
-import { GetSubCategoriesBaseDto } from './dto/get-sub-categories.dto';
 import { UpdateSubCategoryDto } from './dto/update-sub-category.dto';
 import {
   SubCategory,
   SubCategoryDocument,
 } from './schemas/sub-category.schema';
-import { TFunction } from 'src/i18n/types';
-import { CategoryService } from 'src/category/category.service';
 
 @Injectable()
 export class SubCategoryService {
@@ -84,7 +84,7 @@ export class SubCategoryService {
    */
   async findAll(
     paginationQuery: PaginationQueryDto,
-    getSubCategoriesQuery?: GetSubCategoriesBaseDto,
+    getSubCategoriesQuery?: BaseFiltersDto,
   ): Promise<Paginated<SubCategory>> {
     const filters: Record<string, any> = {};
 

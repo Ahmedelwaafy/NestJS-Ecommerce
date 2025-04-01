@@ -6,16 +6,16 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { BaseFiltersDto } from 'src/common/dto/base-filters.dto';
 import { LocalizedFieldDto } from 'src/common/dto/localized-field.dto';
 import { PaginationQueryDto } from 'src/common/pagination/dto/pagination-query.dto';
 import { Paginated } from 'src/common/pagination/interfaces/paginated.interface';
 import { PaginationService } from 'src/common/pagination/providers/pagination.service';
 import { I18nHelperService } from 'src/i18n/providers/I18n-helper-service';
+import { TFunction } from 'src/i18n/types';
 import { CreateCategoryDto } from './dto/create-category.dto';
-import { GetCategoriesBaseDto } from './dto/get-categories.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { Category, CategoryDocument } from './schemas/category.schema';
-import { TFunction } from 'src/i18n/types';
 
 @Injectable()
 export class CategoryService {
@@ -66,7 +66,7 @@ export class CategoryService {
    */
   async findAll(
     paginationQuery: PaginationQueryDto,
-    getCategoriesQuery?: GetCategoriesBaseDto,
+    getCategoriesQuery?: BaseFiltersDto,
   ): Promise<Paginated<Category>> {
     const filters: Record<string, any> = {};
 
@@ -156,7 +156,8 @@ export class CategoryService {
         updateCategoryDto.name,
       );
       //console.log({ categoryNameTaken });
-      if (categoryNameTaken && categoryNameTaken._id.toString() !== id) {//prevent duplicate categories names, while allowing changing only en or ar values
+      if (categoryNameTaken && categoryNameTaken._id.toString() !== id) {
+        //prevent duplicate categories names, while allowing changing only en or ar values
         throw new BadRequestException(this.t('service.ALREADY_EXISTS'));
       }
     }

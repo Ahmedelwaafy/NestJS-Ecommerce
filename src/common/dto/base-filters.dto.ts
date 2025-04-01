@@ -1,14 +1,9 @@
 import { ApiPropertyOptional, IntersectionType } from '@nestjs/swagger';
-import {
-  IsBoolean,
-  IsEnum,
-  IsOptional,
-  IsString
-} from 'class-validator';
+import { IsBoolean, IsEnum, IsOptional, IsString } from 'class-validator';
 import { Sort } from 'src/common/enums';
 import { PaginationQueryDto } from 'src/common/pagination/dto/pagination-query.dto';
 
-export class GetCategoriesBaseDto {
+export class BaseFiltersDto {
   @ApiPropertyOptional({
     example: Sort.asc,
     description: 'sort query.',
@@ -39,8 +34,7 @@ export class GetCategoriesBaseDto {
   })
   search?: string;
 }
-
-export class GetCategoriesDto extends IntersectionType(
-  GetCategoriesBaseDto,
+export class PaginationAndFiltersDto extends IntersectionType(
+  BaseFiltersDto,
   PaginationQueryDto,
 ) {}

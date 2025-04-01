@@ -18,7 +18,7 @@ import { Roles } from 'src/auth/decorators/roles.decorator';
 import { AuthGuard } from 'src/auth/gaurds/auth.guard';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
-import { GetSubCategoriesDto } from './dto/get-sub-categories.dto';
+import { PaginationAndFiltersDto } from 'src/common/dto/base-filters.dto';
 
 @Controller('v1/sub-category')
 export class SubCategoryController {
@@ -60,7 +60,7 @@ export class SubCategoryController {
     description: 'SubCategories fetched successfully',
   })
   @ResponseMessage('sub-category.controller.GET_ALL_SUCCESSFULLY')
-  findAll(@Query() getSubCategoriesQuery: GetSubCategoriesDto) {
+  findAll(@Query() getSubCategoriesQuery: PaginationAndFiltersDto) {
     const { limit, page, ...filters } = getSubCategoriesQuery;
 
     return this.subCategoryService.findAll({ page, limit }, filters);

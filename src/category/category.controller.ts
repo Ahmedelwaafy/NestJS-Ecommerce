@@ -1,24 +1,24 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
-  UseGuards,
+  Get,
   HttpCode,
   HttpStatus,
+  Param,
+  Patch,
+  Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
+import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { AuthGuard } from 'src/auth/gaurds/auth.guard';
+import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
+import { PaginationAndFiltersDto } from 'src/common/dto/base-filters.dto';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-import { Roles } from 'src/auth/decorators/roles.decorator';
-import { AuthGuard } from 'src/auth/gaurds/auth.guard';
-import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
-import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
-import { GetCategoriesDto } from './dto/get-categories.dto';
 
 @Controller('v1/category')
 export class CategoryController {
@@ -60,7 +60,7 @@ export class CategoryController {
     description: 'Categories fetched successfully',
   })
   @ResponseMessage('category.controller.GET_ALL_SUCCESSFULLY')
-  findAll(@Query() getCategoriesQuery: GetCategoriesDto) {
+  findAll(@Query() getCategoriesQuery: PaginationAndFiltersDto) {
     const { limit, page, ...filters } = getCategoriesQuery;
 
     return this.categoryService.findAll({ page, limit }, filters);
