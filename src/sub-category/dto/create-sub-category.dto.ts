@@ -28,10 +28,10 @@ export class CreateSubCategoryDto {
     example: '5f1f1f1f1f1f1f1f1f1f1f1f',
   })
   @IsNotEmpty({
-    message: 'sub-category.dto.CATEGORY_IS_REQUIRED',
+    message: 'validation.sub-category.CATEGORY_IS_REQUIRED',
   })
   @IsMongoId({
-    message: 'sub-category.dto.CATEGORY_ID_IS_INVALID',
+    message: 'validation.sub-category.CATEGORY_ID_IS_INVALID',
   })
   category: string;
 

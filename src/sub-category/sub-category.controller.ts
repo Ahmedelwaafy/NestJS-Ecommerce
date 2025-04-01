@@ -43,7 +43,7 @@ export class SubCategoryController {
     description: 'SubCategory details',
     type: CreateSubCategoryDto,
   })
-  @ResponseMessage('sub-category.controller.CREATED_SUCCESSFULLY')
+  @ResponseMessage(['CREATED_SUCCESSFULLY', 'SUB_CATEGORY'])
   create(@Body() createSubCategoryDto: CreateSubCategoryDto) {
     return this.subCategoryService.create(createSubCategoryDto);
   }
@@ -59,7 +59,7 @@ export class SubCategoryController {
     status: 200,
     description: 'SubCategories fetched successfully',
   })
-  @ResponseMessage('sub-category.controller.GET_ALL_SUCCESSFULLY')
+  @ResponseMessage(['GET_ALL_SUCCESSFULLY', 'SUB_CATEGORY'])
   findAll(@Query() getSubCategoriesQuery: PaginationAndFiltersDto) {
     const { limit, page, ...filters } = getSubCategoriesQuery;
 
@@ -82,7 +82,7 @@ export class SubCategoryController {
     description: 'SubCategory id',
     type: String,
   })
-  @ResponseMessage('sub-category.controller.GET_ONE_SUCCESSFULLY')
+  @ResponseMessage(['GET_ONE_SUCCESSFULLY', 'SUB_CATEGORY'])
   findOne(@Param('id') id: string) {
     return this.subCategoryService.findOne(id);
   }
@@ -109,7 +109,7 @@ export class SubCategoryController {
     description: 'SubCategory details',
     type: UpdateSubCategoryDto,
   })
-  @ResponseMessage('sub-category.controller.UPDATED_SUCCESSFULLY')
+  @ResponseMessage(['UPDATED_SUCCESSFULLY', 'SUB_CATEGORY'])
   update(
     @Param('id') id: string,
     @Body() updateSubCategoryDto: UpdateSubCategoryDto,
@@ -135,7 +135,7 @@ export class SubCategoryController {
     description: 'SubCategory id',
     type: String,
   })
-  @ResponseMessage('sub-category.controller.DELETED_SUCCESSFULLY')
+  @ResponseMessage(['DELETED_SUCCESSFULLY', 'SUB_CATEGORY'])
   deactivate(@Param('id') id: string) {
     return this.subCategoryService.deactivate(id);
   }
@@ -158,7 +158,7 @@ export class SubCategoryController {
     description: 'SubCategory id',
     type: String,
   })
-  @ResponseMessage('sub-category.controller.RESTORED_SUCCESSFULLY')
+  @ResponseMessage(['RESTORED_SUCCESSFULLY', 'SUB_CATEGORY'])
   activate(@Param('id') id: string) {
     return this.subCategoryService.activate(id);
   }

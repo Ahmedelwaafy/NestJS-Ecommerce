@@ -43,7 +43,7 @@ export class SupplierController {
     description: 'Supplier details',
     type: CreateSupplierDto,
   })
-  @ResponseMessage('supplier.controller.CREATED_SUCCESSFULLY')
+  @ResponseMessage(['CREATED_SUCCESSFULLY', 'SUPPLIER'])
   create(@Body() createSupplierDto: CreateSupplierDto) {
     return this.supplierService.create(createSupplierDto);
   }
@@ -59,7 +59,7 @@ export class SupplierController {
     status: 200,
     description: 'Suppliers fetched successfully',
   })
-  @ResponseMessage('supplier.controller.GET_ALL_SUCCESSFULLY')
+  @ResponseMessage(['GET_ALL_SUCCESSFULLY', 'SUPPLIER'])
   findAll(@Query() getSuppliersQuery: PaginationAndFiltersDto) {
     const { limit, page, ...filters } = getSuppliersQuery;
 
@@ -82,7 +82,7 @@ export class SupplierController {
     description: 'Supplier id',
     type: String,
   })
-  @ResponseMessage('supplier.controller.GET_ONE_SUCCESSFULLY')
+  @ResponseMessage(['GET_ONE_SUCCESSFULLY', 'SUPPLIER'])
   findOne(@Param('id') id: string) {
     return this.supplierService.findOne(id);
   }
@@ -109,7 +109,7 @@ export class SupplierController {
     description: 'Supplier details',
     type: UpdateSupplierDto,
   })
-  @ResponseMessage('supplier.controller.UPDATED_SUCCESSFULLY')
+  @ResponseMessage(['UPDATED_SUCCESSFULLY', 'SUPPLIER'])
   update(
     @Param('id') id: string,
     @Body() updateSupplierDto: UpdateSupplierDto,
@@ -135,7 +135,7 @@ export class SupplierController {
     description: 'Supplier id',
     type: String,
   })
-  @ResponseMessage('supplier.controller.DELETED_SUCCESSFULLY')
+  @ResponseMessage(['DELETED_SUCCESSFULLY', 'SUPPLIER'])
   deactivate(@Param('id') id: string) {
     return this.supplierService.deactivate(id);
   }
@@ -158,7 +158,7 @@ export class SupplierController {
     description: 'Supplier id',
     type: String,
   })
-  @ResponseMessage('supplier.controller.RESTORED_SUCCESSFULLY')
+  @ResponseMessage(['RESTORED_SUCCESSFULLY', 'SUPPLIER'])
   activate(@Param('id') id: string) {
     return this.supplierService.activate(id);
   }

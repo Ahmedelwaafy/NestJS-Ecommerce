@@ -17,7 +17,7 @@ export class DataResponseInterceptor implements NestInterceptor {
   ) {}
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
-    const messageKey =
+    const [OPERATION, MODEL_NAME] =
       this.reflector.get<string>(RESPONSE_MESSAGE, context.getHandler()) ||
       'common.operation_succeeded';
 
@@ -26,7 +26,16 @@ export class DataResponseInterceptor implements NestInterceptor {
     return next.handle().pipe(
       map((data) => {
         // Translate the message
-        const translatedMsg = this.i18nHelper.t(messageKey);
+        const translatedMsg = this.i18nHelper.t(
+          `response-messages.${OPERATION}`,
+          {
+            args: {
+              MODEL_NAME: MODEL_NAME
+                ? this.i18nHelper.t(`common.MODELS_NAMES.${MODEL_NAME}`)
+                : '',
+            },
+          },
+        );
 
         return {
           status,

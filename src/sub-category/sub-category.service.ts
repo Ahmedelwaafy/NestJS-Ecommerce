@@ -34,9 +34,8 @@ export class SubCategoryService {
     private readonly i18nHelper: I18nHelperService,
     private readonly categoryService: CategoryService,
   ) {
-    // Set up namespace name globally per class
-    this.t = this.i18nHelper.createNamespaceTranslator('sub-category').t;
-    this.lang = this.i18nHelper.createNamespaceTranslator('sub-category').lang;
+    this.t = this.i18nHelper.translate().t;
+    this.lang = this.i18nHelper.translate().lang;
   }
 
   /**
@@ -49,7 +48,13 @@ export class SubCategoryService {
 
     // handle exception if subCategory already exists
     if (subCategory) {
-      throw new BadRequestException(this.t('service.ALREADY_EXISTS'));
+      throw new BadRequestException(
+        this.t('service.ALREADY_EXISTS', {
+          args: {
+            MODEL_NAME: this.t(`common.MODELS_NAMES.SUB_CATEGORY`),
+          },
+        }),
+      );
     }
 
     const category = await this.categoryService.findOne(
@@ -132,7 +137,13 @@ export class SubCategoryService {
       });
     }
     if (!subCategory) {
-      throw new NotFoundException(this.t('service.NOT_FOUND'));
+      throw new NotFoundException(
+        this.t('service.NOT_FOUND', {
+          args: {
+            MODEL_NAME: this.t(`common.MODELS_NAMES.SUB_CATEGORY`),
+          },
+        }),
+      );
     }
     const localizedSubCategory =
       this.subCategoryModel.schema.methods.toJSONLocalizedOnly(
@@ -180,7 +191,13 @@ export class SubCategoryService {
       //console.log({ subCategoryNameTaken });
       if (subCategoryNameTaken && subCategoryNameTaken._id.toString() !== id) {
         //prevent duplicate categories names, while allowing changing only en or ar values
-        throw new BadRequestException(this.t('service.ALREADY_EXISTS'));
+        throw new BadRequestException(
+          this.t('service.ALREADY_EXISTS', {
+            args: {
+              MODEL_NAME: this.t(`common.MODELS_NAMES.SUB_CATEGORY`),
+            },
+          }),
+        );
       }
     }
 

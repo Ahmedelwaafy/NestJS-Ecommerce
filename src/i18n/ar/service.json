@@ -1,0 +1,7 @@
+{
+  "ALREADY_EXISTS": "يوجد {MODEL_NAME} بهذا الاسم",
+  "ERROR_OCCURRED": "حدث خطأ ما",
+  "NOT_FOUND": "{MODEL_NAME} غير موجودة",
+  "DATABASE_CONNECTION_FAILED": "غير قادر على الاتصال بقاعدة البيانات",
+  "PARENT_CATEGORY_DOES_NOT_EXIST": "القسم الرئيسي غير موجود"
+}

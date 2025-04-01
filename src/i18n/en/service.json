@@ -1,0 +1,7 @@
+{
+  "ALREADY_EXISTS": "{MODEL_NAME} with the same name already exists",
+  "ERROR_OCCURRED": "an error occurred",
+  "NOT_FOUND": "{MODEL_NAME} not found",
+  "DATABASE_CONNECTION_FAILED": "unable to connect to the database",
+  "PARENT_CATEGORY_DOES_NOT_EXIST": "parent category does not exist"
+}

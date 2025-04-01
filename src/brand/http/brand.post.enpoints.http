@@ -7,5 +7,5 @@ lang: ar
 {
   "name": {"en": "Nike", "ar": "نايكي"},
  "active": true,
- "image":"https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png",
+ "image":"https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png"
 }

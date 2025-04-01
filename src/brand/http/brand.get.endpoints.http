@@ -5,7 +5,7 @@ lang: ar
 
 
 
-GET http://localhost:3000/api/v1/brand/67eb7a7ea03bccd0dc806442
+GET http://localhost:3000/api/v1/brand/67eb7a7ea43bccd0dc806442
 lang: ar
 
 

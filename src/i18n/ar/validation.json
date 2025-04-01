@@ -13,5 +13,22 @@
   "website_IS_STRING": "يجب أن يكون رابط الموقع سلاسل نصية.",
   "website_IS_URL": "يجب أن يكون رابط الموقع صالح.",
   "DELETED_AT_IS_DATE": "يجب أن يكون تاريخ الحذف صالح",
-  "NAME_NOT_EMPTY": "الاسم مطلوب"
+  "NAME_NOT_EMPTY": "الاسم مطلوب",
+  "coupon": {
+    "CODE_IS_STRING": "يجب ان يكون رمز القسيمة نصا.",
+    "CODE_MIN_LENGTH": "يجب ان يكون رمز القسيمة على الاقل 3 حروف.",
+    "CODE_MAX_LENGTH": "يجب ان يكون رمز القسيمة على الاكثر 50 حرف.",
+    "DISCOUNT_IS_NUMBER": "يجب ان يكون مبلغ الخصم رقما.",
+    "DISCOUNT_MIN": "يجب ان يكون مبلغ الخصم على الاقل 1.",
+    "DISCOUNT_MAX": "يجب ان يكون مبلغ الخصم على الاكثر 100.",
+    "EXPIRATION_DATE_IS_DATE": "يجب ان يكون تاريخ انتهاء القسيمة تاريخا صالحا.",
+    "EXPIRATION_DATE_IS_IN_FUTURE": "يجب ان يكون تاريخ انتهاء القسيمة في المستقبل.",
+    "ACTIVE_IS_BOOLEAN": "يجب ان يكون حالة القسيمة نشطة او غير نشطة.",
+    "MIN_ORDER_TOTAL_IS_NUMBER": "يجب ان يكون اقل مبلغ للطلب رقما.",
+    "MAX_DISCOUNT_IS_NUMBER": "يجب ان يكون اقصى مبلغ للخصم رقما."
+  },
+  "sub-category": {
+    "CATEGORY_IS_REQUIRED": "التصنيف مطلوبة",
+    "CATEGORY_ID_IS_INVALID": "معرف التصنيف غير صالح"
+  }
 }

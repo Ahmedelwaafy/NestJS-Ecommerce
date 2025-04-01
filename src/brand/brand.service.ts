@@ -28,9 +28,8 @@ export class BrandService {
     private readonly paginationService: PaginationService,
     private readonly i18nHelper: I18nHelperService,
   ) {
-    // Set up namespace name globally per class
-    this.t = this.i18nHelper.createNamespaceTranslator('brand').t;
-    this.lang = this.i18nHelper.createNamespaceTranslator('brand').lang;
+    this.t = this.i18nHelper.translate().t;
+    this.lang = this.i18nHelper.translate().lang;
   }
 
   /**
@@ -43,7 +42,13 @@ export class BrandService {
 
     // handle exception if brand already exists
     if (brand) {
-      throw new BadRequestException(this.t('service.ALREADY_EXISTS'));
+      throw new BadRequestException(
+        this.t('service.ALREADY_EXISTS', {
+          args: {
+            MODEL_NAME: this.t(`common.MODELS_NAMES.BRAND`),
+          },
+        }),
+      );
     }
 
     // create new brand
@@ -110,13 +115,18 @@ export class BrandService {
       });
     }
     if (!brand) {
-      throw new NotFoundException(this.t('service.NOT_FOUND'));
-    }
-    const localizedBrand =
-      this.brandModel.schema.methods.toJSONLocalizedOnly(
-        brand,
-        this.lang,
+      throw new NotFoundException(
+        this.t('service.NOT_FOUND', {
+          args: {
+            MODEL_NAME: this.t(`common.MODELS_NAMES.BRAND`),
+          },
+        }),
       );
+    }
+    const localizedBrand = this.brandModel.schema.methods.toJSONLocalizedOnly(
+      brand,
+      this.lang,
+    );
 
     return localizedBrand;
   }
@@ -152,13 +162,17 @@ export class BrandService {
     await this.findOne(id);
 
     if (updateBrandDto?.name) {
-      const brandNameTaken = await this.findOneByName(
-        updateBrandDto.name,
-      );
+      const brandNameTaken = await this.findOneByName(updateBrandDto.name);
       //console.log({ brandNameTaken });
       if (brandNameTaken && brandNameTaken._id.toString() !== id) {
         //prevent duplicate brands names, while allowing changing only en or ar values
-        throw new BadRequestException(this.t('service.ALREADY_EXISTS'));
+        throw new BadRequestException(
+          this.t('service.ALREADY_EXISTS', {
+            args: {
+              MODEL_NAME: this.t(`common.MODELS_NAMES.BRAND`),
+            },
+          }),
+        );
       }
     }
     //update the brand

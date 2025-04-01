@@ -43,7 +43,7 @@ export class CategoryController {
     description: 'Category details',
     type: CreateCategoryDto,
   })
-  @ResponseMessage('category.controller.CREATED_SUCCESSFULLY')
+  @ResponseMessage(['CREATED_SUCCESSFULLY', 'CATEGORY'])
   create(@Body() createCategoryDto: CreateCategoryDto) {
     return this.categoryService.create(createCategoryDto);
   }
@@ -59,7 +59,7 @@ export class CategoryController {
     status: 200,
     description: 'Categories fetched successfully',
   })
-  @ResponseMessage('category.controller.GET_ALL_SUCCESSFULLY')
+  @ResponseMessage(['GET_ALL_SUCCESSFULLY', 'CATEGORY'])
   findAll(@Query() getCategoriesQuery: PaginationAndFiltersDto) {
     const { limit, page, ...filters } = getCategoriesQuery;
 
@@ -82,7 +82,7 @@ export class CategoryController {
     description: 'Category id',
     type: String,
   })
-  @ResponseMessage('category.controller.GET_ONE_SUCCESSFULLY')
+  @ResponseMessage(['GET_ONE_SUCCESSFULLY', 'CATEGORY'])
   findOne(@Param('id') id: string) {
     return this.categoryService.findOne(id);
   }
@@ -109,7 +109,7 @@ export class CategoryController {
     description: 'Category details',
     type: UpdateCategoryDto,
   })
-  @ResponseMessage('category.controller.UPDATED_SUCCESSFULLY')
+  @ResponseMessage(['UPDATED_SUCCESSFULLY', 'CATEGORY'])
   update(
     @Param('id') id: string,
     @Body() updateCategoryDto: UpdateCategoryDto,
@@ -135,7 +135,7 @@ export class CategoryController {
     description: 'Category id',
     type: String,
   })
-  @ResponseMessage('category.controller.DELETED_SUCCESSFULLY')
+  @ResponseMessage(['DELETED_SUCCESSFULLY', 'CATEGORY'])
   deactivate(@Param('id') id: string) {
     return this.categoryService.deactivate(id);
   }
@@ -158,7 +158,7 @@ export class CategoryController {
     description: 'Category id',
     type: String,
   })
-  @ResponseMessage('category.controller.RESTORED_SUCCESSFULLY')
+  @ResponseMessage(['RESTORED_SUCCESSFULLY', 'CATEGORY'])
   activate(@Param('id') id: string) {
     return this.categoryService.activate(id);
   }

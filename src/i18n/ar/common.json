@@ -1,6 +1,13 @@
 {
-  "operation_succeeded": "تمت العملية بنجاح",
-  "ERROR_OCCURRED": "an error occurred",
-  "NOT_FOUND": "not found",
-  "DATABASE_CONNECTION_FAILED": "unable to connect to the database"
+  "operation_succeeded": "نجحت العملية",
+  "MODELS_NAMES": {
+    "USER": "المستخدم",
+    "CATEGORY": "التصنيف",
+    "SUB_CATEGORY": "التصنيف الفرعي",
+    "BRAND": "العلامة التجارية",
+    "COUPON": "القسيمة",
+    "SUPPLIER": "المورد",
+    "PRODUCT": "المنتج",
+    "ORDER": "الطلب"
+  }
 }

@@ -1,3 +1,13 @@
 {
-  "operation_succeeded": "Operation succeeded"
+  "operation_succeeded": "Operation succeeded",
+  "MODELS_NAMES": {
+    "USER": "User",
+    "CATEGORY": "Category",
+    "SUB_CATEGORY": "Sub Category",
+    "BRAND": "Brand",
+    "COUPON": "Coupon",
+    "SUPPLIER": "Supplier",
+    "PRODUCT": "Product",
+    "ORDER": "Order"
+  }
 }

@@ -28,9 +28,8 @@ export class SupplierService {
     private readonly paginationService: PaginationService,
     private readonly i18nHelper: I18nHelperService,
   ) {
-    // Set up namespace name globally per class
-    this.t = this.i18nHelper.createNamespaceTranslator('supplier').t;
-    this.lang = this.i18nHelper.createNamespaceTranslator('supplier').lang;
+    this.t = this.i18nHelper.translate().t;
+    this.lang = this.i18nHelper.translate().lang;
   }
 
   /**
@@ -43,7 +42,13 @@ export class SupplierService {
 
     // handle exception if supplier already exists
     if (supplier) {
-      throw new BadRequestException(this.t('service.ALREADY_EXISTS'));
+      throw new BadRequestException(
+        this.t('service.ALREADY_EXISTS', {
+          args: {
+            MODEL_NAME: this.t(`common.MODELS_NAMES.SUPPLIER`),
+          },
+        }),
+      );
     }
 
     // create new supplier
@@ -111,12 +116,19 @@ export class SupplierService {
       });
     }
     if (!supplier) {
-      throw new NotFoundException(this.t('service.NOT_FOUND'));
+      throw new NotFoundException(
+        this.t('service.NOT_FOUND', {
+          args: {
+            MODEL_NAME: this.t(`common.MODELS_NAMES.SUPPLIER`),
+          },
+        }),
+      );
     }
-    const localizedSupplier = this.supplierModel.schema.methods.toJSONLocalizedOnly(
-      supplier,
-      this.lang,
-    );
+    const localizedSupplier =
+      this.supplierModel.schema.methods.toJSONLocalizedOnly(
+        supplier,
+        this.lang,
+      );
 
     return localizedSupplier;
   }
@@ -133,7 +145,7 @@ export class SupplierService {
         $or: [{ 'name.en': name.en }, { 'name.ar': name.ar }],
       });
     } catch (error) {
-            console.log({ error });
+      console.log({ error });
 
       throw new RequestTimeoutException(this.t('service.ERROR_OCCURRED'), {
         description:
@@ -154,11 +166,19 @@ export class SupplierService {
     await this.findOne(id);
 
     if (updateSupplierDto?.name) {
-      const supplierNameTaken = await this.findOneByName(updateSupplierDto.name);
+      const supplierNameTaken = await this.findOneByName(
+        updateSupplierDto.name,
+      );
       //console.log({ supplierNameTaken });
       if (supplierNameTaken && supplierNameTaken._id.toString() !== id) {
         //prevent duplicate suppliers names, while allowing changing only en or ar values
-        throw new BadRequestException(this.t('service.ALREADY_EXISTS'));
+        throw new BadRequestException(
+          this.t('service.ALREADY_EXISTS', {
+            args: {
+              MODEL_NAME: this.t(`common.MODELS_NAMES.SUPPLIER`),
+            },
+          }),
+        );
       }
     }
     //update the supplier

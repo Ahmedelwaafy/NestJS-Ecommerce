@@ -43,7 +43,7 @@ export class BrandController {
     description: 'Brand details',
     type: CreateBrandDto,
   })
-  @ResponseMessage('brand.controller.CREATED_SUCCESSFULLY')
+  @ResponseMessage(['CREATED_SUCCESSFULLY', 'BRAND'])
   create(@Body() createBrandDto: CreateBrandDto) {
     return this.brandService.create(createBrandDto);
   }
@@ -59,7 +59,7 @@ export class BrandController {
     status: 200,
     description: 'Brands fetched successfully',
   })
-  @ResponseMessage('brand.controller.GET_ALL_SUCCESSFULLY')
+  @ResponseMessage(['GET_ALL_SUCCESSFULLY', 'BRAND'])
   findAll(@Query() getBrandsQuery: PaginationAndFiltersDto) {
     const { limit, page, ...filters } = getBrandsQuery;
 
@@ -82,7 +82,7 @@ export class BrandController {
     description: 'Brand id',
     type: String,
   })
-  @ResponseMessage('brand.controller.GET_ONE_SUCCESSFULLY')
+  @ResponseMessage(['GET_ONE_SUCCESSFULLY', 'BRAND'])
   findOne(@Param('id') id: string) {
     return this.brandService.findOne(id);
   }
@@ -109,11 +109,8 @@ export class BrandController {
     description: 'Brand details',
     type: UpdateBrandDto,
   })
-  @ResponseMessage('brand.controller.UPDATED_SUCCESSFULLY')
-  update(
-    @Param('id') id: string,
-    @Body() updateBrandDto: UpdateBrandDto,
-  ) {
+  @ResponseMessage(['UPDATED_SUCCESSFULLY', 'BRAND'])
+  update(@Param('id') id: string, @Body() updateBrandDto: UpdateBrandDto) {
     return this.brandService.update(id, updateBrandDto);
   }
 
@@ -135,7 +132,7 @@ export class BrandController {
     description: 'Brand id',
     type: String,
   })
-  @ResponseMessage('brand.controller.DELETED_SUCCESSFULLY')
+  @ResponseMessage(['DELETED_SUCCESSFULLY', 'BRAND'])
   deactivate(@Param('id') id: string) {
     return this.brandService.deactivate(id);
   }
@@ -158,7 +155,7 @@ export class BrandController {
     description: 'Brand id',
     type: String,
   })
-  @ResponseMessage('brand.controller.RESTORED_SUCCESSFULLY')
+  @ResponseMessage(['RESTORED_SUCCESSFULLY', 'BRAND'])
   activate(@Param('id') id: string) {
     return this.brandService.activate(id);
   }

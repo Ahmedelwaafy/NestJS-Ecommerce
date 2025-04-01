@@ -17,26 +17,26 @@ export class CreateCouponDto {
     description: 'The code of the coupon.',
     example: 'SUMMER20',
   })
-  @IsString({ message: 'coupon.dto.CODE_IS_STRING' })
-  @MinLength(3, { message: 'coupon.dto.CODE_MIN_LENGTH' })
-  @MaxLength(50, { message: 'coupon.dto.CODE_MAX_LENGTH' })
+  @IsString({ message: 'validation.coupon.CODE_IS_STRING' })
+  @MinLength(3, { message: 'validation.coupon.CODE_MIN_LENGTH' })
+  @MaxLength(50, { message: 'validation.coupon.CODE_MAX_LENGTH' })
   code: string;
 
   @ApiProperty({
     description: 'The discount percentage of the coupon.',
     example: 20,
   })
-  @IsNumber({}, { message: 'coupon.dto.DISCOUNT_IS_NUMBER' })
-  @Min(1, { message: 'coupon.dto.DISCOUNT_MIN' })
-  @Max(100, { message: 'coupon.dto.DISCOUNT_MAX' })
+  @IsNumber({}, { message: 'validation.coupon.DISCOUNT_IS_NUMBER' })
+  @Min(1, { message: 'validation.coupon.DISCOUNT_MIN' })
+  @Max(100, { message: 'validation.coupon.DISCOUNT_MAX' })
   discount: number;
 
   @ApiPropertyOptional({
     description: 'The expiration date of the coupon.',
     example: '2023-10-01T00:00:00Z',
   })
-  @IsDate({ message: 'coupon.dto.EXPIRATION_DATE_IS_DATE' })
-  @MinDate(new Date(), { message: 'coupon.dto.EXPIRATION_DATE_IS_IN_FUTURE' })
+  @IsDate({ message: 'validation.coupon.EXPIRATION_DATE_IS_DATE' })
+  @MinDate(new Date(), { message: 'validation.coupon.EXPIRATION_DATE_IS_IN_FUTURE' })
   expirationDate: Date;
 
   @ApiPropertyOptional({
@@ -45,7 +45,7 @@ export class CreateCouponDto {
   })
   @IsOptional()
   @IsBoolean({
-    message: 'coupon.dto.ACTIVE_IS_BOOLEAN',
+    message: 'validation.coupon.ACTIVE_IS_BOOLEAN',
   })
   active: boolean = true;
 
@@ -54,7 +54,7 @@ export class CreateCouponDto {
     example: 50,
   })
   @IsOptional()
-  @IsNumber({}, { message: 'coupon.dto.MIN_ORDER_TOTAL_IS_NUMBER' })
+  @IsNumber({}, { message: 'validation.coupon.MIN_ORDER_TOTAL_IS_NUMBER' })
   minOrderTotal?: number;
 
   @ApiPropertyOptional({
@@ -62,6 +62,6 @@ export class CreateCouponDto {
     example: 50,
   })
   @IsOptional()
-  @IsNumber({}, { message: 'coupon.dto.MAX_DISCOUNT_IS_NUMBER' })
+  @IsNumber({}, { message: 'validation.coupon.MAX_DISCOUNT_IS_NUMBER' })
   maxDiscount?: number;
 }

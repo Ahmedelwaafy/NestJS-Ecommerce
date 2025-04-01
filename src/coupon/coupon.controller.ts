@@ -43,7 +43,7 @@ export class CouponController {
     description: 'Coupon details',
     type: CreateCouponDto,
   })
-  @ResponseMessage('coupon.controller.CREATED_SUCCESSFULLY')
+  @ResponseMessage(['CREATED_SUCCESSFULLY', 'COUPON'])
   create(@Body() createCouponDto: CreateCouponDto) {
     return this.couponService.create(createCouponDto);
   }
@@ -61,7 +61,7 @@ export class CouponController {
     status: 200,
     description: 'Coupons fetched successfully',
   })
-  @ResponseMessage('coupon.controller.GET_ALL_SUCCESSFULLY')
+  @ResponseMessage(['GET_ALL_SUCCESSFULLY', 'COUPON'])
   findAll(@Query() getCouponsQuery: PaginationAndFiltersDto) {
     const { limit, page, ...filters } = getCouponsQuery;
 
@@ -86,7 +86,7 @@ export class CouponController {
     description: 'Coupon id',
     type: String,
   })
-  @ResponseMessage('coupon.controller.GET_ONE_SUCCESSFULLY')
+  @ResponseMessage(['GET_ONE_SUCCESSFULLY', 'COUPON'])
   findOne(@Param('id') id: string) {
     return this.couponService.findOne(id);
   }
@@ -113,7 +113,7 @@ export class CouponController {
     description: 'Coupon details',
     type: UpdateCouponDto,
   })
-  @ResponseMessage('coupon.controller.UPDATED_SUCCESSFULLY')
+  @ResponseMessage(['UPDATED_SUCCESSFULLY', 'COUPON'])
   update(@Param('id') id: string, @Body() updateCouponDto: UpdateCouponDto) {
     return this.couponService.update(id, updateCouponDto);
   }
@@ -136,7 +136,7 @@ export class CouponController {
     description: 'Coupon id',
     type: String,
   })
-  @ResponseMessage('coupon.controller.DELETED_SUCCESSFULLY')
+  @ResponseMessage(['DELETED_SUCCESSFULLY', 'COUPON'])
   deactivate(@Param('id') id: string) {
     return this.couponService.remove(id);
   }

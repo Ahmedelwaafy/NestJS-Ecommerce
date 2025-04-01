@@ -28,9 +28,8 @@ export class CategoryService {
     private readonly paginationService: PaginationService,
     private readonly i18nHelper: I18nHelperService,
   ) {
-    // Set up namespace name globally per class
-    this.t = this.i18nHelper.createNamespaceTranslator('category').t;
-    this.lang = this.i18nHelper.createNamespaceTranslator('category').lang;
+    this.t = this.i18nHelper.translate().t;
+    this.lang = this.i18nHelper.translate().lang;
   }
 
   /**
@@ -43,7 +42,13 @@ export class CategoryService {
 
     // handle exception if category already exists
     if (category) {
-      throw new BadRequestException(this.t('service.ALREADY_EXISTS'));
+      throw new BadRequestException(
+        this.t('service.ALREADY_EXISTS', {
+          args: {
+            MODEL_NAME: this.t(`common.MODELS_NAMES.CATEGORY`),
+          },
+        }),
+      );
     }
 
     // create new category
@@ -110,7 +115,13 @@ export class CategoryService {
       });
     }
     if (!category) {
-      throw new NotFoundException(this.t('service.NOT_FOUND'));
+      throw new NotFoundException(
+        this.t('service.NOT_FOUND', {
+          args: {
+            MODEL_NAME: this.t(`common.MODELS_NAMES.CATEGORY`),
+          },
+        }),
+      );
     }
     const localizedCategory =
       this.categoryModel.schema.methods.toJSONLocalizedOnly(
@@ -158,7 +169,13 @@ export class CategoryService {
       //console.log({ categoryNameTaken });
       if (categoryNameTaken && categoryNameTaken._id.toString() !== id) {
         //prevent duplicate categories names, while allowing changing only en or ar values
-        throw new BadRequestException(this.t('service.ALREADY_EXISTS'));
+        throw new BadRequestException(
+          this.t('service.ALREADY_EXISTS', {
+            args: {
+              MODEL_NAME: this.t(`common.MODELS_NAMES.CATEGORY`),
+            },
+          }),
+        );
       }
     }
     //update the category

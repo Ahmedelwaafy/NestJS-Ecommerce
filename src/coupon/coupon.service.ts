@@ -7,7 +7,6 @@ import {
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { BaseFiltersDto } from 'src/common/dto/base-filters.dto';
-import { LocalizedFieldDto } from 'src/common/dto/localized-field.dto';
 import { PaginationQueryDto } from 'src/common/pagination/dto/pagination-query.dto';
 import { Paginated } from 'src/common/pagination/interfaces/paginated.interface';
 import { PaginationService } from 'src/common/pagination/providers/pagination.service';
@@ -20,7 +19,6 @@ import { Coupon, CouponDocument } from './schemas/coupon.schema';
 @Injectable()
 export class CouponService {
   private t: TFunction;
-  private lang: string;
 
   constructor(
     //* injecting coupon model
@@ -28,9 +26,7 @@ export class CouponService {
     private readonly paginationService: PaginationService,
     private readonly i18nHelper: I18nHelperService,
   ) {
-    // Set up namespace name globally per class
-    this.t = this.i18nHelper.createNamespaceTranslator('coupon').t;
-    this.lang = this.i18nHelper.createNamespaceTranslator('coupon').lang;
+    this.t = this.i18nHelper.translate().t;
   }
 
   /**
@@ -43,7 +39,13 @@ export class CouponService {
 
     // handle exception if coupon already exists
     if (coupon) {
-      throw new BadRequestException(this.t('service.ALREADY_EXISTS'));
+      throw new BadRequestException(
+        this.t('service.ALREADY_EXISTS', {
+          args: {
+            MODEL_NAME: this.t(`common.MODELS_NAMES.COUPON`),
+          },
+        }),
+      );
     }
 
     // create new coupon
@@ -109,7 +111,13 @@ export class CouponService {
       });
     }
     if (!coupon) {
-      throw new NotFoundException(this.t('service.NOT_FOUND'));
+      throw new NotFoundException(
+        this.t('service.NOT_FOUND', {
+          args: {
+            MODEL_NAME: this.t(`common.MODELS_NAMES.COUPON`),
+          },
+        }),
+      );
     }
 
     return coupon;
@@ -148,7 +156,13 @@ export class CouponService {
       //console.log({ couponCodeTaken });
       if (couponCodeTaken && couponCodeTaken._id.toString() !== id) {
         //prevent duplicate coupons codes
-        throw new BadRequestException(this.t('service.ALREADY_EXISTS'));
+        throw new BadRequestException(
+          this.t('service.ALREADY_EXISTS', {
+            args: {
+              MODEL_NAME: this.t(`common.MODELS_NAMES.COUPON`),
+            },
+          }),
+        );
       }
     }
     //update the coupon
