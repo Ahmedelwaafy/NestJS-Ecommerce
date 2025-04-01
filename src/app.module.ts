@@ -18,6 +18,7 @@ import { CategoryModule } from './category/category.module';
 import { LocalizationModule } from './i18n/i18n.module';
 import { SubCategoryModule } from './sub-category/sub-category.module';
 import { BrandModule } from './brand/brand.module';
+import { CouponModule } from './coupon/coupon.module';
 
 const ENV = process.env.NODE_ENV;
 //console.log({ ENV });
@@ -57,6 +58,8 @@ const ENV = process.env.NODE_ENV;
     CategoryModule,
     SubCategoryModule,
     BrandModule,
+    CouponModule,
+    CouponModule,
   ],
   controllers: [],
   providers: [

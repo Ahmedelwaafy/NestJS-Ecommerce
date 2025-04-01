@@ -1,0 +1,30 @@
+{
+  "controller": {
+    "CREATED_SUCCESSFULLY": "تم انشاء القسيمة بنجاح",
+    "UPDATED_SUCCESSFULLY": "تم تحديث القسيمة بنجاح",
+    "DELETED_SUCCESSFULLY": "تم حذف القسيمة بنجاح",
+    "GET_ALL_SUCCESSFULLY": "تم جلب القسائم بنجاح",
+    "GET_ONE_SUCCESSFULLY": "تم جلب القسيمة بنجاح"
+  },
+  "service": {
+    "ALREADY_EXISTS": "يوجد قسيمة بهذا الرمز مسبقا",
+    "fetched_successfully": "تم جلب بيانات القسيمة بنجاح",
+    "ERROR_OCCURRED": "حدث خطأ ما",
+    "NOT_FOUND": "القسيمة غير موجودة",
+    "DATABASE_CONNECTION_FAILED": "غير قادر على الاتصال بقاعدة البيانات"
+  },
+  "dto": {
+    "CODE_IS_STRING": "يجب ان يكون رمز القسيمة نصا.",
+    "CODE_MIN_LENGTH": "يجب ان يكون رمز القسيمة على الاقل 3 حروف.",
+    "CODE_MAX_LENGTH": "يجب ان يكون رمز القسيمة على الاكثر 50 حرف.",
+    "DISCOUNT_IS_NUMBER": "يجب ان يكون مبلغ الخصم رقما.",
+    "DISCOUNT_MIN": "يجب ان يكون مبلغ الخصم على الاقل 1.",
+    "DISCOUNT_MAX": "يجب ان يكون مبلغ الخصم على الاكثر 100.",
+    "EXPIRATION_DATE_IS_DATE": "يجب ان يكون تاريخ انتهاء القسيمة تاريخا صالحا.",
+    "EXPIRATION_DATE_IS_IN_FUTURE": "يجب ان يكون تاريخ انتهاء القسيمة في المستقبل.",
+    "ACTIVE_IS_BOOLEAN": "يجب ان يكون حالة القسيمة نشطة او غير نشطة.",
+    "MIN_ORDER_TOTAL_IS_NUMBER": "يجب ان يكون اقل مبلغ للطلب رقما.",
+    "MAX_DISCOUNT_IS_NUMBER": "يجب ان يكون اقصى مبلغ للخصم رقما."
+  }
+}
+

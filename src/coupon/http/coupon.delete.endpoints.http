@@ -1,0 +1,5 @@
+DELETE http://localhost:3000/api/v1/coupon/67eb9a805c9cb52e5349ade8
+cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4ifQ.uLUQKCAZ3c_a94nMsfDMCYLRNHdkET0xoLd-DVVj4Aw
+lang: ar
+
+

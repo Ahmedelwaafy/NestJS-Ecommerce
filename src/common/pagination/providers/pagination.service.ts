@@ -53,12 +53,10 @@ export class PaginationService {
     const totalPages = Math.ceil(totalItems / limit);
     const nextPage = page === totalPages ? page : page + 1;
     const previousPage = page === 1 ? 1 : page - 1;
-    
-    const localizedResults = model.schema.methods.toJSONLocalizedOnly(
-      results,
-      this.lang,
-    );
 
+    const localizedResults = model.schema.methods.toJSONLocalizedOnly
+      ? model.schema.methods.toJSONLocalizedOnly(results, this.lang)
+      : results;
     return {
       data: localizedResults,
       meta: {

@@ -1,0 +1,29 @@
+{
+  "controller": {
+    "CREATED_SUCCESSFULLY": "Coupon created successfully",
+    "UPDATED_SUCCESSFULLY": "Coupon updated successfully",
+    "DELETED_SUCCESSFULLY": "Coupon deleted successfully",
+    "GET_ALL_SUCCESSFULLY": "Coupons fetched successfully",
+    "GET_ONE_SUCCESSFULLY": "Coupon fetched successfully"
+  },
+  "service": {
+    "ALREADY_EXISTS": "A coupon with the same code already exists",
+    "fetched_successfully": "Coupon data fetched successfully",
+    "ERROR_OCCURRED": "an error occurred",
+    "NOT_FOUND": "Coupon not found",
+    "DATABASE_CONNECTION_FAILED": "unable to connect to the database"
+  },
+  "dto": {
+    "CODE_IS_STRING": "Coupon code must be a string.",
+    "CODE_MIN_LENGTH": "Coupon code must be at least 3 characters long.",
+    "CODE_MAX_LENGTH": "Coupon code must be at most 50 characters long.",
+    "DISCOUNT_IS_NUMBER": "Discount must be a number.",
+    "DISCOUNT_MIN": "Discount must be at least 1.",
+    "DISCOUNT_MAX": "Discount must be at most 100.",
+    "EXPIRATION_DATE_IS_DATE": "Expiration date must be a valid date.",
+    "EXPIRATION_DATE_IS_IN_FUTURE": "Expiration date must be in the future.",
+    "ACTIVE_IS_BOOLEAN": "Active status must be a boolean.",
+    "MIN_ORDER_TOTAL_IS_NUMBER": "Minimum order total must be a number.",
+    "MAX_DISCOUNT_IS_NUMBER": "Maximum discount amount must be a number."
+  }
+}
