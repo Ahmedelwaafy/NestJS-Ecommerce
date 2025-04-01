@@ -1,0 +1,11 @@
+POST http://localhost:3000/api/v1/sub-category
+Content-Type: application/json
+lang: ar
+cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4ifQ.uLUQKCAZ3c_a94nMsfDMCYLRNHdkET0xoLd-DVVj4Aw
+
+
+{
+  "name": {"en": "Shirts", "ar": "قمصان"},
+  "category":"67eaf38892a2508063c4f834",
+ "active": false
+}

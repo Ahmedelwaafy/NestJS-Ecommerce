@@ -1,8 +1,10 @@
 {
   "EN_NAME_NOT_EMPTY": "English name is required",
   "EN_NAME_IS_STRING": "English name must be string",
+  "EN_NAME_LENGTH": "English name must be between 2 and 100 characters long",
   "AR_NAME_NOT_EMPTY": "Arabic name is required",
   "AR_NAME_IS_STRING": "Arabic name must be string",
+  "AR_NAME_LENGTH": "Arabic name must be between 2 and 100 characters long",
   "SORT_NOT_VALID": "Sort must be 'asc' or 'desc'",
   "ACTIVE_IS_BOOLEAN": "Active status must be a boolean",
   "SEARCH_IS_STRING": "Search must be a string"

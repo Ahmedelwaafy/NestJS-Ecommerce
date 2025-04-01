@@ -1,0 +1,11 @@
+GET http://localhost:3000/api/v1/sub-category/
+?limit=10
+&page=1&sort=desc
+lang: ar
+
+
+
+GET http://localhost:3000/api/v1/sub-category/67eb6629d94963acfb9d8785
+lang: ar
+
+

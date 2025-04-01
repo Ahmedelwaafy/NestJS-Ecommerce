@@ -44,7 +44,7 @@ export class AuthGuard implements CanActivate {
           ? this.configService.get('jwt.userSecret')
           : this.configService.get('jwt.adminSecret'),
       });
-      console.log({ roles, token, payload });
+      //console.log({ roles, token, payload });
       
       //* handle if the role is altered manually, like from https://jwt.io/
       if (!roles.includes(payload?.role)) {

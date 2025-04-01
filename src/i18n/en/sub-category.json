@@ -1,0 +1,21 @@
+{
+  "controller": {
+    "CREATED_SUCCESSFULLY": "Sub Category created successfully",
+    "UPDATED_SUCCESSFULLY": "Sub Category updated successfully",
+    "DELETED_SUCCESSFULLY": "Sub Category deleted successfully",
+    "RESTORED_SUCCESSFULLY": "Sub Category restored successfully",
+    "GET_ALL_SUCCESSFULLY": "Sub Categories fetched successfully",
+    "GET_ONE_SUCCESSFULLY": "Sub Category fetched successfully"
+  },
+  "service": {
+    "ALREADY_EXISTS": "A sub category with the same name already exists",
+    "PARENT_CATEGORY_DOES_NOT_EXIST": "Parent category does not exist",
+    "ERROR_OCCURRED": "an error occurred",
+    "NOT_FOUND": "Sub Category not found",
+    "DATABASE_CONNECTION_FAILED": "unable to connect to the database"
+  },
+  "dto": {
+    "CATEGORY_IS_REQUIRED": "Category is required",
+    "CATEGORY_ID_IS_INVALID": "Category id is invalid"
+  }
+}

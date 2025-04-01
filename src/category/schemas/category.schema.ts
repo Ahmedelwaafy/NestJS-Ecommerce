@@ -9,6 +9,8 @@ export class Category {
   @Prop({
     required: true,
     type: String,
+    maxlength: 100,
+    minlength: 2,
     i18n: true,
   })
   name: string;

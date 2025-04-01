@@ -16,6 +16,7 @@ import securityConfig from './config/security.config';
 import { MailModule } from './mail/mail.module';
 import { CategoryModule } from './category/category.module';
 import { LocalizationModule } from './i18n/i18n.module';
+import { SubCategoryModule } from './sub-category/sub-category.module';
 
 const ENV = process.env.NODE_ENV;
 //console.log({ ENV });
@@ -53,6 +54,7 @@ const ENV = process.env.NODE_ENV;
     MailModule,
     LocalizationModule,
     CategoryModule,
+    SubCategoryModule,
   ],
   controllers: [],
   providers: [
