@@ -3,6 +3,7 @@ import { Type } from 'class-transformer';
 import {
   IsBoolean,
   IsDate,
+  IsNotEmpty,
   IsOptional,
   IsString,
   IsUrl,
@@ -18,6 +19,7 @@ export class CreateCategoryDto {
       ar: 'ملابس',
     },
   })
+  @IsNotEmpty({ message: 'validation.NAME_NOT_EMPTY' })
   @Type(() => LocalizedFieldDto)
   @ValidateNested()
   name: LocalizedFieldDto;

@@ -18,6 +18,7 @@ export class CreateSubCategoryDto {
       ar: 'ملابس',
     },
   })
+  @IsNotEmpty({ message: 'validation.NAME_NOT_EMPTY' })
   @Type(() => LocalizedFieldDto)
   @ValidateNested()
   name: LocalizedFieldDto;

@@ -4,7 +4,7 @@
     "UPDATED_SUCCESSFULLY": "Brand updated successfully",
     "DELETED_SUCCESSFULLY": "Brand deleted successfully",
     "RESTORED_SUCCESSFULLY": "Brand restored successfully",
-    "GET_ALL_SUCCESSFULLY": "Categories fetched successfully",
+    "GET_ALL_SUCCESSFULLY": "Brands fetched successfully",
     "GET_ONE_SUCCESSFULLY": "Brand fetched successfully"
   },
   "service": {

@@ -10,5 +10,8 @@
   "SEARCH_IS_STRING": "Search must be a string",
   "IMAGE_IS_STRING": "Image URL must be a string.",
   "IMAGE_IS_URL": "Image URL must be a valid URL.",
-  "DELETED_AT_IS_DATE": "Deleted at must be a valid date."
+  "WEBSITE_IS_STRING": "Website URL must be a string.",
+  "WEBSITE_IS_URL": "Website URL must be a valid URL.",
+  "DELETED_AT_IS_DATE": "Deleted at must be a valid date.",
+  "NAME_NOT_EMPTY": "Name is required"
 }

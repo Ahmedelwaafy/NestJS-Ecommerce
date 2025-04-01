@@ -1,0 +1,17 @@
+{
+  "controller": {
+    "CREATED_SUCCESSFULLY": "Supplier created successfully",
+    "UPDATED_SUCCESSFULLY": "Supplier updated successfully",
+    "DELETED_SUCCESSFULLY": "Supplier deleted successfully",
+    "RESTORED_SUCCESSFULLY": "Supplier restored successfully",
+    "GET_ALL_SUCCESSFULLY": "Suppliers fetched successfully",
+    "GET_ONE_SUCCESSFULLY": "Supplier fetched successfully"
+  },
+  "service": {
+    "ALREADY_EXISTS": "A supplier with the same name already exists",
+    "fetched_successfully": "Supplier data fetched successfully",
+    "ERROR_OCCURRED": "an error occurred",
+    "NOT_FOUND": "Supplier not found",
+    "DATABASE_CONNECTION_FAILED": "unable to connect to the database"
+  }
+}

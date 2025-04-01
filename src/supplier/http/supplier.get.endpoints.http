@@ -1,0 +1,11 @@
+GET http://localhost:3000/api/v1/supplier/
+?limit=10
+&page=1&sort=desc
+lang: ar
+
+
+
+GET http://localhost:3000/api/v1/supplier/67eb7a7ea03bccd0dc806442
+lang: ar
+
+
