@@ -56,7 +56,7 @@ export class SubCategoryService {
       createSubCategoryDto.category,
     );
     // handle exception if parent category does not already exists
-    if (!category) {
+    if (!category || category.deletedAt) {
       throw new BadRequestException(
         this.t('service.PARENT_CATEGORY_DOES_NOT_EXIST'),
       );
@@ -189,7 +189,7 @@ export class SubCategoryService {
         updateSubCategoryDto.category,
       );
       // handle exception if parent category does not already exists
-      if (!category || !category.active) {
+      if (!category || category.deletedAt) {
         throw new BadRequestException(
           this.t('service.PARENT_CATEGORY_DOES_NOT_EXIST'),
         );

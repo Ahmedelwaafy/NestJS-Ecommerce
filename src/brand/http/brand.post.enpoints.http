@@ -1,0 +1,11 @@
+POST http://localhost:3000/api/v1/brand
+Content-Type: application/json
+cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4ifQ.uLUQKCAZ3c_a94nMsfDMCYLRNHdkET0xoLd-DVVj4Aw
+lang: ar
+
+
+{
+  "name": {"en": "Nixke", "ar": "نايxكي"},
+ "active": true,
+ "image":"htxes/branding/googlelogo/2x/googlelogo_color_120x44dp.png"
+}

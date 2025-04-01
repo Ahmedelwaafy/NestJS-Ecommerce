@@ -9,12 +9,8 @@
   },
   "service": {
     "ALREADY_EXISTS": "يوجد تصنيف بهذا الاسم",
-    "fetched_successfully": "تم جلب بيانات التصنيف بنجاح",
     "ERROR_OCCURRED": "حدث خطأ ما",
     "NOT_FOUND": "التصنيف غير موجودة",
     "DATABASE_CONNECTION_FAILED": "غير قادر على الاتصال بقاعدة البيانات"
-  },
-  "dto": {
-    "IMAGE_IS_STRING": "يجب أن يكون رابط الصورة سلاسل نصية."
   }
 }

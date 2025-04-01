@@ -9,6 +9,7 @@ export type CategoryDocument = HydratedDocument<Category>;
 export class Category {
   @Prop({
     required: true,
+    unique: true,
     type: String,
     maxlength: 100,
     minlength: 2,
@@ -26,6 +27,13 @@ export class Category {
     default: true,
   })
   active: boolean;
+
+  @Prop({
+    type: Date,
+    required: false,
+    default: null,
+  })
+  deletedAt: Date;
 }
 
 const CategorySchema = SchemaFactory.createForClass(Category);

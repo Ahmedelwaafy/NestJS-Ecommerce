@@ -5,7 +5,7 @@ cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4ifQ
 
 
 {
-  "name": {"en": "Shirts", "ar": "قمصان"},
+  "name": {"en": "Shidrdts", "ar": "قdمصdان"},
   "category":"67eaf38892a2508063c4f834",
- "active": false
+  "active": false
 }

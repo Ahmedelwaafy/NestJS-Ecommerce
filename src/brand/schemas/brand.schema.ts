@@ -9,6 +9,7 @@ export type BrandDocument = HydratedDocument<Brand>;
 export class Brand {
   @Prop({
     required: true,
+    unique: true,
     type: String,
     maxlength: 100,
     minlength: 2,
@@ -26,6 +27,13 @@ export class Brand {
     default: true,
   })
   active: boolean;
+
+  @Prop({
+    type: Date,
+    required: false,
+    default: null,
+  })
+  deletedAt: Date;
 }
 
 const BrandSchema = SchemaFactory.createForClass(Brand);

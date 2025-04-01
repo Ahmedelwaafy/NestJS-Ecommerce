@@ -182,7 +182,7 @@ export class CategoryService {
    * @param id
    */
   async deactivate(id: string) {
-    await this.update(id, { active: false });
+    await this.update(id, { deletedAt: new Date() });
   }
 
   /**
@@ -190,6 +190,6 @@ export class CategoryService {
    * @param id
    */
   async activate(id: string) {
-    await this.update(id, { active: true });
+    await this.update(id, { deletedAt: null });
   }
 }

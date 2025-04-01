@@ -2,10 +2,11 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
   IsBoolean,
+  IsDate,
   IsMongoId,
   IsNotEmpty,
   IsOptional,
-  ValidateNested
+  ValidateNested,
 } from 'class-validator';
 import { LocalizedFieldDto } from 'src/common/dto/localized-field.dto';
 
@@ -42,4 +43,12 @@ export class CreateSubCategoryDto {
     message: 'validation.ACTIVE_IS_BOOLEAN',
   })
   active: boolean = true;
+
+  @ApiPropertyOptional({
+    description: 'The deleted status of the category.',
+    example: '2023-10-01T00:00:00Z',
+  })
+  @IsOptional()
+  @IsDate({ message: 'validation.DELETED_AT_IS_DATE' })
+  deletedAt?: Date;
 }

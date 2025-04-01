@@ -10,6 +10,7 @@ export type SubCategoryDocument = HydratedDocument<SubCategory>;
 export class SubCategory {
   @Prop({
     required: true,
+    unique: true,
     type: String,
     maxlength: 100,
     minlength: 2,
@@ -29,6 +30,13 @@ export class SubCategory {
     default: true,
   })
   active: boolean;
+
+  @Prop({
+    type: Date,
+    required: false,
+    default: null,
+  })
+  deletedAt: Date;
 }
 
 const SubCategorySchema = SchemaFactory.createForClass(SubCategory);

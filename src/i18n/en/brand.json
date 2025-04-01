@@ -1,0 +1,17 @@
+{
+  "controller": {
+    "CREATED_SUCCESSFULLY": "Brand created successfully",
+    "UPDATED_SUCCESSFULLY": "Brand updated successfully",
+    "DELETED_SUCCESSFULLY": "Brand deleted successfully",
+    "RESTORED_SUCCESSFULLY": "Brand restored successfully",
+    "GET_ALL_SUCCESSFULLY": "Categories fetched successfully",
+    "GET_ONE_SUCCESSFULLY": "Brand fetched successfully"
+  },
+  "service": {
+    "ALREADY_EXISTS": "A brand with the same name already exists",
+    "fetched_successfully": "Brand data fetched successfully",
+    "ERROR_OCCURRED": "an error occurred",
+    "NOT_FOUND": "Brand not found",
+    "DATABASE_CONNECTION_FAILED": "unable to connect to the database"
+  }
+}

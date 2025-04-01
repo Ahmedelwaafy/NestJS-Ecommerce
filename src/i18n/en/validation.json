@@ -7,5 +7,8 @@
   "AR_NAME_LENGTH": "Arabic name must be between 2 and 100 characters long",
   "SORT_NOT_VALID": "Sort must be 'asc' or 'desc'",
   "ACTIVE_IS_BOOLEAN": "Active status must be a boolean",
-  "SEARCH_IS_STRING": "Search must be a string"
+  "SEARCH_IS_STRING": "Search must be a string",
+  "IMAGE_IS_STRING": "Image URL must be a string.",
+  "IMAGE_IS_URL": "Image URL must be a valid URL.",
+  "DELETED_AT_IS_DATE": "Deleted at must be a valid date."
 }

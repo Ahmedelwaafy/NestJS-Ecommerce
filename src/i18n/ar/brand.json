@@ -1,0 +1,16 @@
+{
+  "controller": {
+    "CREATED_SUCCESSFULLY": "تم انشاء العلامة التجارية بنجاح",
+    "UPDATED_SUCCESSFULLY": "تم تحديث العلامة التجارية بنجاح",
+    "DELETED_SUCCESSFULLY": "تم حذف العلامة التجارية بنجاح",
+    "RESTORED_SUCCESSFULLY": "تم استعادة العلامة التجارية بنجاح",
+    "GET_ALL_SUCCESSFULLY": "تم جلب العلامات التجارية بنجاح",
+    "GET_ONE_SUCCESSFULLY": "تم جلب العلامة التجارية بنجاح"
+  },
+  "service": {
+    "ALREADY_EXISTS": "يوجد علامة تجارية بهذا الاسم",
+    "ERROR_OCCURRED": "حدث خطأ ما",
+    "NOT_FOUND": "العلامة التجارية غير موجودة",
+    "DATABASE_CONNECTION_FAILED": "غير قادر على الاتصال بقاعدة البيانات"
+  }
+}
