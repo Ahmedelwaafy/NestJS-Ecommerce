@@ -52,6 +52,8 @@ export class CouponController {
    * //***** Get all Coupon ******
    */
   @Get()
+  @Roles(['admin'])
+  @UseGuards(AuthGuard)
   @ApiOperation({
     summary: 'Get all coupons',
   })
@@ -70,6 +72,8 @@ export class CouponController {
    * //***** Get a Coupon ******
    */
   @Get(':id')
+  @Roles(['admin'])
+  @UseGuards(AuthGuard)
   @ApiOperation({
     summary: 'Fetches a coupon by its id',
   })
