@@ -5,8 +5,15 @@
   "AR_NAME_NOT_EMPTY": "Arabic name is required",
   "AR_NAME_IS_STRING": "Arabic name must be string",
   "AR_NAME_LENGTH": "Arabic name must be between 2 and 100 characters long",
+  "NAME_IS_STRING": "The product name must be a string.",
+  "NAME_MIN_LENGTH": "The product name must be at least 2 characters long.",
+  "NAME_MAX_LENGTH": "The product name must not exceed 100 characters.",
+  "DESCRIPTION_IS_STRING": "The product description must be a string.",
+  "DESCRIPTION_MIN_LENGTH": "The product description must be at least 2 characters long.",
+  "DESCRIPTION_MAX_LENGTH": "The product description must not exceed 150 characters.",
   "SORT_NOT_VALID": "Sort must be 'asc' or 'desc'",
   "ACTIVE_IS_BOOLEAN": "Active status must be a boolean",
+  "IS_AVAILABLE_IS_BOOLEAN": "The availability status must be a boolean value.",
   "SEARCH_IS_STRING": "Search must be a string",
   "IMAGE_IS_STRING": "Image URL must be a string.",
   "IMAGE_IS_URL": "Image URL must be a valid URL.",
@@ -23,12 +30,15 @@
     "DISCOUNT_MAX": "Discount must be at most 100.",
     "EXPIRATION_DATE_IS_DATE": "Expiration date must be a valid date.",
     "EXPIRATION_DATE_IS_IN_FUTURE": "Expiration date must be in the future.",
-    "ACTIVE_IS_BOOLEAN": "Active status must be a boolean.",
     "MIN_ORDER_TOTAL_IS_NUMBER": "Minimum order total must be a number.",
     "MAX_DISCOUNT_IS_NUMBER": "Maximum discount amount must be a number."
   },
-  "sub-category": {
-    "CATEGORY_IS_REQUIRED": "Category is required",
-    "CATEGORY_ID_IS_INVALID": "Category id is invalid"
-  }
+  "CATEGORY_IS_REQUIRED": "Category is required",
+  "CATEGORY_ID_IS_INVALID": "Category id is invalid",
+  "CATEGORY_IS_STRING": "The category must be a string.",
+  "CATEGORY_MIN_LENGTH": "The category must be at least 1 character long.",
+  "CATEGORY_MAX_LENGTH": "The category must not exceed 50 characters.",
+  "QUANTITY_IS_STRING": "The quantity must be a string.",
+  "QUANTITY_MIN_LENGTH": "The quantity must be at least 1 character long.",
+  "QUANTITY_MAX_LENGTH": "The quantity must not exceed 50 characters."
 }

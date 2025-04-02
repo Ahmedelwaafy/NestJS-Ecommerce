@@ -8,6 +8,7 @@
     "COUPON": "Coupon",
     "SUPPLIER": "Supplier",
     "PRODUCT": "Product",
+    "PRODUCT_REQUEST": "Product Request",
     "ORDER": "Order"
   }
 }

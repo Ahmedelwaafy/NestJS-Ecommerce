@@ -45,7 +45,7 @@ export class CreateCouponDto {
   })
   @IsOptional()
   @IsBoolean({
-    message: 'validation.coupon.ACTIVE_IS_BOOLEAN',
+    message: 'validation.ACTIVE_IS_BOOLEAN',
   })
   active: boolean = true;
 

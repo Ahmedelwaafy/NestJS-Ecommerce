@@ -8,6 +8,7 @@
     "COUPON": "القسيمة",
     "SUPPLIER": "المورد",
     "PRODUCT": "المنتج",
+    "PRODUCT_REQUEST": "طلب المنتج",
     "ORDER": "الطلب"
   }
 }

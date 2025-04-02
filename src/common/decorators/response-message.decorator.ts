@@ -17,6 +17,7 @@ type MODULES =
   | 'COUPON'
   | 'SUPPLIER'
   | 'PRODUCT'
+  | 'PRODUCT_REQUEST'
   | 'ORDER'
   | 'CUSTOM';
 export const RESPONSE_MESSAGE = 'response_message';
