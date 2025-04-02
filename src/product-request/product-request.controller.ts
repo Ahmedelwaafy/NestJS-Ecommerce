@@ -9,6 +9,7 @@ import {
   UseGuards,
   HttpStatus,
   HttpCode,
+  Query,
 } from '@nestjs/common';
 import { ProductRequestService } from './product-request.service';
 import { CreateProductRequestDto } from './dto/create-product-request.dto';
@@ -19,13 +20,14 @@ import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
 import { ActiveUser } from 'src/auth/decorators/active-user.decorator';
 import { ActiveUserData } from 'src/auth/interfaces/active-user.interface';
+import { PaginationAndFiltersDto } from 'src/common/dto/base-filters.dto';
 
 @Controller('v1/product-request')
 export class ProductRequestController {
   constructor(private readonly productRequestService: ProductRequestService) {}
 
   /**
-   * //***** Create a Coupon ******
+   * //***** Create a product request ******
    */
   @Post()
   @Roles(['user'])
@@ -54,9 +56,23 @@ export class ProductRequestController {
     });
   }
 
+  /**
+   * //***** Get all product requests ******
+   */
   @Get()
-  findAll() {
-    return this.productRequestService.findAll();
+  @Roles(['admin'])
+  @UseGuards(AuthGuard)
+  @ApiOperation({
+    summary: 'Get all product requests',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Product requests fetched successfully',
+  })
+  @ResponseMessage(['GET_ALL_SUCCESSFULLY', 'PRODUCT_REQUEST'])
+  findAll(@Query() getCouponsQuery: PaginationAndFiltersDto) {
+    const { limit, page, ...filters } = getCouponsQuery;
+    return this.productRequestService.findAll({ page, limit }, filters);
   }
 
   @Get(':id')

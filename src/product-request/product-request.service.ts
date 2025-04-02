@@ -1,5 +1,12 @@
-import { BadRequestException, Injectable, RequestTimeoutException } from '@nestjs/common';
-import { BaseProductRequestDto, CreateProductRequestDto } from './dto/create-product-request.dto';
+import {
+  BadRequestException,
+  Injectable,
+  RequestTimeoutException,
+} from '@nestjs/common';
+import {
+  BaseProductRequestDto,
+  CreateProductRequestDto,
+} from './dto/create-product-request.dto';
 import { UpdateProductRequestDto } from './dto/update-product-request.dto';
 import { TFunction } from 'src/i18n/types';
 import { InjectModel } from '@nestjs/mongoose';
@@ -10,6 +17,9 @@ import {
   ProductRequestDocument,
 } from './schemas/product-request.schema';
 import { Model } from 'mongoose';
+import { PaginationQueryDto } from 'src/common/pagination/dto/pagination-query.dto';
+import { BaseFiltersDto } from 'src/common/dto/base-filters.dto';
+import { Paginated } from 'src/common/pagination/interfaces/paginated.interface';
 
 @Injectable()
 export class ProductRequestService {
@@ -61,8 +71,37 @@ export class ProductRequestService {
     }
   }
 
-  findAll() {
-    return `This action returns all productRequest`;
+  /**
+   *//***** Get All ProductRequests ******
+   * @param paginationQuery
+   * @param getProductRequestsQuery
+   * @returns Paginated<ProductRequest>
+   */
+  async findAll(
+    paginationQuery: PaginationQueryDto,
+    getProductRequestsQuery?: BaseFiltersDto,
+  ): Promise<Paginated<ProductRequest>> {
+    const filters: Record<string, any> = {};
+
+    // Build filters dynamically
+    const { active, search, sort } = getProductRequestsQuery;
+
+    if (active) {
+      filters.active = active;
+    }
+
+    if (search) {
+      filters.$or = [{ name: { $regex: search, $options: 'i' } }];
+    }
+    return this.paginationService.paginateQuery(
+      paginationQuery,
+      this.productRequestModel,
+      {
+        filters,
+        populate: { path: 'user', select: 'name email age gender' },
+        sort,
+      },
+    );
   }
 
   findOne(id: number) {
