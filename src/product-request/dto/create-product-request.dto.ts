@@ -1,8 +1,7 @@
 import {
   ApiProperty,
   ApiPropertyOptional,
-  OmitType,
-  PickType,
+  OmitType
 } from '@nestjs/swagger';
 import {
   IsBoolean,
@@ -72,10 +71,5 @@ export class BaseProductRequestDto {
 // DTO for creating a product request (excludes user and isAvailable), user is get from the token, and isAvailable mustn't be sent from the user
 export class CreateProductRequestDto extends OmitType(BaseProductRequestDto, [
   'user',
-  'isAvailable',
-] as const) {}
-
-// DTO for admin use, picking all fields (if needed in another function), admin should change the isAvailable key only
-export class AdminProductRequestDto extends PickType(BaseProductRequestDto, [
   'isAvailable',
 ] as const) {}

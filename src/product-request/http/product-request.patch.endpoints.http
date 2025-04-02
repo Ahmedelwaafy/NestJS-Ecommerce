@@ -1,14 +1,23 @@
-PATCH http://localhost:3000/api/v1/product-request/67eb9a805c9cb52e5349ade8
+//for user
+
+PATCH http://localhost:3000/api/v1/product-request/67ecce672f1cf0a29baa842d
 Content-Type: application/json
-cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4ifQ.uLUQKCAZ3c_a94nMsfDMCYLRNHdkET0xoLd-DVVj4Aw
+cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZWNjZTQ5MmYxY2YwYTI5YmFhODQyOSIsIm5hbWUiOiJ1c2VyIiwiZW1haWwiOiJ1c2VyQHVzZXJ4LmNvbSIsInJvbGUiOiJ1c2VyIiwiYWdlIjoyNywiZ2VuZGVyIjoibWFsZSIsImlhdCI6MTc0MzU4NDQ5MiwiZXhwIjoxNzQzNTg4MDkyLCJhdWQiOiJsb2NhbGhvc3Q6MzAwMCIsImlzcyI6ImxvY2FsaG9zdDozMDAwIn0.dJrmhWpVUfwOfEvZKIS4DbBeIF04eyqC8a3ozJc7Cd8
 lang: ar
 
 {
-  "name": "Gaming Laptop",
+  "name": "Gaming Laptopsw",
   "description": "A high-performance laptop designed for gaming and professional use.",
   "quantity": "5",
   "category": "Electronics"
  }
+
+//for admin
+PATCH http://localhost:3000/api/v1/product-request/accept/67ecce672f1cf0a29baa842d
+Content-Type: application/json
+cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4ifQ.uLUQKCAZ3c_a94nMsfDMCYLRNHdkET0xoLd-DVVj4Aw
+lang: ar
+
 
 
 

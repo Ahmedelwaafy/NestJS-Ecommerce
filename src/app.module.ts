@@ -21,6 +21,7 @@ import { BrandModule } from './brand/brand.module';
 import { CouponModule } from './coupon/coupon.module';
 import { SupplierModule } from './supplier/supplier.module';
 import { ProductRequestModule } from './product-request/product-request.module';
+import { SettingModule } from './setting/setting.module';
 
 const ENV = process.env.NODE_ENV;
 //console.log({ ENV });
@@ -64,6 +65,7 @@ const ENV = process.env.NODE_ENV;
     CouponModule,
     SupplierModule,
     ProductRequestModule,
+    SettingModule,
   ],
   controllers: [],
   providers: [

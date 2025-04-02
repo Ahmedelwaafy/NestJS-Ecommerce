@@ -5,16 +5,16 @@ git add -A
 git commit -m "$1"
 
 # Step 2: Push to the current branch
-git push origin localization-feature
+git push origin product-request-model
 
 # Step 3: Checkout development branch, pull updates, merge, and push
 git checkout development
 git pull origin development
-git merge localization-feature
+git merge product-request-model
 git push origin development
-# Step 4: Switch back to localization-feature branch
-git checkout localization-feature
+# Step 4: Switch back to product-request-model branch
+git checkout product-request-model
 
 
-# Step 5: ./git-automation.sh "change the localization approach for reusability"
+# Step 5: ./git-automation.sh "finish product-request-model"
 #git merge development
