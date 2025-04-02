@@ -5,12 +5,12 @@
   "AR_NAME_NOT_EMPTY": "الاسم باللغة العربية مطلوب",
   "AR_NAME_IS_STRING": "يجب أن يكون الاسم باللغة العربية نصًا",
   "AR_NAME_LENGTH": "يجب أن يكون الاسم باللغة العربية بين 2 و 100 حرف",
-  "NAME_IS_STRING": "يجب أن يكون اسم المنتج نصًا.",
-  "NAME_MIN_LENGTH": "يجب ألا يقل اسم المنتج عن 2 حرفين.",
-  "NAME_MAX_LENGTH": "يجب ألا يتجاوز اسم المنتج 100 حرف.",
-  "DESCRIPTION_IS_STRING": "يجب أن يكون وصف المنتج نصًا.",
-  "DESCRIPTION_MIN_LENGTH": "يجب ألا يقل وصف المنتج عن 2 حرفين.",
-  "DESCRIPTION_MAX_LENGTH": "يجب ألا يتجاوز وصف المنتج 150 حرفًا.",
+  "NAME_IS_STRING": "يجب أن يكون الاسم نصًا.",
+  "NAME_MIN_LENGTH": "يجب ألا يقل الاسم عن حرفين.",
+  "NAME_MAX_LENGTH": "يجب ألا يتجاوز الاسم 100 حرف.",
+  "DESCRIPTION_IS_STRING": "يجب أن يكون الوصف نصًا.",
+  "DESCRIPTION_MIN_LENGTH": "يجب ألا يقل الوصف عن حرفين.",
+  "DESCRIPTION_MAX_LENGTH": "يجب ألا يتجاوز الوصف 150 حرفًا.",
   "SORT_NOT_VALID": "يجب أن يكون الترتيب 'asc' or 'desc'",
   "ACTIVE_IS_BOOLEAN": "يجب أن تكون حالة التفعيل قيمة منطقية",
   "IS_AVAILABLE_IS_BOOLEAN": "يجب أن تكون حالة التوفر قيمة منطقية.",
@@ -41,5 +41,13 @@
   "QUANTITY_IS_STRING": "يجب أن تكون الكمية نصًا.",
   "QUANTITY_MIN_LENGTH": "يجب ألا تقل الكمية عن 1 حرف.",
   "QUANTITY_MAX_LENGTH": "يجب ألا تتجاوز الكمية 50 حرفًا.",
-  "USER_IS_MONGO_ID": "يجب أن يكون معرف المستخدم ObjectId صالحًا لمونغو دي بي."
+  "USER_IS_MONGO_ID": "يجب أن يكون معرف المستخدم ObjectId صالحًا لمونغو دي بي.",
+
+  "KEY_NOT_EMPTY": "المفتاح مطلوب",
+  "KEY_IS_STRING": "يجب أن يكون المفتاح نصًا",
+  "KEY_MIN_LENGTH": "يجب أن يتكون المفتاح من حرفين على الأقل",
+  "KEY_MAX_LENGTH": "لا يمكن أن يتجاوز المفتاح 150 حرفًا",
+  "VALUE_NOT_EMPTY": "القيمة مطلوبة",
+  "VALUE_IS_STRING": "يجب أن تكون القيمة نصًا",
+  "VALUE_IS_OBJECT": "يجب أن تكون القيمة كائنًا"
 }

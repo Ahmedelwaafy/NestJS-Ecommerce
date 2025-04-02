@@ -5,12 +5,12 @@
   "AR_NAME_NOT_EMPTY": "Arabic name is required",
   "AR_NAME_IS_STRING": "Arabic name must be string",
   "AR_NAME_LENGTH": "Arabic name must be between 2 and 100 characters long",
-  "NAME_IS_STRING": "The product name must be a string.",
-  "NAME_MIN_LENGTH": "The product name must be at least 2 characters long.",
-  "NAME_MAX_LENGTH": "The product name must not exceed 100 characters.",
-  "DESCRIPTION_IS_STRING": "The product description must be a string.",
-  "DESCRIPTION_MIN_LENGTH": "The product description must be at least 2 characters long.",
-  "DESCRIPTION_MAX_LENGTH": "The product description must not exceed 150 characters.",
+  "NAME_IS_STRING": "The name must be a string.",
+  "NAME_MIN_LENGTH": "The name must be at least 2 characters long.",
+  "NAME_MAX_LENGTH": "The name must not exceed 100 characters.",
+  "DESCRIPTION_IS_STRING": "The description must be a string.",
+  "DESCRIPTION_MIN_LENGTH": "The description must be at least 2 characters long.",
+  "DESCRIPTION_MAX_LENGTH": "The description must not exceed 150 characters.",
   "SORT_NOT_VALID": "Sort must be 'asc' or 'desc'",
   "ACTIVE_IS_BOOLEAN": "Active status must be a boolean",
   "IS_AVAILABLE_IS_BOOLEAN": "The availability status must be a boolean value.",
@@ -40,5 +40,13 @@
   "CATEGORY_MAX_LENGTH": "The category must not exceed 50 characters.",
   "QUANTITY_IS_STRING": "The quantity must be a string.",
   "QUANTITY_MIN_LENGTH": "The quantity must be at least 1 character long.",
-  "QUANTITY_MAX_LENGTH": "The quantity must not exceed 50 characters."
+  "QUANTITY_MAX_LENGTH": "The quantity must not exceed 50 characters.",
+
+  "KEY_NOT_EMPTY": "Key is required",
+  "KEY_IS_STRING": "Key must be a string",
+  "KEY_MIN_LENGTH": "Key must be at least 2 characters long",
+  "KEY_MAX_LENGTH": "Key cannot exceed 150 characters",
+  "VALUE_NOT_EMPTY": "Value is required",
+  "VALUE_IS_STRING": "Value must be a string",
+  "VALUE_IS_OBJECT": "Value must be an object"
 }

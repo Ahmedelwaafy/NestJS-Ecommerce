@@ -9,7 +9,8 @@
     "SUPPLIER": "Supplier",
     "PRODUCT": "Product",
     "PRODUCT_REQUEST": "Product Request",
-    "ORDER": "Order"
+    "ORDER": "Order",
+    "SETTING": "Setting"
   },
   "ACCESS_NOT_ALLOWED": "Access not allowed"
 }

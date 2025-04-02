@@ -19,6 +19,7 @@ type MODULES =
   | 'PRODUCT'
   | 'PRODUCT_REQUEST'
   | 'ORDER'
+  | 'SETTING'
   | 'CUSTOM';
 export const RESPONSE_MESSAGE = 'response_message';
 export const ResponseMessage = (msgInfo: [OPERATIONS, MODULES?]) =>

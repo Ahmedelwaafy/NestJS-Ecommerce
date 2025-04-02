@@ -9,7 +9,8 @@
     "SUPPLIER": "المورد",
     "PRODUCT": "المنتج",
     "PRODUCT_REQUEST": "طلب المنتج",
-    "ORDER": "الطلب"
+    "ORDER": "الطلب",
+    "SETTING": "الاعداد"
   },
   "ACCESS_NOT_ALLOWED": "هذا الاجراء غير مسموح به"
 }
