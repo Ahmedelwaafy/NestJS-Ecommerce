@@ -1,7 +1,9 @@
 import {
   BadRequestException,
   Injectable,
+  NotFoundException,
   RequestTimeoutException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import {
   BaseProductRequestDto,
@@ -20,6 +22,8 @@ import { Model } from 'mongoose';
 import { PaginationQueryDto } from 'src/common/pagination/dto/pagination-query.dto';
 import { BaseFiltersDto } from 'src/common/dto/base-filters.dto';
 import { Paginated } from 'src/common/pagination/interfaces/paginated.interface';
+import { ActiveUserData } from 'src/auth/interfaces/active-user.interface';
+import { Role } from 'src/auth/enums/role.enum';
 
 @Injectable()
 export class ProductRequestService {
@@ -72,7 +76,7 @@ export class ProductRequestService {
   }
 
   /**
-   *//***** Get All ProductRequests ******
+   *//***** Get All Product Requests ******
    * @param paginationQuery
    * @param getProductRequestsQuery
    * @returns Paginated<ProductRequest>
@@ -104,8 +108,39 @@ export class ProductRequestService {
     );
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} productRequest`;
+  /**
+   *//***** Get Single Product Request ******
+   * @param id
+   * @param sender
+   * @returns ProductRequest
+   */
+  async findOne(id: string, sender: ActiveUserData) {
+    let productRequest: ProductRequest;
+    try {
+      productRequest = await this.productRequestModel.findById(id);
+    } catch (error) {
+      throw new RequestTimeoutException(this.t('service.ERROR_OCCURRED'), {
+        description:
+          error.message || this.t('service.DATABASE_CONNECTION_FAILED'),
+      });
+    }
+    if (!productRequest) {
+      throw new NotFoundException(
+        this.t('service.NOT_FOUND', {
+          args: {
+            MODEL_NAME: this.t(`common.MODELS_NAMES.PRODUCT_REQUEST`),
+          },
+        }),
+      );
+    }
+
+    if (
+      sender.role !== Role.Admin &&
+      productRequest.user.toString() !== sender.id
+    ) {
+      throw new UnauthorizedException(this.t(`common.ACCESS_NOT_ALLOWED`));
+    }
+    return productRequest;
   }
 
   /**

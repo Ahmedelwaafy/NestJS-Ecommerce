@@ -16,7 +16,7 @@ import { CreateProductRequestDto } from './dto/create-product-request.dto';
 import { UpdateProductRequestDto } from './dto/update-product-request.dto';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { AuthGuard } from 'src/auth/gaurds/auth.guard';
-import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
 import { ActiveUser } from 'src/auth/decorators/active-user.decorator';
 import { ActiveUserData } from 'src/auth/interfaces/active-user.interface';
@@ -75,10 +75,27 @@ export class ProductRequestController {
     return this.productRequestService.findAll({ page, limit }, filters);
   }
 
+  /**
+   * //***** Get a Product request ******
+   */
   @Get(':id')
   @Roles(['admin', 'user'])
-  findOne(@Param('id') id: string) {
-    return this.productRequestService.findOne(+id);
+  @UseGuards(AuthGuard)
+  @ApiOperation({
+    summary: 'Fetches a product request by its id',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Product request fetched successfully',
+  })
+  @ApiParam({
+    name: 'id',
+    description: 'Product request id',
+    type: String,
+  })
+  @ResponseMessage(['GET_ONE_SUCCESSFULLY', 'PRODUCT_REQUEST'])
+  findOne(@Param('id') id: string, @ActiveUser() sender: ActiveUserData) {
+    return this.productRequestService.findOne(id, sender);
   }
 
   @Patch(':id')

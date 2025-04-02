@@ -38,10 +38,12 @@ export class AuthGuard implements CanActivate {
       //console.log("token not found");
       throw new UnauthorizedException('token not found');
     }
+    //enable AuthGuard to handle both admin and user (registered users) roles for the same route
     // First, determine which secrets to try
     const tryUserSecret = roles.includes(Role.User);
     const tryAdminSecret = roles.includes(Role.Admin);
     let payload = null;
+    let role = null;
     let verificationError = null;
 
     // Try verifying with the appropriate secrets
@@ -50,6 +52,7 @@ export class AuthGuard implements CanActivate {
         payload = await this.jwtService.verifyAsync(token, {
           secret: this.configService.get('jwt.userSecret'),
         });
+        role = Role.User;
       } catch (error) {
         verificationError = error;
       }
@@ -61,9 +64,11 @@ export class AuthGuard implements CanActivate {
         payload = await this.jwtService.verifyAsync(token, {
           secret: this.configService.get('jwt.adminSecret'),
         });
+        role = Role.Admin;
+
         verificationError = null; // Clear error if admin verification succeeds
       } catch (error) {
-         verificationError = error;
+        verificationError = error;
       }
     }
 
@@ -76,12 +81,15 @@ export class AuthGuard implements CanActivate {
     //console.log({ roles, token, payload });
 
     //* handle if the role is altered manually, like from https://jwt.io/
-    if (!roles.includes(payload?.role)) {
+    //!Solution-1: check if the role is included in the roles array set by the Roles decorator
+    /* if (!roles.includes(payload?.role)) {
       throw new UnauthorizedException('unauthorized role');
-    }
+    } */
+
     // 💡 We're assigning the payload to the request object here
     // so that we can access it in our route handlers
-    request[REQUEST_USER_KEY] = payload;
+    //!Solution-2: assign the role based on the success secret not from the decoded payload, this solution is more secure if the guard handles both roles, so Solution-1 is more disabled
+    request[REQUEST_USER_KEY] = { ...payload, role };
 
     return true;
   }

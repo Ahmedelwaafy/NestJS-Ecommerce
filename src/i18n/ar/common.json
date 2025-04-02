@@ -10,5 +10,6 @@
     "PRODUCT": "المنتج",
     "PRODUCT_REQUEST": "طلب المنتج",
     "ORDER": "الطلب"
-  }
+  },
+  "ACCESS_NOT_ALLOWED": "هذا الاجراء غير مسموح به"
 }

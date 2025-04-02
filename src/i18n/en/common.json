@@ -10,5 +10,6 @@
     "PRODUCT": "Product",
     "PRODUCT_REQUEST": "Product Request",
     "ORDER": "Order"
-  }
+  },
+  "ACCESS_NOT_ALLOWED": "Access not allowed"
 }
