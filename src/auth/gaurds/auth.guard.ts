@@ -38,25 +38,51 @@ export class AuthGuard implements CanActivate {
       //console.log("token not found");
       throw new UnauthorizedException('token not found');
     }
-    try {
-      const payload = await this.jwtService.verifyAsync(token, {
-        secret: roles.includes(Role.User)
-          ? this.configService.get('jwt.userSecret')
-          : this.configService.get('jwt.adminSecret'),
-      });
-      //console.log({ roles, token, payload });
-      
-      //* handle if the role is altered manually, like from https://jwt.io/
-      if (!roles.includes(payload?.role)) {
-        throw new UnauthorizedException('unauthorized role');
+    // First, determine which secrets to try
+    const tryUserSecret = roles.includes(Role.User);
+    const tryAdminSecret = roles.includes(Role.Admin);
+    let payload = null;
+    let verificationError = null;
+
+    // Try verifying with the appropriate secrets
+    if (tryUserSecret) {
+      try {
+        payload = await this.jwtService.verifyAsync(token, {
+          secret: this.configService.get('jwt.userSecret'),
+        });
+      } catch (error) {
+        verificationError = error;
       }
-      // 💡 We're assigning the payload to the request object here
-      // so that we can access it in our route handlers
-      request[REQUEST_USER_KEY] = payload;
-    } catch (error) {
-      console.log(error);
+    }
+
+    // If user verification failed or wasn't attempted, try admin secret if applicable
+    if (!payload && tryAdminSecret) {
+      try {
+        payload = await this.jwtService.verifyAsync(token, {
+          secret: this.configService.get('jwt.adminSecret'),
+        });
+        verificationError = null; // Clear error if admin verification succeeds
+      } catch (error) {
+         verificationError = error;
+      }
+    }
+
+    // If payload is still null, throw the last error encountered
+    if (!payload) {
+      //throw verificationError ||
       throw new UnauthorizedException('invalid token');
     }
+
+    //console.log({ roles, token, payload });
+
+    //* handle if the role is altered manually, like from https://jwt.io/
+    if (!roles.includes(payload?.role)) {
+      throw new UnauthorizedException('unauthorized role');
+    }
+    // 💡 We're assigning the payload to the request object here
+    // so that we can access it in our route handlers
+    request[REQUEST_USER_KEY] = payload;
+
     return true;
   }
 

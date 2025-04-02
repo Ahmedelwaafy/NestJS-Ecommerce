@@ -27,7 +27,7 @@ export class PaginationService {
       filters?: Record<string, any>;
       select?: string;
       sort: Sort; // default value set in the BaseFiltersDto
-      populate?: PopulateOptions | Array<PopulateOptions> | string;
+      populate?: PopulateOptions | (string | PopulateOptions)[];
     },
   ): Promise<Paginated<T>> {
     const { page = 1, limit = 10 } = paginationQuery;
@@ -45,7 +45,7 @@ export class PaginationService {
 
     // Apply populate if provided
     if (options?.populate) {
-      findQuery = findQuery.populate(options.populate as any);
+      findQuery = findQuery.populate(options.populate);
     }
 
     const [results, totalItems] = await Promise.all([

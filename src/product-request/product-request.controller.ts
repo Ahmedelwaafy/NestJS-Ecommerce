@@ -76,6 +76,7 @@ export class ProductRequestController {
   }
 
   @Get(':id')
+  @Roles(['admin', 'user'])
   findOne(@Param('id') id: string) {
     return this.productRequestService.findOne(+id);
   }
