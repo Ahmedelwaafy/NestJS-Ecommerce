@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import {
   IsArray,
   IsBoolean,
@@ -44,6 +44,12 @@ export class CreateProductDto {
   })
   @Type(() => LocalizedFieldDto)
   @ValidateNested()
+  /* @Transform(({ value }) => {
+    if (value) {
+      value._FIELD_NAME = 'DESCRIPTION';
+    }
+    return value;
+  }) */
   description: LocalizedFieldDto;
 
   @ApiProperty({ description: 'The price of the product.', example: 100 })

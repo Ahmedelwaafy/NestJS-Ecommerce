@@ -6,9 +6,11 @@ lang: ar
 
 {
   "name":{"en":"","ar":""},
-"description":{"en":"","ar":""},
-"price":0,
-"quantity":0
+"description":{"en":"","ar":"w"},
+"price":3,
+"quantity":3,
+"imageCover":"https://example.com/image.jpg",
+"category":"64e0f3a9d9a9a9a9a9a9a9a9"
 
 }
 
