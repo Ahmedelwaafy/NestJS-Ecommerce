@@ -48,5 +48,15 @@
   "KEY_MAX_LENGTH": "Key cannot exceed 150 characters",
   "VALUE_NOT_EMPTY": "Value is required",
   "VALUE_IS_STRING": "Value must be a string",
-  "VALUE_IS_OBJECT": "Value must be an object"
+  "VALUE_IS_OBJECT": "Value must be an object",
+
+  "NOT_EMPTY": "{FIELD_NAME} is required",
+  "MUST_BE_NUMBER": "{FIELD_NAME} must be a number",
+  "MUST_BE_STRING": "{FIELD_NAME} must be a string",
+  "MUST_BE_BOOLEAN": "{FIELD_NAME} must be a boolean",
+  "MIN_VALUE": "{FIELD_NAME} must be at least {constraints.0}",
+  "MAX_VALUE": "{FIELD_NAME} must not exceed {constraints.0}",
+  "MUST_BE_URL": "{FIELD_NAME} must be a valid URL",
+  "MUST_BE_ARRAY": "{FIELD_NAME} must be an array",
+  "INVALID_MONGO_ID": "Invalid {MODEL_NAME} ID"
 }

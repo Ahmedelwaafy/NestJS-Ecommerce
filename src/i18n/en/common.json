@@ -12,5 +12,20 @@
     "ORDER": "Order",
     "SETTING": "Setting"
   },
+  "FIELDS": {
+    "NAME": "name",
+    "DESCRIPTION": "description",
+    "PRICE": "price",
+    "QUANTITY": "quantity",
+    "IMAGE_COVER": "cover image",
+    "IMAGES": "images",
+    "IMAGE": "image",
+    "SOLD": "sold count",
+    "PRICE_AFTER_DISCOUNT": "discounted price",
+    "COLORS": "colors",
+    "COLOR": "color",
+    "ACTIVE": "active status",
+    "CATEGORY": "category"
+  },
   "ACCESS_NOT_ALLOWED": "Access not allowed"
 }

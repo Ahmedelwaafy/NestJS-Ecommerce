@@ -12,5 +12,20 @@
     "ORDER": "الطلب",
     "SETTING": "الاعداد"
   },
+  "FIELDS": {
+    "NAME": "الاسم",
+    "DESCRIPTION": "الوصف",
+    "PRICE": "السعر",
+    "QUANTITY": "الكمية",
+    "IMAGE_COVER": "صورة الغلاف",
+    "IMAGES": "الصور",
+    "IMAGE": "الصورة",
+    "SOLD": "عدد المبيعات",
+    "PRICE_AFTER_DISCOUNT": "السعر بعد الخصم",
+    "COLORS": "الألوان",
+    "COLOR": "اللون",
+    "ACTIVE": "حالة التفعيل",
+    "CATEGORY": "التصنيف"
+  },
   "ACCESS_NOT_ALLOWED": "هذا الاجراء غير مسموح به"
 }

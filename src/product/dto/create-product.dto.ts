@@ -11,8 +11,9 @@ import {
   IsUrl,
   Max,
   Min,
-  ValidateNested
+  ValidateNested,
 } from 'class-validator';
+import { i18nValidationMessage } from 'nestjs-i18n';
 import { LocalizedFieldDto } from 'src/common/dto/localized-field.dto';
 
 export class CreateProductDto {
@@ -20,7 +21,11 @@ export class CreateProductDto {
     description: 'The name of the product.',
     example: { en: 'Adidas Air Max', ar: 'اديداس اير ماكس' },
   })
-  @IsNotEmpty({ message: 'validation.NAME_NOT_EMPTY' })
+  @IsNotEmpty({
+    message: i18nValidationMessage('validation.NOT_EMPTY', {
+      FIELD_NAME: '$t(common.FIELDS.NAME)',
+    }),
+  })
   @Type(() => LocalizedFieldDto)
   @ValidateNested()
   name: LocalizedFieldDto;
@@ -32,36 +37,80 @@ export class CreateProductDto {
       ar: 'أحذية رياضية عالية الجودة',
     },
   })
-  @IsNotEmpty({ message: 'validation.DESCRIPTION_NOT_EMPTY' })
+  @IsNotEmpty({
+    message: i18nValidationMessage('validation.NOT_EMPTY', {
+      FIELD_NAME: '$t(common.FIELDS.DESCRIPTION)',
+    }),
+  })
   @Type(() => LocalizedFieldDto)
   @ValidateNested()
   description: LocalizedFieldDto;
 
   @ApiProperty({ description: 'The price of the product.', example: 100 })
-  @IsNumber()
-  @Min(1, { message: 'validation.PRICE_MIN' })
-  @Max(20000, { message: 'validation.PRICE_MAX' })
+  @IsNumber(
+    {},
+    {
+      message: i18nValidationMessage('validation.MUST_BE_NUMBER', {
+        FIELD_NAME: '$t(common.FIELDS.PRICE)',
+      }),
+    },
+  )
+  @Min(1, {
+    message: i18nValidationMessage('validation.MIN_VALUE', {
+      FIELD_NAME: '$t(common.FIELDS.PRICE)',
+    }),
+  })
+  @Max(20000, {
+    message: i18nValidationMessage('validation.MAX_VALUE', {
+      FIELD_NAME: '$t(common.FIELDS.PRICE)',
+    }),
+  })
   price: number;
 
   @ApiProperty({
     description: 'The category ID of the product.',
     example: '60b6a2f9f1d3c8d7aeb7a3e6',
   })
-  @IsString()
-  @IsMongoId({ message: 'validation.USER_IS_MONGO_ID' })
+  @IsMongoId({
+    message: i18nValidationMessage('validation.INVALID_MONGO_ID', {
+      MODEL_NAME: '$t(common.MODELS_NAMES.CATEGORY)',
+    }),
+  })
   category: string;
 
   @ApiProperty({ description: 'The quantity of the product.', example: 10 })
-  @IsNumber()
-  @Min(1, { message: 'validation.QUANTITY_MIN' })
+  @IsNumber(
+    {},
+    {
+      message: i18nValidationMessage('validation.MUST_BE_NUMBER', {
+        FIELD_NAME: '$t(common.FIELDS.QUANTITY)',
+      }),
+    },
+  )
+  @Min(1, {
+    message: i18nValidationMessage('validation.MIN_VALUE', {
+      FIELD_NAME: '$t(common.FIELDS.QUANTITY)',
+    }),
+  })
   quantity: number;
 
   @ApiProperty({
     description: 'The main image of the product.',
     example: 'https://example.com/image.jpg',
   })
-  @IsString()
-  @IsUrl({}, { message: 'validation.IMAGE_IS_URL' })
+  @IsNotEmpty({
+    message: i18nValidationMessage('validation.NOT_EMPTY', {
+      FIELD_NAME: '$t(common.FIELDS.IMAGE_COVER)',
+    }),
+  })
+  @IsUrl(
+    {},
+    {
+      message: i18nValidationMessage('validation.MUST_BE_URL', {
+        FIELD_NAME: '$t(common.FIELDS.IMAGE_COVER)',
+      }),
+    },
+  )
   imageCover: string;
 
   @ApiPropertyOptional({
@@ -69,19 +118,49 @@ export class CreateProductDto {
     example: ['https://example.com/img1.jpg', 'https://example.com/img2.jpg'],
   })
   @IsOptional()
-  @IsArray({ message: 'validation.IMAGES_MUST_BE_ARRAY' })
-  @IsUrl({}, { each: true, message: 'validation.IMAGE_IS_URL' })
+  @IsArray({
+    message: i18nValidationMessage('validation.MUST_BE_ARRAY', {
+      FIELD_NAME: '$t(common.FIELDS.IMAGES)',
+    }),
+  })
+  @IsUrl(
+    {},
+    {
+      each: true,
+      message: i18nValidationMessage('validation.MUST_BE_URL', {
+        FIELD_NAME: '$t(common.FIELDS.IMAGE)',
+      }),
+    },
+  )
   images?: string[];
 
   @ApiPropertyOptional({ description: 'Number of items sold.', example: 5 })
   @IsOptional()
-  @IsNumber()
+  @IsNumber(
+    {},
+    {
+      message: i18nValidationMessage('validation.MUST_BE_NUMBER', {
+        FIELD_NAME: '$t(common.FIELDS.SOLD)',
+      }),
+    },
+  )
   sold?: number;
 
   @ApiPropertyOptional({ description: 'Price after discount.', example: 80 })
   @IsOptional()
-  @IsNumber()
-  @Max(20000, { message: 'validation.PRICE_AFTER_DISCOUNT_MAX' })
+  @IsNumber(
+    {},
+    {
+      message: i18nValidationMessage('validation.MUST_BE_NUMBER', {
+        FIELD_NAME: '$t(common.FIELDS.PRICE_AFTER_DISCOUNT)',
+      }),
+    },
+  )
+  @Max(20000, {
+    message: i18nValidationMessage('validation.MAX_VALUE', {
+      FIELD_NAME: '$t(common.FIELDS.PRICE_AFTER_DISCOUNT)',
+    }),
+  })
   priceAfterDiscount?: number;
 
   @ApiPropertyOptional({
@@ -89,16 +168,35 @@ export class CreateProductDto {
     example: ['red', 'blue', 'green'],
   })
   @IsOptional()
-  @IsArray({ message: 'validation.COLORS_MUST_BE_ARRAY' })
-  @IsString({ each: true, message: 'validation.COLOR_MUST_BE_STRING' })
-  @IsNotEmpty({ each: true, message: 'validation.COLOR_NOT_EMPTY' })
+  @IsArray({
+    message: i18nValidationMessage('validation.MUST_BE_ARRAY', {
+      FIELD_NAME: '$t(common.FIELDS.COLORS)',
+    }),
+  })
+  @IsString({
+    each: true,
+    message: i18nValidationMessage('validation.MUST_BE_STRING', {
+      FIELD_NAME: '$t(common.FIELDS.COLOR)',
+    }),
+  })
+  @IsNotEmpty({
+    each: true,
+    message: i18nValidationMessage('validation.NOT_EMPTY', {
+      FIELD_NAME: '$t(common.FIELDS.COLOR)',
+    }),
+  })
   colors?: string[];
+
   @ApiPropertyOptional({
     description: 'Sub-category ID.',
     example: '60b6a2f9f1d3c8d7aeb7a3e7',
   })
   @IsOptional()
-  @IsMongoId({ message: 'validation.USER_IS_MONGO_ID' })
+  @IsMongoId({
+    message: i18nValidationMessage('validation.INVALID_MONGO_ID', {
+      MODEL_NAME: '$t(common.MODELS_NAMES.SUB_CATEGORY)',
+    }),
+  })
   subCategory?: string;
 
   @ApiPropertyOptional({
@@ -106,7 +204,11 @@ export class CreateProductDto {
     example: '60b6a2f9f1d3c8d7aeb7a3e8',
   })
   @IsOptional()
-  @IsMongoId({ message: 'validation.USER_IS_MONGO_ID' })
+  @IsMongoId({
+    message: i18nValidationMessage('validation.INVALID_MONGO_ID', {
+      MODEL_NAME: '$t(common.MODELS_NAMES.BRAND)',
+    }),
+  })
   brand?: string;
 
   @ApiPropertyOptional({
@@ -114,6 +216,10 @@ export class CreateProductDto {
     example: true,
   })
   @IsOptional()
-  @IsBoolean()
+  @IsBoolean({
+    message: i18nValidationMessage('validation.MUST_BE_BOOLEAN', {
+      FIELD_NAME: '$t(common.FIELDS.ACTIVE)',
+    }),
+  })
   active?: boolean = true;
 }

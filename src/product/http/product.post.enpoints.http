@@ -5,7 +5,10 @@ lang: ar
 
 
 {
-  "name": {"en": "Nike", "ar": "نايكي"},
- "active": true,
- "image":"https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png"
+  "name":{"en":"","ar":""},
+"description":{"en":"","ar":""},
+"price":0,
+"quantity":0
+
 }
+
