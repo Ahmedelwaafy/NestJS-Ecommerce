@@ -12,7 +12,6 @@ export function createApp(app: INestApplication) {
   //* Parse cookies
   app.use(cookieParser());
 
- 
   //* Use validation pipes globally
   //* to use nestjs-i18n in your DTO validation
   app.useGlobalPipes(
@@ -27,7 +26,9 @@ export function createApp(app: INestApplication) {
   );
 
   //* for nestjs-i18n to translate the class-validator errors add the I18nValidationExceptionFilter globally.
-  app.useGlobalFilters(new I18nValidationExceptionFilter());
+  app.useGlobalFilters(
+    new I18nValidationExceptionFilter({ detailedErrors: false }),
+  );
 
   //*  swagger configuration
 
