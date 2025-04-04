@@ -19,6 +19,8 @@ import { PaginationAndFiltersDto } from 'src/common/dto/base-filters.dto';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { Role } from 'src/auth/enums/role.enum';
+import { GetProductsDto } from './dto/get-products.dto';
 
 @Controller('v1/product')
 export class ProductController {
@@ -28,12 +30,12 @@ export class ProductController {
    * //***** Create a Product ******
    */
   @Post()
-  @Roles(['admin'])
+  @Roles([Role.Admin])
   @UseGuards(AuthGuard)
   @HttpCode(HttpStatus.CREATED)
   @ApiResponse({
     status: HttpStatus.CREATED,
-    description: 'product created successfully',
+    description: 'Product created successfully',
   })
   @ApiOperation({
     summary: 'Creates a new product',
@@ -60,9 +62,8 @@ export class ProductController {
     description: 'Products fetched successfully',
   })
   @ResponseMessage(['GET_ALL_SUCCESSFULLY', 'PRODUCT'])
-  findAll(@Query() getProductsQuery: PaginationAndFiltersDto) {
+  findAll(@Query() getProductsQuery: GetProductsDto) {
     const { limit, page, ...filters } = getProductsQuery;
-
     return this.productService.findAll({ page, limit }, filters);
   }
 
@@ -91,7 +92,7 @@ export class ProductController {
    * //***** Update a Product ******
    */
   @Patch(':id')
-  @Roles(['admin'])
+  @Roles([Role.Admin])
   @UseGuards(AuthGuard)
   @ApiOperation({
     summary: 'Updates a product by its id',
@@ -118,7 +119,7 @@ export class ProductController {
    * //***** Delete a Product ******
    */
   @Delete(':id')
-  @Roles(['admin'])
+  @Roles([Role.Admin])
   @UseGuards(AuthGuard)
   @ApiOperation({
     summary: 'Deletes a product by its id',
@@ -133,30 +134,7 @@ export class ProductController {
     type: String,
   })
   @ResponseMessage(['DELETED_SUCCESSFULLY', 'PRODUCT'])
-  deactivate(@Param('id') id: string) {
-    return this.productService.deactivate(id);
-  }
-
-  /**
-   * //***** Restore a Product ******
-   */
-  @Patch('restore/:id')
-  @Roles(['admin'])
-  @UseGuards(AuthGuard)
-  @ApiOperation({
-    summary: 'Restores a product by its id',
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'Product restored successfully',
-  })
-  @ApiParam({
-    name: 'id',
-    description: 'Product id',
-    type: String,
-  })
-  @ResponseMessage(['RESTORED_SUCCESSFULLY', 'PRODUCT'])
-  activate(@Param('id') id: string) {
-    return this.productService.activate(id);
+  remove(@Param('id') id: string) {
+    return this.productService.remove(id);
   }
 }

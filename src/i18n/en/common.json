@@ -25,7 +25,15 @@
     "COLORS": "colors",
     "COLOR": "color",
     "ACTIVE": "active status",
-    "CATEGORY": "category"
+    "CATEGORY": "category",
+    "FIELDS": "Fields"
+  },
+  "OPERATORS": {
+    "<": "less than",
+    "<=": "less than or equal",
+    ">": "greater than",
+    ">=": "greater than or equal",
+    "=": "equal"
   },
   "ACCESS_NOT_ALLOWED": "Access not allowed"
 }

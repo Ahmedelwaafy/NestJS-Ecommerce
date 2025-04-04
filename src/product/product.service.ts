@@ -16,6 +16,10 @@ import { TFunction } from 'src/i18n/types';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product, ProductDocument } from './schemas/product.schema';
+import { CategoryService } from 'src/category/category.service';
+import { SubCategoryService } from 'src/sub-category/sub-category.service';
+import { BrandService } from 'src/brand/brand.service';
+import { GetProductsFiltersDto } from './dto/get-products.dto';
 
 @Injectable()
 export class ProductService {
@@ -27,6 +31,9 @@ export class ProductService {
     @InjectModel(Product.name) private readonly productModel: Model<Product>,
     private readonly paginationService: PaginationService,
     private readonly i18nHelper: I18nHelperService,
+    private readonly categoryService: CategoryService,
+    private readonly subCategoryService: SubCategoryService,
+    private readonly brandService: BrandService,
   ) {
     this.t = this.i18nHelper.translate().t;
     this.lang = this.i18nHelper.translate().lang;
@@ -51,6 +58,19 @@ export class ProductService {
       );
     }
 
+    //check if the category exists, exception is handled internally by findOne method
+    await this.categoryService.findOne(createProductDto.category);
+
+    //check if the sub-category exists, exception is handled internally by findOne method
+    if (createProductDto.subCategory) {
+      await this.subCategoryService.findOne(createProductDto.subCategory);
+    }
+
+    //check if the brand exists, exception is handled internally by findOne method
+    if (createProductDto.brand) {
+      await this.brandService.findOne(createProductDto.brand);
+    }
+
     // create new product
     try {
       const newProduct = await this.productModel.create(createProductDto);
@@ -71,30 +91,52 @@ export class ProductService {
    */
   async findAll(
     paginationQuery: PaginationQueryDto,
-    getProductsQuery?: BaseFiltersDto,
+    getProductsQuery?: GetProductsFiltersDto,
   ): Promise<Paginated<Product>> {
-    const filters: Record<string, any> = {};
+    let filters: Record<string, any> = {};
 
     // Build filters dynamically
 
-    if (getProductsQuery?.active !== undefined) {
-      filters.active = getProductsQuery.active;
+    const { active, search, sort, category, fields, ...restFilters } =
+      getProductsQuery;
+
+    const formattedFilters = JSON.parse(
+      JSON.stringify(restFilters).replace(
+        /\b(gte|lte|lt|gt)\b/g,
+        (match) => `$${match}`,
+      ),
+    );
+
+    if (active !== undefined) {
+      filters.active = active;
+    }
+    if (category !== undefined) {
+      filters.category = category;
     }
 
-    if (getProductsQuery?.search) {
+    if (search) {
       filters.$or = [
-        { 'name.en': { $regex: getProductsQuery.search, $options: 'i' } },
-        { 'name.ar': { $regex: getProductsQuery.search, $options: 'i' } },
+        { 'name.en': { $regex: search, $options: 'i' } },
+        { 'name.ar': { $regex: search, $options: 'i' } },
+        { 'description.en': { $regex: search, $options: 'i' } },
+        { 'description.ar': { $regex: search, $options: 'i' } },
       ];
     }
-
+    filters = { ...filters, ...formattedFilters };
+    const select = `${fields ?? ''} `.replaceAll(',', ' ');
+    console.log({ restFilters, formattedFilters, filters, fields, select,sort });
     return this.paginationService.paginateQuery(
       paginationQuery,
       this.productModel,
       {
         filters,
-        select: ' -__v',
-        ...(getProductsQuery?.sort && { sort: getProductsQuery.sort }),
+        select,
+        sort,
+        populate: [
+          { path: 'category', select: 'name _id' },
+          { path: 'subCategory', select: 'name _id' },
+          { path: 'brand', select: 'name _id' },
+        ],
       },
     );
   }
@@ -107,7 +149,9 @@ export class ProductService {
   async findOne(id: string) {
     let product: Product;
     try {
-      product = await this.productModel.findById(id);
+      product = await this.productModel
+        .findById(id)
+        .populate('category subCategory brand', 'name _id');
     } catch (error) {
       throw new RequestTimeoutException(this.t('service.ERROR_OCCURRED'), {
         description:
@@ -123,16 +167,15 @@ export class ProductService {
         }),
       );
     }
-    const localizedProduct = this.productModel.schema.methods.toJSONLocalizedOnly(
-      product,
-      this.lang,
-    );
+
+    const localizedProduct =
+      this.productModel.schema.methods.toJSONLocalizedOnly(product, this.lang);
 
     return localizedProduct;
   }
 
   /**
-   *//***** Get Single Product ******
+   *//***** Get Single Product By Name ******
    * @param name
    * @returns Product
    */
@@ -159,8 +202,9 @@ export class ProductService {
    */
   async update(id: string, updateProductDto: UpdateProductDto) {
     //check if the product exists
-    await this.findOne(id);
+    const product = await this.findOne(id);
 
+    //check product name availability
     if (updateProductDto?.name) {
       const productNameTaken = await this.findOneByName(updateProductDto.name);
       //console.log({ productNameTaken });
@@ -174,6 +218,50 @@ export class ProductService {
           }),
         );
       }
+    }
+    //ensure that price > price after discount
+    const price = updateProductDto?.price || product.price;
+    const priceAfterDiscount =
+      updateProductDto?.priceAfterDiscount || product.priceAfterDiscount;
+    if (price <= priceAfterDiscount) {
+      throw new BadRequestException(
+        this.t('validation.INVALID_COMPARISON', {
+          args: {
+            FIRST_FIELD_NAME: '$t(common.FIELDS.PRICE_AFTER_DISCOUNT)',
+            OPERATOR: '<',
+            SECOND_FIELD_NAME: '$t(common.FIELDS.PRICE)',
+          },
+        }),
+      );
+    }
+
+    //ensure that quantity > sold
+    const quantity = updateProductDto?.quantity || product.quantity;
+    const sold = updateProductDto?.sold || product.sold;
+    if (quantity < sold) {
+      throw new BadRequestException(
+        this.t('validation.INVALID_COMPARISON', {
+          args: {
+            FIRST_FIELD_NAME: '$t(common.FIELDS.SOLD)',
+            OPERATOR: '<=',
+            SECOND_FIELD_NAME: '$t(common.FIELDS.QUANTITY)',
+          },
+        }),
+      );
+    }
+
+    //check if the category exists, exception is handled internally by findOne method
+    if (updateProductDto.category) {
+      await this.categoryService.findOne(updateProductDto.category);
+    }
+    //check if the sub-category exists, exception is handled internally by findOne method
+    if (updateProductDto.subCategory) {
+      await this.subCategoryService.findOne(updateProductDto.subCategory);
+    }
+
+    //check if the brand exists, exception is handled internally by findOne method
+    if (updateProductDto.brand) {
+      await this.brandService.findOne(updateProductDto.brand);
     }
     //update the product
     try {
@@ -195,15 +283,11 @@ export class ProductService {
    *//***** Deactivate Single Product ******
    * @param id
    */
-  async deactivate(id: string) {
-    await this.update(id, { active: false });
-  }
+  async remove(id: string) {
+    //check if the product exists
+    await this.findOne(id);
 
-  /**
-   *//***** Activate Single Product ******
-   * @param id
-   */
-  async activate(id: string) {
-    await this.update(id, { active: true });
+    //delete the product
+    await this.productModel.findByIdAndDelete(id);
   }
 }

@@ -59,5 +59,7 @@
   "MAX_VALUE": "يجب ألا يتجاوز {FIELD_NAME} قيمة {constraints.0}",
   "MUST_BE_URL": "يجب أن يكون {FIELD_NAME} رابطاً صالحاً",
   "MUST_BE_ARRAY": "يجب أن يكون {FIELD_NAME} مصفوفة",
-  "INVALID_MONGO_ID": "معرف {MODEL_NAME} غير صالح"
+  "INVALID_MONGO_ID": "معرف {MODEL_NAME} غير صالح",
+  "PRICE_AFTER_DISCOUNT_LESS_THAN_PRICE": "{FIELD_NAME} يجب ان يكون اقل من السعر الاصلي",
+  "INVALID_COMPARISON": "يجب أن تكون قيمة {FIRST_FIELD_NAME} $t(common.OPERATORS.{OPERATOR}) قيمة {SECOND_FIELD_NAME}"
 }

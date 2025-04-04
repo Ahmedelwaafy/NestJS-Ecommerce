@@ -1,11 +1,11 @@
 GET http://localhost:3000/api/v1/product/
 ?limit=10
-&page=1&sort=desc
+&page=1&sort=desc&search=air&price[gte]=50&price[lte]=100&sold[gte]=10&category=67e871d13746b70ecf6b111c&fields=name,description,price,sold
 lang: ar
 
 
 
-GET http://localhost:3000/api/v1/product/67eb7a7ea43bccd0dc806442
+GET http://localhost:3000/api/v1/product/67ef01b648abf6f3b448cbcf
 lang: ar
 
 

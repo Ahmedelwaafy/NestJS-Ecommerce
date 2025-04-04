@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Transform, Type } from 'class-transformer';
+import { Type } from 'class-transformer';
 import {
   IsArray,
   IsBoolean,
@@ -14,6 +14,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { i18nValidationMessage } from 'nestjs-i18n';
+import { CompareWith } from 'src/common/decorators/custom.decorator';
 import { LocalizedFieldDto } from 'src/common/dto/localized-field.dto';
 
 export class CreateProductDto {
@@ -150,6 +151,12 @@ export class CreateProductDto {
       }),
     },
   )
+  @CompareWith(
+    'quantity',
+    '<=',
+    '$t(common.FIELDS.SOLD)',
+    '$t(common.FIELDS.QUANTITY)',
+  )
   sold?: number;
 
   @ApiPropertyOptional({ description: 'Price after discount.', example: 80 })
@@ -167,6 +174,12 @@ export class CreateProductDto {
       FIELD_NAME: '$t(common.FIELDS.PRICE_AFTER_DISCOUNT)',
     }),
   })
+  @CompareWith(
+    'price',
+    '<',
+    '$t(common.FIELDS.PRICE_AFTER_DISCOUNT)',
+    '$t(common.FIELDS.PRICE)',
+  )
   priceAfterDiscount?: number;
 
   @ApiPropertyOptional({

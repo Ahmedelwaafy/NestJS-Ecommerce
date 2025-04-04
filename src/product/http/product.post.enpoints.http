@@ -3,14 +3,29 @@ Content-Type: application/json
 cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4ifQ.uLUQKCAZ3c_a94nMsfDMCYLRNHdkET0xoLd-DVVj4Aw
 lang: ar
 
-
-{
-  "name":{"en":"","ar":""},
-"description":{"en":"","ar":"w"},
-"price":3,
-"quantity":3,
-"imageCover":"https://example.com/image.jpg",
-"category":"64e0f3a9d9a9a9a9a9a9a9a9"
+  {
+  "name": {
+    "en": "Adidas1 Air Madx",
+    "ar": "اديdداس 1اير ماكس"
+  },
+  "description": {
+    "en": "High-quality sports shoes.",
+    "ar": "أحذية رياضية عالية الجودة"
+  },
+  "price": 100,
+  "category": "67e871d13746b70ecf6b111c",
+  "quantity": 10,
+  "imageCover": "https://example.com/image.jpg",
+  "images": [
+    "https://example.com/img1.jpg",
+    "https://example.com/img2.jpg"
+  ],
+  "sold": 5,
+  "priceAfterDiscount": 80,
+  "colors": ["red", "blue", "green"],
+  "subCategory": "67eb09fd27fb2ca39853cadc",
+  "brand": "67eb7a7ea03bccd0dc806442",
+  "active": true
 
 }
 
