@@ -52,14 +52,18 @@
   "VALUE_IS_OBJECT": "يجب أن تكون القيمة كائنًا",
 
   "NOT_EMPTY": "{FIELD_NAME} مطلوب",
-  "MUST_BE_NUMBER": "يجب أن يكون {FIELD_NAME} رقماً",
-  "MUST_BE_STRING": "يجب أن يكون {FIELD_NAME} نصاً",
+  "IS_NUMBER": "يجب أن يكون {FIELD_NAME} رقماً",
+  "IS_INTEGER": "يجب أن يكون {FIELD_NAME} رقمًا صحيحًا",
+  "IS_STRING": "يجب أن يكون {FIELD_NAME} نصاً",
   "MUST_BE_BOOLEAN": "يجب أن يكون {FIELD_NAME} قيمة منطقية",
-  "MIN_VALUE": "يجب أن يكون {FIELD_NAME} على الأقل {constraints.0}",
-  "MAX_VALUE": "يجب ألا يتجاوز {FIELD_NAME} قيمة {constraints.0}",
+  "MIN": "يجب أن يكون {FIELD_NAME} على الأقل {constraints.0}",
+  "MAX": "يجب ألا يتجاوز {FIELD_NAME} قيمة {constraints.0}",
+  "MIN__LENGTH_VALUE": "يجب أن يكون {FIELD_NAME} على الأقل {constraints.0} حرفًا",
+  "MAX__LENGTH_VALUE": "يجب ان يكون {FIELD_NAME} على الاكثر {constraints.0} حرفًا",
+  "LENGTH": "يجب ان يكون {FIELD_NAME} بين {constraints.0} و {constraints.1} حرفًا",
   "MUST_BE_URL": "يجب أن يكون {FIELD_NAME} رابطاً صالحاً",
   "MUST_BE_ARRAY": "يجب أن يكون {FIELD_NAME} مصفوفة",
-  "INVALID_MONGO_ID": "معرف {MODEL_NAME} غير صالح",
+  "IS_MONGO_ID": "معرف {MODEL_NAME} غير صالح",
   "PRICE_AFTER_DISCOUNT_LESS_THAN_PRICE": "{FIELD_NAME} يجب ان يكون اقل من السعر الاصلي",
   "INVALID_COMPARISON": "يجب أن تكون قيمة {FIRST_FIELD_NAME} $t(common.OPERATORS.{OPERATOR}) قيمة {SECOND_FIELD_NAME}"
 }

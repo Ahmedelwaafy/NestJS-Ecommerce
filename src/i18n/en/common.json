@@ -10,7 +10,8 @@
     "PRODUCT": "Product",
     "PRODUCT_REQUEST": "Product Request",
     "ORDER": "Order",
-    "SETTING": "Setting"
+    "SETTING": "Setting",
+    "REVIEW": "Review"
   },
   "FIELDS": {
     "NAME": "name",
@@ -26,7 +27,10 @@
     "COLOR": "color",
     "ACTIVE": "active status",
     "CATEGORY": "category",
-    "FIELDS": "Fields"
+    "FIELDS": "Fields",
+    "COMMENT": "Comment",
+    "RATING": "Rating",
+    "RATINGS_QUANTITY": "Ratings Quantity"
   },
   "OPERATORS": {
     "<": "less than",

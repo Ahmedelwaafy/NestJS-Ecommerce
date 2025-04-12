@@ -1,5 +1,6 @@
 {
   "ALREADY_EXISTS": "يوجد {MODEL_NAME} بهذا الاسم",
+  "REVIEW_ALREADY_EXISTS": "لقد قمت بتقييم هذا المنتج بالفعل",
   "ERROR_OCCURRED": "حدث خطأ ما",
   "NOT_FOUND": "{MODEL_NAME} غير موجودة",
   "DATABASE_CONNECTION_FAILED": "غير قادر على الاتصال بقاعدة البيانات",

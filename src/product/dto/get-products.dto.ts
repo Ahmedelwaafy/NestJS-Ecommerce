@@ -1,10 +1,6 @@
 import { ApiPropertyOptional, IntersectionType } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import {
-  IsMongoId,
-  IsOptional,
-  IsString
-} from 'class-validator';
+import { IsMongoId, IsOptional, IsString } from 'class-validator';
 import { i18nValidationMessage } from 'nestjs-i18n';
 import { BaseFiltersDto } from 'src/common/dto/base-filters.dto';
 import { RangeFilterDto } from 'src/common/dto/custom.dto';
@@ -17,7 +13,7 @@ export class GetProductsFiltersDto extends BaseFiltersDto {
   })
   @IsOptional()
   @IsMongoId({
-    message: i18nValidationMessage('validation.INVALID_MONGO_ID', {
+    message: i18nValidationMessage('validation.IS_MONGO_ID', {
       MODEL_NAME: '$t(common.MODELS_NAMES.CATEGORY)',
     }),
   })
@@ -29,7 +25,7 @@ export class GetProductsFiltersDto extends BaseFiltersDto {
   })
   @IsOptional()
   @IsString({
-    message: i18nValidationMessage('validation.MUST_BE_STRING', {
+    message: i18nValidationMessage('validation.IS_STRING', {
       FIELD_NAME: '$t(common.FIELDS.COLOR)',
     }),
   })
@@ -55,5 +51,3 @@ export class GetProductsDto extends IntersectionType(
   GetProductsFiltersDto,
   PaginationQueryDto,
 ) {}
-
-

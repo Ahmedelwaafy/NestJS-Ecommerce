@@ -5,6 +5,7 @@
   "RESTORED_SUCCESSFULLY": "{MODEL_NAME} restored successfully",
   "GET_ALL_SUCCESSFULLY": "{MODEL_NAME}s fetched successfully",
   "GET_ONE_SUCCESSFULLY": "{MODEL_NAME} fetched successfully",
+  "ACCEPTED_SUCCESSFULLY": "{MODEL_NAME} accepted successfully",
   "LOGGED_IN_SUCCESSFULLY": "Logged in successfully",
   "ACCOUNT_CREATED_SUCCESSFULLY": "Account created successfully",
   "SIGN_OUT_SUCCESSFULLY": "Signed out successfully",

@@ -1,8 +1,9 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional, OmitType } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
   IsArray,
   IsBoolean,
+  IsInt,
   IsMongoId,
   IsNotEmpty,
   IsNumber,
@@ -17,7 +18,7 @@ import { i18nValidationMessage } from 'nestjs-i18n';
 import { CompareWith } from 'src/common/decorators/custom.decorator';
 import { LocalizedFieldDto } from 'src/common/dto/localized-field.dto';
 
-export class CreateProductDto {
+export class BaseProductDto {
   @ApiProperty({
     description: 'The name of the product.',
     example: { en: 'Adidas Air Max', ar: 'اديداس اير ماكس' },
@@ -57,18 +58,18 @@ export class CreateProductDto {
   @IsNumber(
     {},
     {
-      message: i18nValidationMessage('validation.MUST_BE_NUMBER', {
+      message: i18nValidationMessage('validation.IS_NUMBER', {
         FIELD_NAME: '$t(common.FIELDS.PRICE)',
       }),
     },
   )
   @Min(1, {
-    message: i18nValidationMessage('validation.MIN_VALUE', {
+    message: i18nValidationMessage('validation.MIN', {
       FIELD_NAME: '$t(common.FIELDS.PRICE)',
     }),
   })
   @Max(20000, {
-    message: i18nValidationMessage('validation.MAX_VALUE', {
+    message: i18nValidationMessage('validation.MAX', {
       FIELD_NAME: '$t(common.FIELDS.PRICE)',
     }),
   })
@@ -79,7 +80,7 @@ export class CreateProductDto {
     example: '60b6a2f9f1d3c8d7aeb7a3e6',
   })
   @IsMongoId({
-    message: i18nValidationMessage('validation.INVALID_MONGO_ID', {
+    message: i18nValidationMessage('validation.IS_MONGO_ID', {
       MODEL_NAME: '$t(common.MODELS_NAMES.CATEGORY)',
     }),
   })
@@ -89,13 +90,13 @@ export class CreateProductDto {
   @IsNumber(
     {},
     {
-      message: i18nValidationMessage('validation.MUST_BE_NUMBER', {
+      message: i18nValidationMessage('validation.IS_NUMBER', {
         FIELD_NAME: '$t(common.FIELDS.QUANTITY)',
       }),
     },
   )
   @Min(1, {
-    message: i18nValidationMessage('validation.MIN_VALUE', {
+    message: i18nValidationMessage('validation.MIN', {
       FIELD_NAME: '$t(common.FIELDS.QUANTITY)',
     }),
   })
@@ -146,7 +147,7 @@ export class CreateProductDto {
   @IsNumber(
     {},
     {
-      message: i18nValidationMessage('validation.MUST_BE_NUMBER', {
+      message: i18nValidationMessage('validation.IS_NUMBER', {
         FIELD_NAME: '$t(common.FIELDS.SOLD)',
       }),
     },
@@ -164,13 +165,13 @@ export class CreateProductDto {
   @IsNumber(
     {},
     {
-      message: i18nValidationMessage('validation.MUST_BE_NUMBER', {
+      message: i18nValidationMessage('validation.IS_NUMBER', {
         FIELD_NAME: '$t(common.FIELDS.PRICE_AFTER_DISCOUNT)',
       }),
     },
   )
   @Max(20000, {
-    message: i18nValidationMessage('validation.MAX_VALUE', {
+    message: i18nValidationMessage('validation.MAX', {
       FIELD_NAME: '$t(common.FIELDS.PRICE_AFTER_DISCOUNT)',
     }),
   })
@@ -194,7 +195,7 @@ export class CreateProductDto {
   })
   @IsString({
     each: true,
-    message: i18nValidationMessage('validation.MUST_BE_STRING', {
+    message: i18nValidationMessage('validation.IS_STRING', {
       FIELD_NAME: '$t(common.FIELDS.COLOR)',
     }),
   })
@@ -212,7 +213,7 @@ export class CreateProductDto {
   })
   @IsOptional()
   @IsMongoId({
-    message: i18nValidationMessage('validation.INVALID_MONGO_ID', {
+    message: i18nValidationMessage('validation.IS_MONGO_ID', {
       MODEL_NAME: '$t(common.MODELS_NAMES.SUB_CATEGORY)',
     }),
   })
@@ -224,7 +225,7 @@ export class CreateProductDto {
   })
   @IsOptional()
   @IsMongoId({
-    message: i18nValidationMessage('validation.INVALID_MONGO_ID', {
+    message: i18nValidationMessage('validation.IS_MONGO_ID', {
       MODEL_NAME: '$t(common.MODELS_NAMES.BRAND)',
     }),
   })
@@ -241,4 +242,54 @@ export class CreateProductDto {
     }),
   })
   active?: boolean = true;
+
+  @ApiProperty({
+    description: 'Average rating of the product (1-5)',
+    example: 4.5,
+    minimum: 0,
+    maximum: 5,
+  })
+  @IsNumber(
+    { maxDecimalPlaces: 1 },
+    {
+      message: i18nValidationMessage('validation.IS_NUMBER', {
+        FIELD_NAME: '$t(common.FIELDS.RATING)',
+      }),
+    },
+  )
+  @Min(1, {
+    message: i18nValidationMessage('validation.MIN', {
+      FIELD_NAME: '$t(common.FIELDS.RATING)',
+    }),
+  })
+  @Max(5, {
+    message: i18nValidationMessage('validation.MAX', {
+      FIELD_NAME: '$t(common.FIELDS.RATING)',
+    }),
+  })
+  ratingsAverage?: number;
+
+  @ApiProperty({
+    description: 'Number of ratings/reviews for the product',
+    example: 42,
+    minimum: 0,
+  })
+  @IsInt({
+    message: i18nValidationMessage('validation.IS_INTEGER', {
+      FIELD_NAME: '$t(common.FIELDS.RATINGS_QUANTITY)',
+    }),
+  })
+  @Min(0, {
+    message: i18nValidationMessage('validation.MIN', {
+      FIELD_NAME: '$t(common.FIELDS.RATINGS_QUANTITY)',
+    }),
+  })
+  ratingsQuantity?: number;
 }
+
+
+// DTO for creating a review (excludes user and isApproved)
+export class CreateProductDto extends OmitType(BaseProductDto, [
+  'ratingsAverage',
+  'ratingsQuantity',
+] as const) {}

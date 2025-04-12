@@ -14,7 +14,10 @@ import { PaginationService } from 'src/common/pagination/providers/pagination.se
 import { I18nHelperService } from 'src/i18n/providers/I18n-helper-service';
 import { TFunction } from 'src/i18n/types';
 import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
+import {
+  BaseUpdateProductDto,
+  UpdateProductDto,
+} from './dto/update-product.dto';
 import { Product, ProductDocument } from './schemas/product.schema';
 import { CategoryService } from 'src/category/category.service';
 import { SubCategoryService } from 'src/sub-category/sub-category.service';
@@ -124,7 +127,14 @@ export class ProductService {
     }
     filters = { ...filters, ...formattedFilters };
     const select = `${fields ?? ''} `.replaceAll(',', ' ');
-    console.log({ restFilters, formattedFilters, filters, fields, select,sort });
+    console.log({
+      restFilters,
+      formattedFilters,
+      filters,
+      fields,
+      select,
+      sort,
+    });
     return this.paginationService.paginateQuery(
       paginationQuery,
       this.productModel,
@@ -200,7 +210,7 @@ export class ProductService {
    * @param id
    * @returns Product
    */
-  async update(id: string, updateProductDto: UpdateProductDto) {
+  async update(id: string, updateProductDto: BaseUpdateProductDto) {
     //check if the product exists
     const product = await this.findOne(id);
 

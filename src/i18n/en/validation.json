@@ -51,14 +51,18 @@
   "VALUE_IS_OBJECT": "Value must be an object",
 
   "NOT_EMPTY": "{FIELD_NAME} is required",
-  "MUST_BE_NUMBER": "{FIELD_NAME} must be a number",
-  "MUST_BE_STRING": "{FIELD_NAME} must be a string",
+  "IS_NUMBER": "{FIELD_NAME} must be a number",
+  "IS_INTEGER": "{FIELD_NAME} must be an integer number",
+  "IS_STRING": "{FIELD_NAME} must be a string",
   "MUST_BE_BOOLEAN": "{FIELD_NAME} must be a boolean",
-  "MIN_VALUE": "{FIELD_NAME} must be at least {constraints.0}",
-  "MAX_VALUE": "{FIELD_NAME} must not exceed {constraints.0}",
+  "MIN": "{FIELD_NAME} must be at least {constraints.0}",
+  "MAX": "{FIELD_NAME} must not exceed {constraints.0}",
+  "MIN__LENGTH_VALUE": "{FIELD_NAME} must be at least {constraints.0} characters long",
+  "MAX__LENGTH_VALUE": "{FIELD_NAME} must not exceed {constraints.0} characters long",
+  "LENGTH": "{FIELD_NAME} must be between {constraints.0} and {constraints.1} characters long",
   "MUST_BE_URL": "{FIELD_NAME} must be a valid URL",
   "MUST_BE_ARRAY": "{FIELD_NAME} must be an array",
-  "INVALID_MONGO_ID": "Invalid {MODEL_NAME} ID",
+  "IS_MONGO_ID": "Invalid {MODEL_NAME} ID",
   "PRICE_AFTER_DISCOUNT_LESS_THAN_PRICE": "{FIELD_NAME} must be less than the original price",
   "INVALID_COMPARISON": "The value of {FIRST_FIELD_NAME} must be $t(common.OPERATORS.{OPERATOR}) the value of {SECOND_FIELD_NAME}"
 }

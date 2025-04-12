@@ -10,7 +10,8 @@
     "PRODUCT": "المنتج",
     "PRODUCT_REQUEST": "طلب المنتج",
     "ORDER": "الطلب",
-    "SETTING": "الاعداد"
+    "SETTING": "الاعداد",
+    "REVIEW": "التقييم"
   },
   "FIELDS": {
     "NAME": "الاسم",
@@ -26,7 +27,10 @@
     "COLOR": "اللون",
     "ACTIVE": "حالة التفعيل",
     "CATEGORY": "التصنيف",
-    "FIELDS": "الحقول"
+    "FIELDS": "الحقول",
+    "COMMENT": "التعليق",
+    "RATING": "التقييم",
+    "RATINGS_QUANTITY": "عدد التقييمات"
   },
   "OPERATORS": {
     "<": "اقل من",

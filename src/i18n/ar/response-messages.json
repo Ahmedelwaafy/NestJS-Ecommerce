@@ -5,6 +5,7 @@
   "RESTORED_SUCCESSFULLY": "تم استعادة {MODEL_NAME} بنجاح",
   "GET_ALL_SUCCESSFULLY": "تم جلب {MODEL_NAME} بنجاح",
   "GET_ONE_SUCCESSFULLY": "تم جلب {MODEL_NAME} بنجاح",
+  "ACCEPTED_SUCCESSFULLY": "تم قبول {MODEL_NAME} بنجاح",
   "LOGGED_IN_SUCCESSFULLY": "تم تسجيل الدخول بنجاح",
   "ACCOUNT_CREATED_SUCCESSFULLY": "تم انشاء الحساب بنجاح",
   "SIGN_OUT_SUCCESSFULLY": "تم تسجيل الخروج بنجاح",
