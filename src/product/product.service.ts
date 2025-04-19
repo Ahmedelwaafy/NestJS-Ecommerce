@@ -23,6 +23,7 @@ import { CategoryService } from 'src/category/category.service';
 import { SubCategoryService } from 'src/sub-category/sub-category.service';
 import { BrandService } from 'src/brand/brand.service';
 import { GetProductsFiltersDto } from './dto/get-products.dto';
+import { SupplierService } from 'src/supplier/supplier.service';
 
 @Injectable()
 export class ProductService {
@@ -37,6 +38,7 @@ export class ProductService {
     private readonly categoryService: CategoryService,
     private readonly subCategoryService: SubCategoryService,
     private readonly brandService: BrandService,
+    private readonly supplierService: SupplierService,
   ) {
     this.t = this.i18nHelper.translate().t;
     this.lang = this.i18nHelper.translate().lang;
@@ -67,6 +69,11 @@ export class ProductService {
     //check if the sub-category exists, exception is handled internally by findOne method
     if (createProductDto.subCategory) {
       await this.subCategoryService.findOne(createProductDto.subCategory);
+    }
+
+    //check if the supplier exists, exception is handled internally by findOne method
+    if (createProductDto.supplier) {
+      await this.supplierService.findOne(createProductDto.supplier);
     }
 
     //check if the brand exists, exception is handled internally by findOne method
@@ -168,7 +175,7 @@ export class ProductService {
           error.message || this.t('service.DATABASE_CONNECTION_FAILED'),
       });
     }
-    if (!product) {
+    if (!product || !product.active) {
       throw new NotFoundException(
         this.t('service.NOT_FOUND', {
           args: {

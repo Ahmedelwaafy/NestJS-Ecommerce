@@ -11,13 +11,16 @@
     "PRODUCT_REQUEST": "طلب المنتج",
     "ORDER": "الطلب",
     "SETTING": "الاعداد",
-    "REVIEW": "التقييم"
+    "REVIEW": "التقييم",
+    "CART": "السلة"
   },
   "FIELDS": {
     "NAME": "الاسم",
     "DESCRIPTION": "الوصف",
     "PRICE": "السعر",
     "QUANTITY": "الكمية",
+
+    "MAX_QUANTITY_PER_ORDER": "اقصي كميه في الطلب الواحد",
     "IMAGE_COVER": "صورة الغلاف",
     "IMAGES": "الصور",
     "IMAGE": "الصورة",
@@ -25,12 +28,17 @@
     "PRICE_AFTER_DISCOUNT": "السعر بعد الخصم",
     "COLORS": "الألوان",
     "COLOR": "اللون",
+    "SIZES": "المقاسات",
+    "SIZE": "المقاس",
     "ACTIVE": "حالة التفعيل",
     "CATEGORY": "التصنيف",
     "FIELDS": "الحقول",
     "COMMENT": "التعليق",
     "RATING": "التقييم",
-    "RATINGS_QUANTITY": "عدد التقييمات"
+    "RATINGS_QUANTITY": "عدد التقييمات",
+    "COUPON_CODE": "كود القسيمة",
+    "MIN_CART_ITEMS": "الحد الادنى لعدد منتجات في سلة التسوق",
+    "MIN_FINAL_TOTAL": "الحد الادنى للمبلغ النهائي"
   },
   "OPERATORS": {
     "<": "اقل من",

@@ -2,6 +2,7 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
   IsBoolean,
   IsDate,
+  IsEnum,
   IsNumber,
   IsOptional,
   IsString,
@@ -11,6 +12,7 @@ import {
   MinDate,
   MinLength,
 } from 'class-validator';
+import { CouponType } from '../enums/coupon-type.enum';
 
 export class CreateCouponDto {
   @ApiProperty({
@@ -23,12 +25,19 @@ export class CreateCouponDto {
   code: string;
 
   @ApiProperty({
+    description: 'The type of the coupon',
+    example: CouponType.Fixed,
+    enum: CouponType,
+  })
+  @IsEnum(CouponType, { message: 'validation.coupon.TYPE' })
+  type: CouponType;
+
+  @ApiProperty({
     description: 'The discount percentage of the coupon.',
     example: 20,
   })
   @IsNumber({}, { message: 'validation.coupon.DISCOUNT_IS_NUMBER' })
   @Min(1, { message: 'validation.coupon.DISCOUNT_MIN' })
-  @Max(100, { message: 'validation.coupon.DISCOUNT_MAX' })
   discount: number;
 
   @ApiPropertyOptional({
@@ -36,8 +45,10 @@ export class CreateCouponDto {
     example: '2023-10-01T00:00:00Z',
   })
   @IsDate({ message: 'validation.coupon.EXPIRATION_DATE_IS_DATE' })
-  @MinDate(new Date(), { message: 'validation.coupon.EXPIRATION_DATE_IS_IN_FUTURE' })
-  expirationDate: Date;
+  @MinDate(new Date(), {
+    message: 'validation.coupon.EXPIRATION_DATE_IS_IN_FUTURE',
+  })
+  expiresAt: Date;
 
   @ApiPropertyOptional({
     description: 'The active status of the coupon.',

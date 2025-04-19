@@ -10,5 +10,6 @@ import { Coupon, CouponSchema } from './schemas/coupon.schema';
   ],
   controllers: [CouponController],
   providers: [CouponService],
+  exports: [CouponService],
 })
 export class CouponModule {}

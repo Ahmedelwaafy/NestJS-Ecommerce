@@ -102,6 +102,32 @@ export class BaseProductDto {
   })
   quantity: number;
 
+  @ApiPropertyOptional({
+    description: 'The max quantity per order of the product.',
+    example: 10,
+  })
+  @IsOptional()
+  @IsNumber(
+    {},
+    {
+      message: i18nValidationMessage('validation.IS_NUMBER', {
+        FIELD_NAME: '$t(common.FIELDS.MAX_QUANTITY_PER_ORDER)',
+      }),
+    },
+  )
+  @Min(1, {
+    message: i18nValidationMessage('validation.MIN', {
+      FIELD_NAME: '$t(common.FIELDS.MAX_QUANTITY_PER_ORDER)',
+    }),
+  })
+  @CompareWith(
+    'quantity',
+    '<=',
+    '$t(common.FIELDS.MAX_QUANTITY_PER_ORDER)',
+    '$t(common.FIELDS.QUANTITY)',
+  )
+  maxQuantityPerOrder?: number;
+
   @ApiProperty({
     description: 'The main image of the product.',
     example: 'https://example.com/image.jpg',
@@ -208,6 +234,30 @@ export class BaseProductDto {
   colors?: string[];
 
   @ApiPropertyOptional({
+    description: 'Available sizes.',
+    example: ['S', 'M', 'L', 'XL'],
+  })
+  @IsOptional()
+  @IsArray({
+    message: i18nValidationMessage('validation.MUST_BE_ARRAY', {
+      FIELD_NAME: '$t(common.FIELDS.SIZES)',
+    }),
+  })
+  @IsString({
+    each: true,
+    message: i18nValidationMessage('validation.IS_STRING', {
+      FIELD_NAME: '$t(common.FIELDS.SIZE)',
+    }),
+  })
+  @IsNotEmpty({
+    each: true,
+    message: i18nValidationMessage('validation.NOT_EMPTY', {
+      FIELD_NAME: '$t(common.FIELDS.SIZE)',
+    }),
+  })
+  sizes?: string[];
+
+  @ApiPropertyOptional({
     description: 'Sub-category ID.',
     example: '60b6a2f9f1d3c8d7aeb7a3e7',
   })
@@ -230,6 +280,18 @@ export class BaseProductDto {
     }),
   })
   brand?: string;
+
+  @ApiPropertyOptional({
+    description: 'Supplier ID.',
+    example: '60b6a2f9f1d3c8d7aeb7a3e8',
+  })
+  @IsOptional()
+  @IsMongoId({
+    message: i18nValidationMessage('validation.IS_MONGO_ID', {
+      MODEL_NAME: '$t(common.MODELS_NAMES.SUPPLIER)',
+    }),
+  })
+  supplier?: string;
 
   @ApiPropertyOptional({
     description: 'The active status of the product.',
@@ -286,7 +348,6 @@ export class BaseProductDto {
   })
   ratingsQuantity?: number;
 }
-
 
 // DTO for creating a review (excludes user and isApproved)
 export class CreateProductDto extends OmitType(BaseProductDto, [

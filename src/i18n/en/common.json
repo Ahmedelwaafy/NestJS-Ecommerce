@@ -11,13 +11,15 @@
     "PRODUCT_REQUEST": "Product Request",
     "ORDER": "Order",
     "SETTING": "Setting",
-    "REVIEW": "Review"
+    "REVIEW": "Review",
+    "CART": "Cart"
   },
   "FIELDS": {
     "NAME": "name",
     "DESCRIPTION": "description",
     "PRICE": "price",
     "QUANTITY": "quantity",
+    "MAX_QUANTITY_PER_ORDER": "Max quantity per order",
     "IMAGE_COVER": "cover image",
     "IMAGES": "images",
     "IMAGE": "image",
@@ -25,12 +27,17 @@
     "PRICE_AFTER_DISCOUNT": "discounted price",
     "COLORS": "colors",
     "COLOR": "color",
+    "SIZES": "sizes",
+    "SIZE": "size",
     "ACTIVE": "active status",
     "CATEGORY": "category",
     "FIELDS": "Fields",
     "COMMENT": "Comment",
     "RATING": "Rating",
-    "RATINGS_QUANTITY": "Ratings Quantity"
+    "RATINGS_QUANTITY": "Ratings Quantity",
+    "COUPON_CODE": "Coupon Code",
+    "MIN_CART_ITEMS": "Min Cart Items",
+    "MIN_FINAL_TOTAL": "Min Final Total"
   },
   "OPERATORS": {
     "<": "less than",

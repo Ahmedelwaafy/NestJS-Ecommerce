@@ -6,6 +6,7 @@ import { Product, ProductSchema } from './schemas/product.schema';
 import { CategoryModule } from 'src/category/category.module';
 import { SubCategoryModule } from 'src/sub-category/sub-category.module';
 import { BrandModule } from 'src/brand/brand.module';
+import { SupplierModule } from 'src/supplier/supplier.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { BrandModule } from 'src/brand/brand.module';
     CategoryModule,
     SubCategoryModule,
     BrandModule,
+    SupplierModule
   ],
   controllers: [ProductController],
   providers: [ProductService],

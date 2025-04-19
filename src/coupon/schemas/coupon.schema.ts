@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { CouponType } from '../enums/coupon-type.enum';
 
 export type CouponDocument = HydratedDocument<Coupon>;
 
@@ -15,10 +16,15 @@ export class Coupon {
   code: string;
 
   @Prop({
+    type: String,
+    enum: CouponType,
+    required: true,
+  })
+  type: string;
+
+  @Prop({
     type: Number,
     required: true,
-    min: 1,
-    max: 100,
   })
   discount: number;
 
@@ -28,7 +34,7 @@ export class Coupon {
     default: null,
     min: new Date(),
   })
-  expirationDate: Date;
+  expiresAt: Date;
 
   @Prop({
     type: Boolean,

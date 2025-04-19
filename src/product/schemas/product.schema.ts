@@ -5,6 +5,7 @@ import { Brand } from 'src/brand/schemas/brand.schema';
 import { Category } from 'src/category/schemas/category.schema';
 import { locales } from 'src/i18n/constants';
 import { SubCategory } from 'src/sub-category/schemas/sub-category.schema';
+import { Supplier } from 'src/supplier/schemas/supplier.schema';
 
 export type ProductDocument = HydratedDocument<Product>;
 
@@ -45,9 +46,16 @@ export class Product {
     type: Number,
     required: true,
     default: 1,
-    min: [1, 'Description must be at least 1 product'],
+    min: [1, 'quantity must be at least 1'],
   })
   quantity: number;
+
+  @Prop({
+    type: Number,
+    default: 5,
+    min: [1, 'maxQuantityPerOrder must be at least 1'],
+  })
+  maxQuantityPerOrder?: number;
 
   @Prop({
     type: String,
@@ -83,6 +91,12 @@ export class Product {
   colors: string[];
 
   @Prop({
+    type: Array,
+    required: false,
+  })
+  sizes: string[];
+
+  @Prop({
     type: mongoose.Schema.Types.ObjectId,
     required: false,
     ref: SubCategory.name,
@@ -109,6 +123,13 @@ export class Product {
     default: 0,
   })
   ratingsQuantity: number;
+
+  @Prop({
+    type: mongoose.Schema.Types.ObjectId,
+    required: false,
+    ref: Supplier.name,
+  })
+  supplier?: string;
 
   @Prop({
     type: Boolean,

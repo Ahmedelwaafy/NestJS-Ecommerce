@@ -31,7 +31,8 @@
     "EXPIRATION_DATE_IS_DATE": "Expiration date must be a valid date.",
     "EXPIRATION_DATE_IS_IN_FUTURE": "Expiration date must be in the future.",
     "MIN_ORDER_TOTAL_IS_NUMBER": "Minimum order total must be a number.",
-    "MAX_DISCOUNT_IS_NUMBER": "Maximum discount amount must be a number."
+    "MAX_DISCOUNT_IS_NUMBER": "Maximum discount amount must be a number.",
+    "TYPE": "Coupon type must be 'fixed' or 'percentage'."
   },
   "CATEGORY_IS_REQUIRED": "Category is required",
   "CATEGORY_ID_IS_INVALID": "Category id is invalid",
@@ -62,6 +63,7 @@
   "LENGTH": "{FIELD_NAME} must be between {constraints.0} and {constraints.1} characters long",
   "MUST_BE_URL": "{FIELD_NAME} must be a valid URL",
   "MUST_BE_ARRAY": "{FIELD_NAME} must be an array",
+  "MUST_BE_POSITIVE": "{FIELD_NAME} must be a positive number",
   "IS_MONGO_ID": "Invalid {MODEL_NAME} ID",
   "PRICE_AFTER_DISCOUNT_LESS_THAN_PRICE": "{FIELD_NAME} must be less than the original price",
   "INVALID_COMPARISON": "The value of {FIRST_FIELD_NAME} must be $t(common.OPERATORS.{OPERATOR}) the value of {SECOND_FIELD_NAME}"

@@ -31,7 +31,8 @@
     "EXPIRATION_DATE_IS_DATE": "يجب ان يكون تاريخ انتهاء القسيمة تاريخا صالحا.",
     "EXPIRATION_DATE_IS_IN_FUTURE": "يجب ان يكون تاريخ انتهاء القسيمة في المستقبل.",
     "MIN_ORDER_TOTAL_IS_NUMBER": "يجب ان يكون اقل مبلغ للطلب رقما.",
-    "MAX_DISCOUNT_IS_NUMBER": "يجب ان يكون اقصى مبلغ للخصم رقما."
+    "MAX_DISCOUNT_IS_NUMBER": "يجب ان يكون اقصى مبلغ للخصم رقما.",
+    "TYPE": "يجب ان يكون نوع القسيمة 'fixed' او 'percentage'."
   },
   "CATEGORY_IS_REQUIRED": "التصنيف مطلوبة",
   "CATEGORY_ID_IS_INVALID": "معرف التصنيف غير صالح",
@@ -64,6 +65,7 @@
   "MUST_BE_URL": "يجب أن يكون {FIELD_NAME} رابطاً صالحاً",
   "MUST_BE_ARRAY": "يجب أن يكون {FIELD_NAME} مصفوفة",
   "IS_MONGO_ID": "معرف {MODEL_NAME} غير صالح",
+  "MUST_BE_POSITIVE": "يجب ان يكون {FIELD_NAME} رقمًا موجبًا",
   "PRICE_AFTER_DISCOUNT_LESS_THAN_PRICE": "{FIELD_NAME} يجب ان يكون اقل من السعر الاصلي",
   "INVALID_COMPARISON": "يجب أن تكون قيمة {FIRST_FIELD_NAME} $t(common.OPERATORS.{OPERATOR}) قيمة {SECOND_FIELD_NAME}"
 }

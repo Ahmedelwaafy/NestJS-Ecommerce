@@ -14,7 +14,10 @@ lang: ar
   },
   "price": 10,
   "category": "67e871d13746b70ecf6b111c",
-  "quantity": 104,
+  "quantity": 104,  
+  "maxQuantityPerOrder": 11, 
+  "sizes": ["S", "M", "L"],
+  "supplier": "67eb09fd27fb2ca39853cadc",
   "imageCover": "https://example.com/image.jpg",
   "images": [
     "https://example.com/img1.jpg",

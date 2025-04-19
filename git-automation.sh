@@ -5,16 +5,16 @@ git add -A
 git commit -m "$1"
 
 # Step 2: Push to the current branch
-git push origin review-model
+git push origin cart-model
 
 # Step 3: Checkout development branch, pull updates, merge, and push
 git checkout development
 git pull origin development
-git merge review-model
+git merge cart-model
 git push origin development
-# Step 4: Switch back to review-model branch
-git checkout review-model
+# Step 4: Switch back to cart-model branch
+git checkout cart-model
 
 
-# Step 5: ./git-automation.sh "feat: finish review-model"
+# Step 5: ./git-automation.sh "feat: finish cart-model"
 #git merge development

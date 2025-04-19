@@ -15,6 +15,7 @@ import { TFunction } from 'src/i18n/types';
 import { CreateCouponDto } from './dto/create-coupon.dto';
 import { UpdateCouponDto } from './dto/update-coupon.dto';
 import { Coupon, CouponDocument } from './schemas/coupon.schema';
+import { CouponType } from './enums/coupon-type.enum';
 
 @Injectable()
 export class CouponService {
@@ -46,6 +47,13 @@ export class CouponService {
           },
         }),
       );
+    }
+
+    if (
+      createCouponDto.type === CouponType.Percentage &&
+      createCouponDto.discount > 100
+    ) {
+      throw new BadRequestException(this.t('validation.coupon.DISCOUNT_MAX'));
     }
 
     // create new coupon
@@ -143,13 +151,46 @@ export class CouponService {
   }
 
   /**
+   *//***** Get Active Coupon ******
+   * @param name
+   * @returns Coupon
+   */
+  async findActiveCoupon(code: string) {
+    let coupon: CouponDocument;
+    try {
+      coupon = await this.couponModel.findOne({
+        code,
+        expiresAt: { $gt: new Date() },
+        active: true,
+      });
+    } catch (error) {
+      throw new RequestTimeoutException(this.t('service.ERROR_OCCURRED'), {
+        description:
+          error.message || this.t('service.DATABASE_CONNECTION_FAILED'),
+      });
+    }
+
+    if (!coupon) {
+      throw new NotFoundException(
+        this.t('service.NOT_FOUND', {
+          args: {
+            MODEL_NAME: this.t(`common.MODELS_NAMES.COUPON`),
+          },
+        }),
+      );
+    }
+
+    return coupon;
+  }
+
+  /**
    *//***** Update Single Coupon ******
    * @param id
    * @returns Coupon
    */
   async update(id: string, updateCouponDto: UpdateCouponDto) {
     //check if the coupon exists
-    await this.findOne(id);
+    const coupon = await this.findOne(id);
 
     if (updateCouponDto?.code) {
       const couponCodeTaken = await this.findOneByName(updateCouponDto.code);
@@ -164,6 +205,15 @@ export class CouponService {
           }),
         );
       }
+    }
+
+    if (
+      updateCouponDto.type &&
+      updateCouponDto.type === CouponType.Percentage &&
+      (updateCouponDto.discount ||
+        (!updateCouponDto.discount && coupon.discount)) > 100
+    ) {
+      throw new BadRequestException(this.t('validation.coupon.DISCOUNT_MAX'));
     }
     //update the coupon
     try {

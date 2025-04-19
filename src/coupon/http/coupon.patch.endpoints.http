@@ -6,7 +6,7 @@ lang: ar
 {
   "code": "SUMMER20032",
   "discount": 20,
-  "expirationDate": "2025-02-02T00:00:00Z",
+  "expiresAt": "2025-02-02T00:00:00Z",
   "active": true,
   "minOrderTotal": 50,
   "maxDiscount": 50

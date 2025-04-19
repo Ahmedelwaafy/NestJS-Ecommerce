@@ -3,29 +3,32 @@ Content-Type: application/json
 cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4ifQ.uLUQKCAZ3c_a94nMsfDMCYLRNHdkET0xoLd-DVVj4Aw
 lang: ar
 
-  {
+ {
   "name": {
-    "en": "Adidas1 Air Madx",
-    "ar": "اديdداس 1اير ماكس"
+    "en": "Smart LED TV",
+    "ar": "تلفاز ذكي LED"
   },
   "description": {
-    "en": "High-quality sports shoes.",
-    "ar": "أحذية رياضية عالية الجودة"
+    "en": "A 55-inch 4K Ultra HD Smart LED TV with HDR support, integrated apps, and voice control.",
+    "ar": "تلفاز ذكي LED مقاس 55 بوصة بدقة 4K Ultra HD مع دعم HDR وتطبيقات مدمجة وتحكم صوتي."
   },
-  "price": 100,
-  "category": "67e871d13746b70ecf6b111c",
-  "quantity": 10,
-  "imageCover": "https://example.com/image.jpg",
+  "price": 8999,
+  "category": "644e5f2c8aaf5b001c45e9d1",
+  "quantity": 25,
+  "maxQuantityPerOrder": 3,
+  "imageCover": "https://example.com/images/tv-cover.jpg",
   "images": [
-    "https://example.com/img1.jpg",
-    "https://example.com/img2.jpg"
+    "https://example.com/images/tv-1.jpg",
+    "https://example.com/images/tv-2.jpg"
   ],
-  "sold": 5,
-  "priceAfterDiscount": 80,
-  "colors": ["red", "blue", "green"],
-  "subCategory": "67eb09fd27fb2ca39853cadc",
-  "brand": "67eb7a7ea03bccd0dc806442",
+  "sold": 10,
+  "priceAfterDiscount": 7999,
+  "colors": ["Black", "Silver"],
+  "sizes": ["55 inch", "65 inch"],
+  "subCategory": "644e5f2c8aaf5b001c45e9d2",
+  "brand": "644e5f2c8aaf5b001c45e9d3",
+  "supplier": "644e5f2c8aaf5b001c45e9d4",
   "active": true
-
 }
+
 

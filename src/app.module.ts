@@ -24,6 +24,7 @@ import { ProductRequestModule } from './product-request/product-request.module';
 import { SettingModule } from './setting/setting.module';
 import { ProductModule } from './product/product.module';
 import { ReviewModule } from './review/review.module';
+import { CartModule } from './cart/cart.module';
 
 const ENV = process.env.NODE_ENV;
 //console.log({ ENV });
@@ -70,6 +71,7 @@ const ENV = process.env.NODE_ENV;
     SettingModule,
     ProductModule,
     ReviewModule,
+    CartModule,
   ],
   controllers: [],
   providers: [
