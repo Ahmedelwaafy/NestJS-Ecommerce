@@ -43,7 +43,7 @@ export class AuthController {
     description: 'User credentials for login',
     type: SignInDto,
   })
-  @ResponseMessage('Logged in successfully')
+  @ResponseMessage(['LOGGED_IN_SUCCESSFULLY'])
   async signIn(
     @Body() signInDto: SignInDto,
     @Res({ passthrough: true }) response: Response,
@@ -68,7 +68,7 @@ export class AuthController {
     description: 'User details for signup',
     type: SignUpDto,
   })
-  @ResponseMessage('Account created successfully')
+  @ResponseMessage(['ACCOUNT_CREATED_SUCCESSFULLY'])
   async signUp(@Body() signUpDto: SignUpDto) {
     return this.authService.signUp(signUpDto);
   }
@@ -86,7 +86,7 @@ export class AuthController {
     summary: 'Sign out',
     description: 'Sign out',
   })
-  @ResponseMessage('Signed out successfully')
+  @ResponseMessage(['SIGN_OUT_SUCCESSFULLY'])
   async signOut(@Res({ passthrough: true }) response: Response) {
     return this.authService.signOut(response);
   }
@@ -104,7 +104,7 @@ export class AuthController {
     summary: 'Generate new access token',
     description: 'Generate new access token',
   })
-  @ResponseMessage('Access token generated successfully')
+  @ResponseMessage(['ACCESS_TOKEN_GENERATED_SUCCESSFULLY'])
   async refreshToken(
     @Req() request: Request,
     @Res({ passthrough: true }) response: Response,
@@ -129,7 +129,7 @@ export class AuthController {
     description: 'User email for forget password',
     type: ForgetPasswordDto,
   })
-  @ResponseMessage('Code sent to your mail successfully')
+  @ResponseMessage(['CODE_SENT_TO_YOUR_MAIL_SUCCESSFULLY'])
   async forgetPassword(@Body() forgetPasswordDto: ForgetPasswordDto) {
     return this.authService.forgetPassword(forgetPasswordDto);
   }
@@ -151,7 +151,7 @@ export class AuthController {
     description: 'the email along with the otp code',
     type: VerifyOtpDto,
   })
-  @ResponseMessage('Otp code verified successfully')
+  @ResponseMessage(['OTP_CODE_VERIFIED_SUCCESSFULLY'])
   async verifyOtp(@Body() verifyOtpDto: VerifyOtpDto) {
     return this.authService.verifyOtp(verifyOtpDto);
   }
@@ -174,7 +174,7 @@ export class AuthController {
     description: 'User email along with the new passwords for reset password',
     type: ResetPasswordDto,
   })
-  @ResponseMessage('Password has been reset successfully')
+  @ResponseMessage(['PASSWORD_RESET_SUCCESSFULLY'])
   async resetPassword(@Body() resetPasswordDto: ResetPasswordDto) {
     return this.authService.resetPassword(resetPasswordDto);
   }
@@ -195,7 +195,7 @@ export class AuthController {
     description: 'User email for resend otp',
     type: ResetPasswordDto,
   })
-  @ResponseMessage('A new otp code has been sent to your email successfully')
+  @ResponseMessage(['NEW_CODE_SENT_TO_YOUR_MAIL_SUCCESSFULLY'])
   async resendOtp(@Body() resendOtpDto: ForgetPasswordDto) {
     return this.authService.forgetPassword(resendOtpDto);
   }

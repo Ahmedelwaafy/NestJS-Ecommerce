@@ -2,6 +2,8 @@
 
 POST http://localhost:3000/api/v1/auth/sign-in
 Content-Type: application/json
+lang: ar
+
 {
   "email": "lola60071@gmail.com",
   "password": "123456"

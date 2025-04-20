@@ -1,0 +1,11 @@
+GET http://localhost:3000/api/v1/setting/
+?limit=10
+&page=1&sort=desc
+lang: ar
+
+
+
+GET http://localhost:3000/api/v1/setting/TAXES
+lang: ar
+
+

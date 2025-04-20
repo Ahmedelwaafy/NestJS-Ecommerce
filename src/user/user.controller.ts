@@ -47,7 +47,7 @@ export class UserController {
     summary: 'Creates a new user',
     description: 'Creates a new user',
   })
-  @ResponseMessage('User created successfully')
+  @ResponseMessage(['CREATED_SUCCESSFULLY', 'USER'])
   create(
     @Body() createUserDto: CreateUserDto,
     //@ActiveUser() user: ActiveUserData,
@@ -104,7 +104,7 @@ export class UserController {
     description: 'User id',
     type: String,
   })
-  @ResponseMessage('User updated successfully')
+  @ResponseMessage(['UPDATED_SUCCESSFULLY', 'USER'])
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(id, updateUserDto);
   }
@@ -124,7 +124,7 @@ export class UserController {
     description: 'User id',
     type: String,
   })
-  @ResponseMessage('User deleted successfully')
+  @ResponseMessage(['DELETED_SUCCESSFULLY', 'USER'])
   deactivate(@Param('id') id: string) {
     return this.userService.deactivate(id);
   }
@@ -177,7 +177,7 @@ export class UserProfileController {
   })
   @Roles(['user'])
   @UseGuards(AuthGuard)
-  @ResponseMessage('Account deactivated successfully')
+  @ResponseMessage(['DEACTIVATED_SUCCESSFULLY', 'USER'])
   deactivateMyProfile(@ActiveUser('id') id: ActiveUserData['id']) {
     return this.userService.deactivate(id);
   }

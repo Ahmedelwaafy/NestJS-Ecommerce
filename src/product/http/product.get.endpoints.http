@@ -1,0 +1,11 @@
+GET http://localhost:3000/api/v1/product/
+?limit=10
+&page=1
+lang: ar
+
+
+
+GET http://localhost:3000/api/v1/product/67ef7f12e8834a074592980b
+lang: ar
+
+

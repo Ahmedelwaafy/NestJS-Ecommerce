@@ -1,0 +1,16 @@
+POST http://localhost:3000/api/v1/coupon
+Content-Type: application/json
+cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4ifQ.uLUQKCAZ3c_a94nMsfDMCYLRNHdkET0xoLd-DVVj4Aw
+lang: ar
+
+
+{
+  "code": "WELCOME50",
+  "type": "percentage",
+  "discount": 115,
+  "expiresAt": "2025-12-31T23:59:59.000Z",
+  "active": true,
+  "minOrderTotal": 200,
+  "maxDiscount": 100
+}
+

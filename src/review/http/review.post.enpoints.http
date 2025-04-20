@@ -1,0 +1,10 @@
+POST http://localhost:3000/api/v1/review
+Content-Type: application/json
+cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4ifQ.uLUQKCAZ3c_a94nMsfDMCYLRNHdkET0xoLd-DVVj4Aw
+lang: ar
+
+{
+  "productId": "60d21b4667d0d8992e610c85",
+  "comment": "This product has excellent build quality and performs even better than expected. I've been using it for two weeks now and I'm very satisfied with my purchase.",
+  "rating": 5
+}

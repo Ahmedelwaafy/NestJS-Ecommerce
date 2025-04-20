@@ -2,17 +2,23 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Request } from 'express';
 import { REQUEST } from '@nestjs/core';
-import { Model } from 'mongoose';
+import { Model, PopulateOptions } from 'mongoose';
 import { PaginationQueryDto } from '../dto/pagination-query.dto';
 import { Paginated } from '../interfaces/paginated.interface';
 import { Sort } from 'src/common/enums';
+import { I18nHelperService } from 'src/i18n/providers/I18n-helper-service';
 
 @Injectable()
 export class PaginationService {
+  private lang: string;
+
   constructor(
     @Inject(REQUEST)
     private readonly request: Request,
-  ) {}
+    private readonly i18nHelper: I18nHelperService,
+  ) {
+    this.lang = this.i18nHelper.createNamespaceTranslator('').lang;
+  }
 
   public async paginateQuery<T>(
     paginationQuery: PaginationQueryDto,
@@ -20,7 +26,8 @@ export class PaginationService {
     options?: {
       filters?: Record<string, any>;
       select?: string;
-      sort?: Sort; // default value set in the dto
+      sort: Sort; // default value set in the BaseFiltersDto
+      populate?: PopulateOptions | (string | PopulateOptions)[];
     },
   ): Promise<Paginated<T>> {
     const { page = 1, limit = 10 } = paginationQuery;
@@ -29,14 +36,20 @@ export class PaginationService {
     const query = options?.filters || {};
     const selectFields = options?.select || '-__v';
 
+    let findQuery = model
+      .find(query)
+      .skip(skip)
+      .limit(limit)
+      .select(selectFields)
+      .sort({ createdAt: options.sort });
+
+    // Apply populate if provided
+    if (options?.populate) {
+      findQuery = findQuery.populate(options.populate);
+    }
+
     const [results, totalItems] = await Promise.all([
-      model
-        .find(query)
-        .skip(skip)
-        .limit(limit)
-        .select(selectFields)
-        .sort({ createdAt: options.sort })
-        .exec(),
+      findQuery.exec(),
       model.countDocuments(query).exec(),
     ]);
 
@@ -48,8 +61,11 @@ export class PaginationService {
     const nextPage = page === totalPages ? page : page + 1;
     const previousPage = page === 1 ? 1 : page - 1;
 
+    const localizedResults = model.schema.methods.toJSONLocalizedOnly
+      ? model.schema.methods.toJSONLocalizedOnly(results, this.lang)
+      : results;
     return {
-      data: results,
+      data: localizedResults,
       meta: {
         itemsPerPage: limit,
         totalItems,

@@ -1,0 +1,12 @@
+POST http://localhost:3000/api/v1/product-request
+Content-Type: application/json
+cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZWNjZDNlODZiNWQwNTE4MDRjMDBmMiIsIm5hbWUiOiJ1c2VyIiwiZW1haWwiOiJ1c2VyQHVzZXIuY29tIiwicm9sZSI6InVzZXIiLCJhZ2UiOjI3LCJnZW5kZXIiOiJtYWxlIiwiaWF0IjoxNzQzNTcyMzEzLCJleHAiOjE3NDM1NzU5MTMsImF1ZCI6ImxvY2FsaG9zdDozMDAwIiwiaXNzIjoibG9jYWxob3N0OjMwMDAifQ.0_vH04ep0QC7zZvLqNHCMqwu-DdqUg-BuGsQAygJLKA
+lang: ar
+
+
+{
+  "name": "Gaming Laptop",
+  "description": "A high-performance laptop designed for gaming and professional use.",
+  "quantity": "5",
+  "category": "Electronics"
+}

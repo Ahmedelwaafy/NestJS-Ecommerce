@@ -1,0 +1,14 @@
+{
+  "ALREADY_EXISTS": "{MODEL_NAME} with the same name already exists",
+  "REVIEW_ALREADY_EXISTS": "You have already reviewed this product",
+  "ERROR_OCCURRED": "an error occurred",
+  "NOT_FOUND": "{MODEL_NAME} not found",
+  "DATABASE_CONNECTION_FAILED": "unable to connect to the database",
+  "PARENT_CATEGORY_DOES_NOT_EXIST": "parent category does not exist",
+  "PRODUCT_HAS_NOT_ENOUGH_QUANTITY": "Product has not enough quantity in stock",
+  "PRODUCT_MAX_QUANTITY_PER_ORDER": "Product max quantity per order is {maxQuantity}",
+  "PRODUCT_NOT_FOUND_IN_CART": "Product not found in cart",
+  "COUPON_ALREADY_APPLIED": "This coupon '{code}' has already been applied",
+  "CART_TOTAL_PRICE_MUST_EXCEED_MIN_ORDER_TOTAL": "Cart total price must exceed the minimum order total of {minOrderTotal} for this coupon '{code}' to be applied",
+  "CART_COUPON_NOT_FOUND": "Coupon not found in cart"
+}

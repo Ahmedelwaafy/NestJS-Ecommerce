@@ -14,6 +14,17 @@ import { PaginationModule } from './common/pagination/pagination.module';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import securityConfig from './config/security.config';
 import { MailModule } from './mail/mail.module';
+import { CategoryModule } from './category/category.module';
+import { LocalizationModule } from './i18n/i18n.module';
+import { SubCategoryModule } from './sub-category/sub-category.module';
+import { BrandModule } from './brand/brand.module';
+import { CouponModule } from './coupon/coupon.module';
+import { SupplierModule } from './supplier/supplier.module';
+import { ProductRequestModule } from './product-request/product-request.module';
+import { SettingModule } from './setting/setting.module';
+import { ProductModule } from './product/product.module';
+import { ReviewModule } from './review/review.module';
+import { CartModule } from './cart/cart.module';
 
 const ENV = process.env.NODE_ENV;
 //console.log({ ENV });
@@ -49,6 +60,18 @@ const ENV = process.env.NODE_ENV;
       }),
     }),
     MailModule,
+    LocalizationModule,
+    CategoryModule,
+    SubCategoryModule,
+    BrandModule,
+    CouponModule,
+    CouponModule,
+    SupplierModule,
+    ProductRequestModule,
+    SettingModule,
+    ProductModule,
+    ReviewModule,
+    CartModule,
   ],
   controllers: [],
   providers: [

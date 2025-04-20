@@ -1,0 +1,18 @@
+POST http://localhost:3000/api/v1/setting
+Content-Type: application/json
+cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4ifQ.uLUQKCAZ3c_a94nMsfDMCYLRNHdkET0xoLd-DVVj4Aw
+lang: ar
+
+
+{
+  "name": {
+    "en": "Site Title",
+    "ar": "عنوان الموقع"
+  },
+  "key": "SITE_TITLE",
+  "value": "My Amazing Website",
+  "hint": {
+    "en": "Enter the title of your website",
+    "ar": "أدخل عنوان موقع الويب الخاص بك"
+  }
+}

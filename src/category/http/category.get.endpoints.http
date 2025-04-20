@@ -1,0 +1,11 @@
+GET http://localhost:3000/api/v1/category/
+?limit=10
+&page=1&sort=desc&search=shir
+lang: ar
+
+
+
+GET http://localhost:3000/api/v1/category/67eaf38892a2508063c4f834
+lang: ar
+
+

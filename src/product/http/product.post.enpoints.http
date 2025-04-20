@@ -1,0 +1,34 @@
+POST http://localhost:3000/api/v1/product
+Content-Type: application/json
+cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4ifQ.uLUQKCAZ3c_a94nMsfDMCYLRNHdkET0xoLd-DVVj4Aw
+lang: ar
+
+ {
+  "name": {
+    "en": "Smart LED TV",
+    "ar": "تلفاز ذكي LED"
+  },
+  "description": {
+    "en": "A 55-inch 4K Ultra HD Smart LED TV with HDR support, integrated apps, and voice control.",
+    "ar": "تلفاز ذكي LED مقاس 55 بوصة بدقة 4K Ultra HD مع دعم HDR وتطبيقات مدمجة وتحكم صوتي."
+  },
+  "price": 8999,
+  "category": "644e5f2c8aaf5b001c45e9d1",
+  "quantity": 25,
+  "maxQuantityPerOrder": 3,
+  "imageCover": "https://example.com/images/tv-cover.jpg",
+  "images": [
+    "https://example.com/images/tv-1.jpg",
+    "https://example.com/images/tv-2.jpg"
+  ],
+  "sold": 10,
+  "priceAfterDiscount": 7999,
+  "colors": ["Black", "Silver"],
+  "sizes": ["55 inch", "65 inch"],
+  "subCategory": "644e5f2c8aaf5b001c45e9d2",
+  "brand": "644e5f2c8aaf5b001c45e9d3",
+  "supplier": "644e5f2c8aaf5b001c45e9d4",
+  "active": true
+}
+
+

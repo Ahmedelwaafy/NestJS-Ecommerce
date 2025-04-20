@@ -1,0 +1,9 @@
+//for admin
+GET http://localhost:3000/api/v1/cart?page=1&limit=10&minCartItems=15&minFinalTotal=3000&userId=60d21b4667d0d8992e610c85
+lang: ar
+
+// for user 
+GET http://localhost:3000/api/v1/cart/check
+lang: ar
+
+

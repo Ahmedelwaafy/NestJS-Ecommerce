@@ -1,0 +1,21 @@
+PATCH http://localhost:3000/api/v1/sub-category/67eb6629d94963acfb9d8785
+Content-Type: application/json
+cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4ifQ.uLUQKCAZ3c_a94nMsfDMCYLRNHdkET0xoLd-DVVj4Aw
+lang: ar
+
+{
+      "name": {
+            "en": "Shirtss",
+            "ar": "قمصsان"
+             },   
+      "category": "67e871d13746b70ecf6b111c",
+      "active": true
+ }
+
+
+PATCH http://localhost:3000/api/v1/sub-category/restore/67eb6629d94963acfb9d8785
+Content-Type: application/json
+cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4ifQ.uLUQKCAZ3c_a94nMsfDMCYLRNHdkET0xoLd-DVVj4Aw
+lang: ar
+
+

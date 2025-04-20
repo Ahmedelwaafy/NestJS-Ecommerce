@@ -1,0 +1,11 @@
+GET http://localhost:3000/api/v1/coupon/
+?limit=10
+&page=1&sort=desc
+lang: ar
+
+
+
+GET http://localhost:3000/api/v1/coupon/67eb9a805c9cb52e5349ade8
+lang: ar
+
+

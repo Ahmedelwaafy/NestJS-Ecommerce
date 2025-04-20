@@ -1,0 +1,19 @@
+PATCH http://localhost:3000/api/v1/category/67ea76598e73116dac2bfa6d
+Content-Type: application/json
+cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4ifQ.uLUQKCAZ3c_a94nMsfDMCYLRNHdkET0xoLd-DVVj4Aw
+lang: ar
+
+{
+"name": {
+      "en": "Shirts",
+      "ar": "قمصان"
+       },
+ "active": false
+ }
+
+
+PATCH http://localhost:3000/api/v1/category/restore/67eaf38892a2508063c4f834
+Content-Type: application/json
+cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4ifQ.uLUQKCAZ3c_a94nMsfDMCYLRNHdkET0xoLd-DVVj4Aw
+
+

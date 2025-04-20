@@ -1,0 +1,34 @@
+PATCH http://localhost:3000/api/v1/product/67ef01b648abf6f3b448cbcf
+Content-Type: application/json
+cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4ifQ.uLUQKCAZ3c_a94nMsfDMCYLRNHdkET0xoLd-DVVj4Aw
+lang: ar
+
+{
+"name": {
+    "en": "Adidas1 Air Max",
+    "ar": "اديداس 1اير ماكس"
+  },
+  "description": {
+    "en": "High-quality sports shoes.2",
+    "ar": "2أحذية رياضية عالية الجودة"
+  },
+  "price": 10,
+  "category": "67e871d13746b70ecf6b111c",
+  "quantity": 104,  
+  "maxQuantityPerOrder": 11, 
+  "sizes": ["S", "M", "L"],
+  "supplier": "67eb09fd27fb2ca39853cadc",
+  "imageCover": "https://example.com/image.jpg",
+  "images": [
+    "https://example.com/img1.jpg",
+    "https://example.com/img2.jpg"
+  ],
+  "sold": 54,
+  "priceAfterDiscount": 80,
+  "colors": ["red", "blue", "green"],
+  "subCategory": "67eb09fd27fb2ca39853cadc",
+  "brand": "67eb7a7ea03bccd0dc806442",
+  "active": true
+   }
+
+

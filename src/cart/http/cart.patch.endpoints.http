@@ -1,0 +1,29 @@
+
+// for user
+PATCH http://localhost:3000/api/v1/cart
+Content-Type: application/json
+cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4ifQ.uLUQKCAZ3c_a94nMsfDMCYLRNHdkET0xoLd-DVVj4Aw
+lang: ar
+
+{
+  "productId": "60d21b4667d0d8992e610c85",
+  "quantity": 5
+}
+
+
+PATCH http://localhost:3000/api/v1/cart/apply-coupon
+Content-Type: application/json
+cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4ifQ.uLUQKCAZ3c_a94nMsfDMCYLRNHdkET0xoLd-DVVj4Aw
+lang: ar
+
+{
+  "code": "WELCOME2000"
+}
+
+
+PATCH http://localhost:3000/api/v1/cart/remove-coupon/60d21b4667d0d8992e610c85
+Content-Type: application/json
+cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4ifQ.uLUQKCAZ3c_a94nMsfDMCYLRNHdkET0xoLd-DVVj4Aw
+lang: ar
+
+
