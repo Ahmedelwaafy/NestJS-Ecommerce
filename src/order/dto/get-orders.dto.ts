@@ -3,7 +3,7 @@ import { IsMongoId, IsNumber, IsOptional } from 'class-validator';
 import { i18nValidationMessage } from 'nestjs-i18n';
 import { PaginationQueryDto } from 'src/common/pagination/dto/pagination-query.dto';
 
-export class GetCartsFiltersDto {
+export class GetOrdersFiltersDto {
   @ApiPropertyOptional({
     description: 'The ID of the user ',
     example: '60d21b4667d0d8992e610c85',
@@ -17,7 +17,7 @@ export class GetCartsFiltersDto {
   userId?: string;
 
   @ApiPropertyOptional({
-    description: 'Filter by minimum cart items',
+    description: 'Filter by minimum order items',
     example: 5,
   })
   @IsOptional()
@@ -29,7 +29,7 @@ export class GetCartsFiltersDto {
       }),
     },
   )
-  minCartItems?: number;
+  minOrderItems?: number;
 
   @ApiPropertyOptional({
     description: 'Filter by minimum final total price',
@@ -46,7 +46,7 @@ export class GetCartsFiltersDto {
   )
   minFinalTotal?: number;
 }
-export class GetCartsDto extends IntersectionType(
-  GetCartsFiltersDto,
+export class GetOrdersDto extends IntersectionType(
+  GetOrdersFiltersDto,
   PaginationQueryDto,
 ) {}

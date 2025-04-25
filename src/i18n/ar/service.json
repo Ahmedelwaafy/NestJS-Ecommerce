@@ -10,5 +10,10 @@
   "PRODUCT_NOT_FOUND_IN_CART": "المنتج غير موجود في السلة",
   "COUPON_ALREADY_APPLIED": "تم تطبيق كوبون '{code}' بالفعل",
   "CART_TOTAL_PRICE_MUST_EXCEED_MIN_ORDER_TOTAL": "يجب ان يتجاوز سعر السلة الكلي على الاقل {minOrderTotal} لتطبيق كوبون '{code}'",
-  "CART_COUPON_NOT_FOUND": "الكوبون غير موجود في السلة"
+  "CART_COUPON_NOT_FOUND": "الكوبون غير موجود في السلة",
+  "CART": { "IS_EMPTY": "السلة فارغة" },
+  "ORDER": {
+    "NO_SHIPPING_ADDRESS": "يجب ادخال عنوان الشحن",
+    "NOT_PAID_BY_CASH": "لا يتم دفع هذا الطلب بالنقد"
+  }
 }

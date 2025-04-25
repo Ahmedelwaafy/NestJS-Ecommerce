@@ -109,7 +109,7 @@ export class SettingService {
    * @param id
    * @returns Setting
    */
-  async findOne(key: string) {
+  async findOne(key: string, throwErrorIfNotFound: boolean = true) {
     let setting: Setting;
     try {
       setting = await this.settingModel.findOne({ key });
@@ -120,13 +120,17 @@ export class SettingService {
       });
     }
     if (!setting) {
-      throw new NotFoundException(
-        this.t('service.NOT_FOUND', {
-          args: {
-            MODEL_NAME: this.t(`common.MODELS_NAMES.SETTING`),
-          },
-        }),
-      );
+      if (throwErrorIfNotFound) {
+        throw new NotFoundException(
+          this.t('service.NOT_FOUND', {
+            args: {
+              MODEL_NAME: this.t(`common.MODELS_NAMES.SETTING`),
+            },
+          }),
+        );
+      } else {
+        return null;
+      }
     }
     const localizedSetting =
       this.settingModel.schema.methods.toJSONLocalizedOnly(setting, this.lang);

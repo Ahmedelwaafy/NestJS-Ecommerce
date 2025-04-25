@@ -63,8 +63,12 @@
   "LENGTH": "{FIELD_NAME} must be between {constraints.0} and {constraints.1} characters long",
   "MUST_BE_URL": "{FIELD_NAME} must be a valid URL",
   "MUST_BE_ARRAY": "{FIELD_NAME} must be an array",
+  "MUST_BE_OBJECT": "{FIELD_NAME} must be an object",
   "MUST_BE_POSITIVE": "{FIELD_NAME} must be a positive number",
   "IS_MONGO_ID": "Invalid {MODEL_NAME} ID",
   "PRICE_AFTER_DISCOUNT_LESS_THAN_PRICE": "{FIELD_NAME} must be less than the original price",
-  "INVALID_COMPARISON": "The value of {FIRST_FIELD_NAME} must be $t(common.OPERATORS.{OPERATOR}) the value of {SECOND_FIELD_NAME}"
+  "INVALID_COMPARISON": "The value of {FIRST_FIELD_NAME} must be $t(common.OPERATORS.{OPERATOR}) the value of {SECOND_FIELD_NAME}",
+  "PAYMENT_METHOD_TYPE": "Payment method type must be 'cash' or 'card'",
+  "INVALID_EGYPTIAN_PHONE_NUMBER": "Phone number is not valid, use valid egyptian phone number",
+  "INVALID_EGYPTIAN_POSTAL_CODE": "Invalid egyptian postal code"
 }

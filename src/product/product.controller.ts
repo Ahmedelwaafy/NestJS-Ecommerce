@@ -15,7 +15,6 @@ import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { AuthGuard } from 'src/auth/gaurds/auth.guard';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
-import { PaginationAndFiltersDto } from 'src/common/dto/base-filters.dto';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';

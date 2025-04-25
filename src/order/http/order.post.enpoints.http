@@ -1,0 +1,20 @@
+POST http://localhost:3000/api/v1/order
+Content-Type: application/json
+cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4ifQ.uLUQKCAZ3c_a94nMsfDMCYLRNHdkET0xoLd-DVVj4Aw
+lang: ar
+
+{
+    "paymentMethod": "cash",
+    "shippingAddress": {
+        "fullName": "John Doe",
+        "addressLine1": "123 Main St",
+        "addressLine2": "123 Main St",
+        "city": "Sample City",
+        "state": "Sample State",
+        "postalCode": "12345",
+        "country": "Egypt",
+        "phoneNumber": "01066031932"
+    },
+    "successUrl": "https://ecommerce.com/success",
+    "cancelUrl": "https://ecommerce.com/cancel"
+}

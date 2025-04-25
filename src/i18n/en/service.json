@@ -10,5 +10,10 @@
   "PRODUCT_NOT_FOUND_IN_CART": "Product not found in cart",
   "COUPON_ALREADY_APPLIED": "This coupon '{code}' has already been applied",
   "CART_TOTAL_PRICE_MUST_EXCEED_MIN_ORDER_TOTAL": "Cart total price must exceed the minimum order total of {minOrderTotal} for this coupon '{code}' to be applied",
-  "CART_COUPON_NOT_FOUND": "Coupon not found in cart"
+  "CART_COUPON_NOT_FOUND": "Coupon not found in cart",
+  "CART": { "IS_EMPTY": "Cart is empty" },
+  "ORDER": {
+    "NO_SHIPPING_ADDRESS": "Shipping address is required",
+    "NOT_PAID_BY_CASH": "This  order is not paid by cash"
+  }
 }

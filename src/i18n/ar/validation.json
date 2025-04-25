@@ -64,8 +64,12 @@
   "LENGTH": "يجب ان يكون {FIELD_NAME} بين {constraints.0} و {constraints.1} حرفًا",
   "MUST_BE_URL": "يجب أن يكون {FIELD_NAME} رابطاً صالحاً",
   "MUST_BE_ARRAY": "يجب أن يكون {FIELD_NAME} مصفوفة",
+  "MUST_BE_OBJECT": "يجب ان يكون {FIELD_NAME} كائن",
   "IS_MONGO_ID": "معرف {MODEL_NAME} غير صالح",
   "MUST_BE_POSITIVE": "يجب ان يكون {FIELD_NAME} رقمًا موجبًا",
   "PRICE_AFTER_DISCOUNT_LESS_THAN_PRICE": "{FIELD_NAME} يجب ان يكون اقل من السعر الاصلي",
-  "INVALID_COMPARISON": "يجب أن تكون قيمة {FIRST_FIELD_NAME} $t(common.OPERATORS.{OPERATOR}) قيمة {SECOND_FIELD_NAME}"
+  "INVALID_COMPARISON": "يجب أن تكون قيمة {FIRST_FIELD_NAME} $t(common.OPERATORS.{OPERATOR}) قيمة {SECOND_FIELD_NAME}",
+  "PAYMENT_METHOD_TYPE": "نوع طريقة الدفع يجب ان يكون 'cash' او 'card'",
+  "INVALID_EGYPTIAN_PHONE_NUMBER": "رقم الهاتف غير صالح، استخدم رقم هاتف مصري صالح",
+  "INVALID_EGYPTIAN_POSTAL_CODE": "الرمز البريدي غير صالح"
 }

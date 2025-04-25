@@ -17,4 +17,15 @@ export default Joi.object({
   SMTP_USERNAME: Joi.string().required(),
   SMTP_PASSWORD: Joi.string().required(),
   OTP_TTL: Joi.number().required(),
+
+  //*******  PAYMOB ******//
+  PAYMOB_WEBHOOK_SECRET_HMAC: Joi.string().required(),
+  PAYMOB_API_KEY: Joi.string().required(),
+  PAYMOB_SECRET_KEY: Joi.string().required(),
+  PAYMOB_PUBLIC_KEY: Joi.string().required(),
+  PAYMOB_CARD_INTEGRATION_ID: Joi.string().required(),
+
+  //*******  STRIPE ******//
+  STRIPE_SECRET_KEY: Joi.string().required(),
+  STRIPE_WEBHOOK_SECRET: Joi.string().required(),
 });

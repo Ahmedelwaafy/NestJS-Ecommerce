@@ -6,24 +6,20 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { BaseFiltersDto } from 'src/common/dto/base-filters.dto';
+import { BrandService } from 'src/brand/brand.service';
+import { CategoryService } from 'src/category/category.service';
 import { LocalizedFieldDto } from 'src/common/dto/localized-field.dto';
 import { PaginationQueryDto } from 'src/common/pagination/dto/pagination-query.dto';
 import { Paginated } from 'src/common/pagination/interfaces/paginated.interface';
 import { PaginationService } from 'src/common/pagination/providers/pagination.service';
 import { I18nHelperService } from 'src/i18n/providers/I18n-helper-service';
 import { TFunction } from 'src/i18n/types';
-import { CreateProductDto } from './dto/create-product.dto';
-import {
-  BaseUpdateProductDto,
-  UpdateProductDto,
-} from './dto/update-product.dto';
-import { Product, ProductDocument } from './schemas/product.schema';
-import { CategoryService } from 'src/category/category.service';
 import { SubCategoryService } from 'src/sub-category/sub-category.service';
-import { BrandService } from 'src/brand/brand.service';
-import { GetProductsFiltersDto } from './dto/get-products.dto';
 import { SupplierService } from 'src/supplier/supplier.service';
+import { CreateProductDto } from './dto/create-product.dto';
+import { GetProductsFiltersDto } from './dto/get-products.dto';
+import { BaseUpdateProductDto } from './dto/update-product.dto';
+import { Product, ProductDocument } from './schemas/product.schema';
 
 @Injectable()
 export class ProductService {
@@ -163,7 +159,7 @@ export class ProductService {
    * @param id
    * @returns Product
    */
-  async findOne(id: string) {
+  async findOne(id: string, localized: boolean = true) {
     let product: Product;
     try {
       product = await this.productModel
@@ -184,11 +180,16 @@ export class ProductService {
         }),
       );
     }
+    if (localized) {
+      const localizedProduct =
+        this.productModel.schema.methods.toJSONLocalizedOnly(
+          product,
+          this.lang,
+        );
 
-    const localizedProduct =
-      this.productModel.schema.methods.toJSONLocalizedOnly(product, this.lang);
-
-    return localizedProduct;
+      return localizedProduct;
+    }
+    return product;
   }
 
   /**
@@ -306,5 +307,24 @@ export class ProductService {
 
     //delete the product
     await this.productModel.findByIdAndDelete(id);
+  }
+
+  /**
+   * //***** Update Product After Purchase ******
+   * @param productId
+   * @param quantity
+   */
+  async updateProductAfterPurchase(
+    productId: string,
+    quantity: number,
+  ): Promise<void> {
+    //check if the product exists
+    const product = await this.findOne(productId, false);
+
+    // Increment sold count and decrement available quantity
+    product.sold = (product.sold || 0) + quantity;
+    product.quantity = Math.max(0, product.quantity - quantity);
+
+    await product.save();
   }
 }
