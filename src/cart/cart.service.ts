@@ -84,12 +84,21 @@ export class CartService {
   }
 
   /**
-   *//***** Get Single Cart ******
+   *//***** Get Single Cart or Create one if non exists ******
    * @param id
    * @returns Cart
    */
   async findOne(userId: string) {
     return await this.cartUtilsProvider.getOrCreateCart(userId);
+  }
+
+  /**
+   *//***** Get Single Cart and throw an error if non exists ******
+   * @param id
+   * @returns Cart
+   */
+  async findCart(userId: string) {
+    return await this.cartUtilsProvider.findCart(userId);
   }
 
   /**

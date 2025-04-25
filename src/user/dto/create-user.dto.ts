@@ -103,7 +103,7 @@ export class CreateUserDto {
   @IsOptional()
   @IsString()
   @IsPhoneNumber('EG', {
-    message: 'Phone number is not valid, use valid egyptian phone number',
+    message: 'validation.INVALID_EGYPTIAN_PHONE_NUMBER',
   })
   phoneNumber?: string;
 

@@ -16,5 +16,5 @@ git push origin development
 git checkout cart-model
 
 
-# Step 5: ./git-automation.sh "feat: finish cart-model"
+# Step 5: ./git-automation.sh "feat: finish order-model & add 2 payment gateways with webhooks (Stripe & Paymob)"
 #git merge development

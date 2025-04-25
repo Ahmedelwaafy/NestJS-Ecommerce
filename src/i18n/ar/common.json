@@ -37,8 +37,18 @@
     "RATING": "التقييم",
     "RATINGS_QUANTITY": "عدد التقييمات",
     "COUPON_CODE": "كود القسيمة",
-    "MIN_CART_ITEMS": "الحد الادنى لعدد منتجات في سلة التسوق",
-    "MIN_FINAL_TOTAL": "الحد الادنى للمبلغ النهائي"
+    "MIN_ITEMS": "الحد الادنى لعدد المنتجات",
+    "MIN_FINAL_TOTAL": "الحد الادنى للمبلغ النهائي",
+    "SHIPPING_ADDRESS": "عنوان التوصيل",
+    "COUNTRY": "البلد",
+    "STATE": "الولاية",
+    "CITY": "المدينة",
+    "STREET": "الشارع",
+    "POSTAL_CODE": "الرقم البريدي",
+    "ADDRESS_LINE": "العنوان",
+    "ADDRESS": "العنوان",
+    "SUCCESS_URL": "رابط النجاح",
+    "CANCEL_URL": "رابط الالغاء"
   },
   "OPERATORS": {
     "<": "اقل من",

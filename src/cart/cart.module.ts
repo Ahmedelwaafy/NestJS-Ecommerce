@@ -28,5 +28,6 @@ import { CartCouponProvider } from './providers/cart-coupon.provider';
     CartUtilsProvider,
     CartCouponProvider,
   ],
+  exports: [CartService],
 })
 export class CartModule {}

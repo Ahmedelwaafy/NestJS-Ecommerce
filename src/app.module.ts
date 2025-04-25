@@ -25,6 +25,8 @@ import { SettingModule } from './setting/setting.module';
 import { ProductModule } from './product/product.module';
 import { ReviewModule } from './review/review.module';
 import { CartModule } from './cart/cart.module';
+import { OrderModule } from './order/order.module';
+import paymentGatewayConfig from './config/payment-gateway.config';
 
 const ENV = process.env.NODE_ENV;
 //console.log({ ENV });
@@ -36,7 +38,13 @@ const ENV = process.env.NODE_ENV;
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: !ENV ? '.env' : `.env.${ENV}`,
-      load: [appConfig, databaseConfig, jwtConfig, securityConfig],
+      load: [
+        appConfig,
+        databaseConfig,
+        jwtConfig,
+        securityConfig,
+        paymentGatewayConfig,
+      ],
       validationSchema: environmentValidation,
     }),
     MongooseModule.forRootAsync({
@@ -72,6 +80,7 @@ const ENV = process.env.NODE_ENV;
     ProductModule,
     ReviewModule,
     CartModule,
+    OrderModule,
   ],
   controllers: [],
   providers: [

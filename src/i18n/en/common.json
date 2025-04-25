@@ -36,8 +36,18 @@
     "RATING": "Rating",
     "RATINGS_QUANTITY": "Ratings Quantity",
     "COUPON_CODE": "Coupon Code",
-    "MIN_CART_ITEMS": "Min Cart Items",
-    "MIN_FINAL_TOTAL": "Min Final Total"
+    "MIN_ITEMS": "Min Items",
+    "MIN_FINAL_TOTAL": "Min Final Total",
+    "SHIPPING_ADDRESS": "Shipping Address",
+    "COUNTRY": "Country",
+    "STATE": "State",
+    "CITY": "City",
+    "STREET": "Street",
+    "POSTAL_CODE": "Postal Code",
+    "ADDRESS_LINE": "Address Line",
+    "ADDRESS": "Address",
+    "SUCCESS_URL": "Success URL",
+    "CANCEL_URL": "Cancel URL"
   },
   "OPERATORS": {
     "<": "less than",
