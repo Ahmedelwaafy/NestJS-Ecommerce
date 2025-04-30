@@ -12,23 +12,23 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import {
-  ApiBody,
+  ApiBearerAuth,
   ApiOperation,
   ApiParam,
-  ApiQuery,
   ApiResponse,
+  ApiSecurity,
   ApiTags,
 } from '@nestjs/swagger';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { UserService } from './user.service';
-import { AuthGuard } from '../auth/gaurds/auth.guard';
-import { Roles } from '../auth/decorators/roles.decorator';
 import { ActiveUser } from 'src/auth/decorators/active-user.decorator';
 import { ActiveUserData } from 'src/auth/interfaces/active-user.interface';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { AuthGuard } from '../auth/gaurds/auth.guard';
+import { CreateUserDto } from './dto/create-user.dto';
 import { GetUsersDto } from './dto/get-users.dto';
-import { Role } from 'src/auth/enums/role.enum';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { UserService } from './user.service';
+import { ACCESS_TOKEN_COOKIE_NAME } from 'src/auth/constants/auth.constants';
 
 @Controller('v1/users')
 @ApiTags('Users')
@@ -63,6 +63,7 @@ export class UserController {
     status: 200,
     description: 'Users fetched successfully',
   })
+  @ApiBearerAuth(ACCESS_TOKEN_COOKIE_NAME)
   @Roles(['admin'])
   @UseGuards(AuthGuard)
   findAll(@Query() getUsersQuery: GetUsersDto) {
@@ -83,6 +84,7 @@ export class UserController {
     description: 'User id',
     type: String,
   })
+  @ApiBearerAuth(ACCESS_TOKEN_COOKIE_NAME)
   @Roles(['admin'])
   @UseGuards(AuthGuard)
   findOne(@Param('id') id: string) {

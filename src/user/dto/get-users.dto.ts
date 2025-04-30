@@ -12,7 +12,10 @@ import { Role } from 'src/auth/enums/role.enum';
 import { Sort } from 'src/common/enums';
 import { PaginationQueryDto } from 'src/common/pagination/dto/pagination-query.dto';
 
-
+enum Active{
+  true = 'true',
+  false = 'false'
+}
 
 export class GetUsersBaseDto {
   @ApiPropertyOptional({
@@ -36,7 +39,7 @@ export class GetUsersBaseDto {
   @ApiPropertyOptional({
     example: true,
     description: 'active status query.',
-    enum: [true, false],
+    enum: Active,
   })
   @IsOptional()
   @IsBoolean({

@@ -31,7 +31,7 @@ export class Product {
     type: Number,
     required: true,
     min: [1, 'Price must be at least 1 L.E'],
-    max: [20000, 'Price must be at least 20000 L.E'],
+    max: [20000, 'Price must be at most 20000 L.E'],
   })
   price: number;
 
@@ -80,7 +80,7 @@ export class Product {
     type: Number,
     required: false,
     default: 0,
-    max: [20000, 'Price must be at least 20000 L.E'],
+    max: [20000, 'Price must be at most 20000 L.E'],
   })
   priceAfterDiscount: number;
 

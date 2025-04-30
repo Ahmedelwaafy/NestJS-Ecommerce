@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as cookieParser from 'cookie-parser';
 import { I18nValidationExceptionFilter, I18nValidationPipe } from 'nestjs-i18n';
+import { ACCESS_TOKEN_COOKIE_NAME } from './auth/constants/auth.constants';
 
 export function createApp(app: INestApplication) {
   const configService = app.get(ConfigService);
@@ -42,6 +43,17 @@ export function createApp(app: INestApplication) {
     )
     .addServer('http://localhost:3000')
     .setVersion('1.0')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'Authorization',
+        description: 'Enter your JWT token to access protected endpoints',
+        in: 'header',
+      },
+      ACCESS_TOKEN_COOKIE_NAME,
+    )
     .build();
 
   const document = SwaggerModule.createDocument(app, swaggerConfig);
