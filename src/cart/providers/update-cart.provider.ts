@@ -59,6 +59,8 @@ export class UpdateCartProvider {
         product: {
           _id: product._id.toString(),
           name: product.name,
+          description: product.description,
+          maxQuantityPerOrder: product.maxQuantityPerOrder,
           price: product.price,
           priceAfterDiscount: product.priceAfterDiscount,
           image: product.imageCover,

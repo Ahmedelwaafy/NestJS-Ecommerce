@@ -23,6 +23,8 @@ class CartItem {
   product: {
     _id: string;
     name: string;
+    description: string;
+    maxQuantityPerOrder: number;
     price: number;
     priceAfterDiscount: number;
     image: string;

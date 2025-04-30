@@ -73,7 +73,6 @@ const ENV = process.env.NODE_ENV;
     SubCategoryModule,
     BrandModule,
     CouponModule,
-    CouponModule,
     SupplierModule,
     ProductRequestModule,
     SettingModule,
