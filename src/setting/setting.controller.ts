@@ -16,7 +16,7 @@ import { CreateSettingDto } from './dto/create-setting.dto';
 import { UpdateSettingDto } from './dto/update-setting.dto';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { Role } from 'src/auth/enums/role.enum';
-import { AuthGuard } from 'src/auth/gaurds/auth.guard';
+import { AuthGuard } from 'src/auth/guards/auth.guard';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
 import { PaginationAndFiltersDto } from 'src/common/dto/base-filters.dto';

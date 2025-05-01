@@ -14,7 +14,7 @@ import {
 import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { Role } from 'src/auth/enums/role.enum';
-import { AuthGuard } from 'src/auth/gaurds/auth.guard';
+import { AuthGuard } from 'src/auth/guards/auth.guard';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { GetReviewsDto } from './dto/get-reviews.dto';

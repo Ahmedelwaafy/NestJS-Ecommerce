@@ -3,7 +3,7 @@
   "REVIEW_ALREADY_EXISTS": "لقد قمت بتقييم هذا المنتج بالفعل",
   "ERROR_OCCURRED": "حدث خطأ ما",
   "NOT_FOUND": "{MODEL_NAME} غير موجودة",
-  "DATABASE_CONNECTION_FAILED": "غير قادر على الاتصال بقاعدة البيانات",
+  "DATABASE_CONNECTION_FAILED": "فشل الاتصال بقاعدة البيانات: {error}",
   "PARENT_CATEGORY_DOES_NOT_EXIST": "القسم الرئيسي غير موجود",
   "PRODUCT_HAS_NOT_ENOUGH_QUANTITY": "لا يوجد كمية كافية في المخزون للمنتج",
   "PRODUCT_MAX_QUANTITY_PER_ORDER": "الكمية الاقصية للمنتج في الطلب هي {maxQuantity}",

@@ -9,17 +9,28 @@ import {
   Patch,
   Post,
   Query,
+  UploadedFiles,
   UseGuards,
+  UseInterceptors
 } from '@nestjs/common';
-import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
+import {
+  AnyFilesInterceptor
+} from '@nestjs/platform-express';
+import {
+  ApiBody,
+  ApiConsumes,
+  ApiOperation,
+  ApiParam,
+  ApiResponse,
+} from '@nestjs/swagger';
 import { Roles } from 'src/auth/decorators/roles.decorator';
-import { AuthGuard } from 'src/auth/gaurds/auth.guard';
-import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
-import { ProductService } from './product.service';
-import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
 import { Role } from 'src/auth/enums/role.enum';
+import { AuthGuard } from 'src/auth/guards/auth.guard';
+import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
+import { CreateProductDto } from './dto/create-product.dto';
 import { GetProductsDto } from './dto/get-products.dto';
+import { UpdateProductDto } from './dto/update-product.dto';
+import { ProductService } from './product.service';
 
 @Controller('v1/product')
 export class ProductController {
@@ -31,6 +42,12 @@ export class ProductController {
   @Post()
   @Roles([Role.Admin])
   @UseGuards(AuthGuard)
+  @UseInterceptors(AnyFilesInterceptor())
+  //? both cannot be used together
+  /* @UseInterceptors(
+    FileInterceptor('imageCover'), // for single image
+    FilesInterceptor('images', 3, { preservePath: true }), // for multiple images
+  ) */
   @HttpCode(HttpStatus.CREATED)
   @ApiResponse({
     status: HttpStatus.CREATED,
@@ -40,13 +57,20 @@ export class ProductController {
     summary: 'Creates a new product',
     description: 'Creates a new product',
   })
+  @ApiConsumes('multipart/form-data')
   @ApiBody({
     description: 'Product details',
     type: CreateProductDto,
   })
   @ResponseMessage(['CREATED_SUCCESSFULLY', 'PRODUCT'])
-  create(@Body() createProductDto: CreateProductDto) {
-    return this.productService.create(createProductDto);
+  create(
+    @Body() createProductDto: CreateProductDto,
+    @UploadedFiles() files: Express.Multer.File[],
+  ) {
+    const imageCover = files.find((file) => file.fieldname === 'imageCover');
+    const images = files.filter((file) => file.fieldname === 'images');
+
+    return this.productService.create(createProductDto, imageCover, images);
   }
 
   /**

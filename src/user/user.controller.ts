@@ -22,7 +22,7 @@ import { ActiveUser } from 'src/auth/decorators/active-user.decorator';
 import { ActiveUserData } from 'src/auth/interfaces/active-user.interface';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
 import { Roles } from '../auth/decorators/roles.decorator';
-import { AuthGuard } from '../auth/gaurds/auth.guard';
+import { AuthGuard } from '../auth/guards/auth.guard';
 import { CreateUserDto } from './dto/create-user.dto';
 import { GetUsersDto } from './dto/get-users.dto';
 import { UpdateUserDto } from './dto/update-user.dto';

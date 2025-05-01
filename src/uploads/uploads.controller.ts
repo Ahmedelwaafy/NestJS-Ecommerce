@@ -6,24 +6,22 @@ import {
   UploadedFile,
   UploadedFiles,
   UseGuards,
-  UseInterceptors,
-  Headers,
+  UseInterceptors
 } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import {
   ApiBearerAuth,
   ApiBody,
   ApiConsumes,
-  ApiHeader,
   ApiOperation,
-  ApiResponse,
+  ApiResponse
 } from '@nestjs/swagger';
-import { UploadsService } from './uploads.service';
+import { ACCESS_TOKEN_COOKIE_NAME } from 'src/auth/constants/auth.constants';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { Role } from 'src/auth/enums/role.enum';
-import { AuthGuard } from 'src/auth/gaurds/auth.guard';
-import { ACCESS_TOKEN_COOKIE_NAME } from 'src/auth/constants/auth.constants';
+import { AuthGuard } from 'src/auth/guards/auth.guard';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
+import { UploadsService } from './uploads.service';
 
 @Controller('v1/uploads')
 export class UploadsController {

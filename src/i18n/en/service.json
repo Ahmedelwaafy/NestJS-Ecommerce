@@ -3,7 +3,7 @@
   "REVIEW_ALREADY_EXISTS": "You have already reviewed this product",
   "ERROR_OCCURRED": "an error occurred",
   "NOT_FOUND": "{MODEL_NAME} not found",
-  "DATABASE_CONNECTION_FAILED": "unable to connect to the database",
+  "DATABASE_CONNECTION_FAILED": "Database connection failed: {error}",
   "PARENT_CATEGORY_DOES_NOT_EXIST": "parent category does not exist",
   "PRODUCT_HAS_NOT_ENOUGH_QUANTITY": "Product has not enough quantity in stock",
   "PRODUCT_MAX_QUANTITY_PER_ORDER": "Product max quantity per order is {maxQuantity}",

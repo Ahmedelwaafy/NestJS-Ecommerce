@@ -1,6 +1,6 @@
 import { forwardRef, Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
-import { AuthGuard } from './gaurds/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { HashingProvider } from './providers/hashing.provider';
 import { AuthService } from './auth.service';
 import { BcryptProvider } from './providers/bcrypt.provider';
