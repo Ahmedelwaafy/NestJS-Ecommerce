@@ -15,5 +15,10 @@
   "ORDER": {
     "NO_SHIPPING_ADDRESS": "Shipping address is required",
     "NOT_PAID_BY_CASH": "This  order is not paid by cash"
+  },
+  "FILE": {
+    "IS_REQUIRED": "{FIELD_NAME} is required",
+    "UPLOAD_FAILED": "File upload failed",
+    "TYPE_NOT_SUPPORTED": "File type not supported"
   }
 }

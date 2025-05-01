@@ -16,7 +16,6 @@ import {
   ApiOperation,
   ApiParam,
   ApiResponse,
-  ApiSecurity,
   ApiTags,
 } from '@nestjs/swagger';
 import { ActiveUser } from 'src/auth/decorators/active-user.decorator';

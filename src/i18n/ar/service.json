@@ -15,5 +15,10 @@
   "ORDER": {
     "NO_SHIPPING_ADDRESS": "يجب ادخال عنوان الشحن",
     "NOT_PAID_BY_CASH": "لا يتم دفع هذا الطلب بالنقد"
+  },
+  "FILE": {
+    "IS_REQUIRED": "{FIELD_NAME} مطلوب",
+    "UPLOAD_FAILED": "فشل رفع الملف",
+    "TYPE_NOT_SUPPORTED": "نوع الملف غير مدعوم"
   }
 }

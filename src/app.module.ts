@@ -27,6 +27,7 @@ import { ReviewModule } from './review/review.module';
 import { CartModule } from './cart/cart.module';
 import { OrderModule } from './order/order.module';
 import paymentGatewayConfig from './config/payment-gateway.config';
+import { UploadsModule } from './uploads/uploads.module';
 
 const ENV = process.env.NODE_ENV;
 //console.log({ ENV });
@@ -80,6 +81,7 @@ const ENV = process.env.NODE_ENV;
     ReviewModule,
     CartModule,
     OrderModule,
+    UploadsModule,
   ],
   controllers: [],
   providers: [
