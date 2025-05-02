@@ -28,14 +28,20 @@ import { CartModule } from './cart/cart.module';
 import { OrderModule } from './order/order.module';
 import paymentGatewayConfig from './config/payment-gateway.config';
 import { UploadsModule } from './uploads/uploads.module';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 const ENV = process.env.NODE_ENV;
 //console.log({ ENV });
 @Module({
   imports: [
-    UserModule,
-    AuthModule,
-    PaginationModule,
+    ThrottlerModule.forRoot({
+      throttlers: [
+        {
+          ttl: 60000,
+          limit: 10,
+        },
+      ],
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: !ENV ? '.env' : `.env.${ENV}`,
@@ -68,8 +74,8 @@ const ENV = process.env.NODE_ENV;
         },
       }),
     }),
-    MailModule,
-    LocalizationModule,
+    UserModule,
+    AuthModule,
     CategoryModule,
     SubCategoryModule,
     BrandModule,
@@ -81,6 +87,9 @@ const ENV = process.env.NODE_ENV;
     ReviewModule,
     CartModule,
     OrderModule,
+    MailModule,
+    LocalizationModule,
+    PaginationModule,
     UploadsModule,
   ],
   controllers: [],
