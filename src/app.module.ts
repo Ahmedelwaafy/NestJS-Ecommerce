@@ -28,7 +28,7 @@ import { CartModule } from './cart/cart.module';
 import { OrderModule } from './order/order.module';
 import paymentGatewayConfig from './config/payment-gateway.config';
 import { UploadsModule } from './uploads/uploads.module';
-import { ThrottlerGuard, ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 
 const ENV = process.env.NODE_ENV;
 //console.log({ ENV });

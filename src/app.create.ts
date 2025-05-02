@@ -5,6 +5,18 @@ import * as cookieParser from 'cookie-parser';
 import { I18nValidationExceptionFilter, I18nValidationPipe } from 'nestjs-i18n';
 import { ACCESS_TOKEN_COOKIE_NAME } from './auth/constants/auth.constants';
 import helmet from 'helmet';
+import { doubleCsrf } from 'csrf-csrf';
+
+/* const {
+  invalidCsrfTokenError, // This is just for convenience if you plan on making your own middleware.
+  generateCsrfToken, // Use this in your routes to provide a CSRF token.
+  validateRequest, // Also a convenience if you plan on making your own middleware.
+  doubleCsrfProtection, // This is the default CSRF protection middleware.
+} = doubleCsrf({
+  getSecret: (req) => 'return some cryptographically pseudorandom secret here',
+  getSessionIdentifier: (req) => req.session.id, // return the requests unique identifier
+}); */
+
 
 export function createApp(app: INestApplication) {
   const configService = app.get(ConfigService);
@@ -27,6 +39,9 @@ export function createApp(app: INestApplication) {
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     //allowedHeaders: ['Content-Type', 'Authorization'],
   });
+
+  // CSRF configuration
+  //app.use(doubleCsrfProtection);
 
   //* Use validation pipes globally
   //* to use nestjs-i18n in your DTO validation
