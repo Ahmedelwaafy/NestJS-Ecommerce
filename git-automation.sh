@@ -16,5 +16,5 @@ git push origin development
 git checkout upload-files-feature
 
 
-# Step 5: ./git-automation.sh "feat: enable sending images with the product details"
+# Step 5: ./git-automation.sh "chore: merge upload-files-feature branch to development branch"
 #git merge development

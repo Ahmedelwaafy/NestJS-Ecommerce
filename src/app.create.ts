@@ -13,6 +13,17 @@ export function createApp(app: INestApplication) {
   //* Parse cookies
   app.use(cookieParser());
 
+  //* #### security configuration ####
+  
+  // CORS configuration
+  const corsOrigins = configService.get('security.cors.origins');
+  app.enableCors({
+    origin: corsOrigins,
+    credentials: configService.get('security.cors.credentials'),
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    //allowedHeaders: ['Content-Type', 'Authorization'],
+  });
+
   //* Use validation pipes globally
   //* to use nestjs-i18n in your DTO validation
   app.useGlobalPipes(
@@ -58,13 +69,4 @@ export function createApp(app: INestApplication) {
 
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api', app, document);
-
-  // CORS configuration
-  const corsOrigins = configService.get('security.cors.origins');
-  app.enableCors({
-    origin: corsOrigins,
-    credentials: configService.get('security.cors.credentials'),
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-    //allowedHeaders: ['Content-Type', 'Authorization'],
-  });
 }
