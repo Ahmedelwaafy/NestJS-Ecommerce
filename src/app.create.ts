@@ -4,6 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as cookieParser from 'cookie-parser';
 import { I18nValidationExceptionFilter, I18nValidationPipe } from 'nestjs-i18n';
 import { ACCESS_TOKEN_COOKIE_NAME } from './auth/constants/auth.constants';
+import helmet from 'helmet';
 
 export function createApp(app: INestApplication) {
   const configService = app.get(ConfigService);
@@ -14,7 +15,10 @@ export function createApp(app: INestApplication) {
   app.use(cookieParser());
 
   //* #### security configuration ####
-  
+
+  // Helmet configuration
+  app.use(helmet());
+
   // CORS configuration
   const corsOrigins = configService.get('security.cors.origins');
   app.enableCors({
