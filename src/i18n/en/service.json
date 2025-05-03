@@ -3,7 +3,7 @@
   "REVIEW_ALREADY_EXISTS": "You have already reviewed this product",
   "ERROR_OCCURRED": "an error occurred",
   "NOT_FOUND": "{MODEL_NAME} not found",
-  "DATABASE_CONNECTION_FAILED": "unable to connect to the database",
+  "DATABASE_CONNECTION_FAILED": "Database connection failed: {error}",
   "PARENT_CATEGORY_DOES_NOT_EXIST": "parent category does not exist",
   "PRODUCT_HAS_NOT_ENOUGH_QUANTITY": "Product has not enough quantity in stock",
   "PRODUCT_MAX_QUANTITY_PER_ORDER": "Product max quantity per order is {maxQuantity}",
@@ -15,5 +15,10 @@
   "ORDER": {
     "NO_SHIPPING_ADDRESS": "Shipping address is required",
     "NOT_PAID_BY_CASH": "This  order is not paid by cash"
+  },
+  "FILE": {
+    "IS_REQUIRED": "{FIELD_NAME} is required",
+    "UPLOAD_FAILED": "File upload failed",
+    "TYPE_NOT_SUPPORTED": "File type not supported"
   }
 }

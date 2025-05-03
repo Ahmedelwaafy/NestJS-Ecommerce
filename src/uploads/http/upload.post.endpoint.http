@@ -1,0 +1,39 @@
+POST http://localhost:3000/api/v1/uploads/single
+Content-Type: multipart/form-data; boundary=WebKitFormBoundary
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTZiN2UzYWQxMTk4NzYyYWE5ZTU4ZCIsIm5hbWUiOiJsb2xhIGdhcmNpYSIsImVtYWlsIjoibG9sYTYwMDcxQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiYWdlIjoyOCwiZ2VuZGVyIjoibWFsZSIsInBhc3N3b3JkUmVzZXRFeHBpcmVzIjpudWxsLCJ2ZXJpZmljYXRpb25Db2RlIjpudWxsLCJpYXQiOjE3NDYwOTA1NDMsImV4cCI6MTc0NjA5NDE0MywiYXVkIjoibG9jYWxob3N0OjMwMDAiLCJpc3MiOiJsb2NhbGhvc3Q6MzAwMCJ9.M613iIU8nPVGKGunuGkiV7JPz9sfLtvR6Bzn7cF45VQ
+
+--WebKitFormBoundary
+Content-Disposition: form-data; name="image"; filename="test-image.jpeg"
+Content-Type: image/jpg
+
+< ./test-image.jpeg
+--WebKitFormBoundary--
+
+
+
+
+
+
+
+
+
+POST http://localhost:3000/api/v1/uploads/multiple
+Content-Type: multipart/form-data; boundary=WebKitFormBoundary
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTZiN2UzYWQxMTk4NzYyYWE5ZTU4ZCIsIm5hbWUiOiJsb2xhIGdhcmNpYSIsImVtYWlsIjoibG9sYTYwMDcxQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiYWdlIjoyOCwiZ2VuZGVyIjoibWFsZSIsInBhc3N3b3JkUmVzZXRFeHBpcmVzIjpudWxsLCJ2ZXJpZmljYXRpb25Db2RlIjpudWxsLCJpYXQiOjE3NDYwOTA1NDMsImV4cCI6MTc0NjA5NDE0MywiYXVkIjoibG9jYWxob3N0OjMwMDAiLCJpc3MiOiJsb2NhbGhvc3Q6MzAwMCJ9.M613iIU8nPVGKGunuGkiV7JPz9sfLtvR6Bzn7cF45VQ
+
+--WebKitFormBoundary
+Content-Disposition: form-data; name="images"; filename="test-image.jpeg"
+Content-Type: image/jpeg
+
+< ./test-image.jpeg
+
+--WebKitFormBoundary
+Content-Disposition: form-data; name="images"; filename="test-image2.jpg"
+Content-Type: image/jpeg
+
+< ./test-image2.jpg
+
+--WebKitFormBoundary--
+
+
+

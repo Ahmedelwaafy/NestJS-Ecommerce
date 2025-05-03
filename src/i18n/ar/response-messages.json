@@ -17,5 +17,7 @@
   "ADDED_TO_CART_SUCCESSFULLY": "تم اضافة المنتج الي السلة بنجاح",
   "DELETED_FROM_CART_SUCCESSFULLY": "تم حذف المنتج من السلة بنجاح",
   "CART_COUPON_APPLIED_SUCCESSFULLY": "تم تطبيق الكوبون الي السلة بنجاح",
-  "CART_COUPON_REMOVED_SUCCESSFULLY": "تم حذف الكوبون من السلة بنجاح"
+  "CART_COUPON_REMOVED_SUCCESSFULLY": "تم حذف الكوبون من السلة بنجاح",
+  "FILE_UPLOADED_SUCCESSFULLY": "تم تحميل الملف بنجاح",
+  "FILES_UPLOADED_SUCCESSFULLY": "تم تحميل الملفات بنجاح"
 }

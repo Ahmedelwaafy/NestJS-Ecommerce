@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional, OmitType } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import {
   IsArray,
   IsBoolean,
@@ -129,44 +129,18 @@ export class BaseProductDto {
   maxQuantityPerOrder?: number;
 
   @ApiProperty({
-    description: 'The main image of the product.',
-    example: 'https://example.com/image.jpg',
+    type: 'string',
+    format: 'binary',
+    description: 'Main image cover file',
   })
-  @IsNotEmpty({
-    message: i18nValidationMessage('validation.NOT_EMPTY', {
-      FIELD_NAME: '$t(common.FIELDS.IMAGE_COVER)',
-    }),
-  })
-  @IsUrl(
-    {},
-    {
-      message: i18nValidationMessage('validation.MUST_BE_URL', {
-        FIELD_NAME: '$t(common.FIELDS.IMAGE_COVER)',
-      }),
-    },
-  )
-  imageCover: string;
+  imageCover: any;
 
   @ApiPropertyOptional({
-    description: 'Additional images of the product.',
-    example: ['https://example.com/img1.jpg', 'https://example.com/img2.jpg'],
+    type: 'array',
+    items: { type: 'string', format: 'binary' },
+    description: 'Additional product images',
   })
-  @IsOptional()
-  @IsArray({
-    message: i18nValidationMessage('validation.MUST_BE_ARRAY', {
-      FIELD_NAME: '$t(common.FIELDS.IMAGES)',
-    }),
-  })
-  @IsUrl(
-    {},
-    {
-      each: true,
-      message: i18nValidationMessage('validation.MUST_BE_URL', {
-        FIELD_NAME: '$t(common.FIELDS.IMAGE)',
-      }),
-    },
-  )
-  images?: string[];
+  images?: any;
 
   @ApiPropertyOptional({ description: 'Number of items sold.', example: 5 })
   @IsOptional()
@@ -231,6 +205,13 @@ export class BaseProductDto {
       FIELD_NAME: '$t(common.FIELDS.COLOR)',
     }),
   })
+  @Transform(({ value }) => {
+    try {
+      return typeof value === 'string' ? JSON.parse(value) : value;
+    } catch {
+      return value;
+    }
+  })
   colors?: string[];
 
   @ApiPropertyOptional({
@@ -254,6 +235,13 @@ export class BaseProductDto {
     message: i18nValidationMessage('validation.NOT_EMPTY', {
       FIELD_NAME: '$t(common.FIELDS.SIZE)',
     }),
+  })
+  @Transform(({ value }) => {
+    try {
+      return typeof value === 'string' ? JSON.parse(value) : value;
+    } catch {
+      return value;
+    }
   })
   sizes?: string[];
 

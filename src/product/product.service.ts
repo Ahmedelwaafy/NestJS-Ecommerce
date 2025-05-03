@@ -20,6 +20,7 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { GetProductsFiltersDto } from './dto/get-products.dto';
 import { BaseUpdateProductDto } from './dto/update-product.dto';
 import { Product, ProductDocument } from './schemas/product.schema';
+import { UploadsService } from 'src/uploads/uploads.service';
 
 @Injectable()
 export class ProductService {
@@ -35,6 +36,7 @@ export class ProductService {
     private readonly subCategoryService: SubCategoryService,
     private readonly brandService: BrandService,
     private readonly supplierService: SupplierService,
+    private readonly uploadsService: UploadsService,
   ) {
     this.t = this.i18nHelper.translate().t;
     this.lang = this.i18nHelper.translate().lang;
@@ -45,7 +47,11 @@ export class ProductService {
    * @param createProductDto
    * @returns Product
    */
-  async create(createProductDto: CreateProductDto) {
+  async create(
+    createProductDto: CreateProductDto,
+    imageCover?: Express.Multer.File,
+    images?: Express.Multer.File[],
+  ) {
     const product = await this.findOneByName(createProductDto.name);
 
     // handle exception if product already exists
@@ -76,16 +82,42 @@ export class ProductService {
     if (createProductDto.brand) {
       await this.brandService.findOne(createProductDto.brand);
     }
+    // ⬇️ Upload images and inject URLs
+    if (!imageCover){
+       throw new BadRequestException(
+         this.t('service.FILE.IS_REQUIRED', {
+           args: {
+             FIELD_NAME: this.t(`common.FIELDS.IMAGE_COVER`),
+           },
+         }),
+       );
+    }else {
+      const uploadedCover =
+        await this.uploadsService.uploadFileToCloudinary(imageCover);
+      createProductDto.imageCover = uploadedCover.path;
+    }
+
+    if (images && images.length) {
+      const uploadedImages =
+        await this.uploadsService.uploadFilesToCloudinary(images);
+      createProductDto.images = uploadedImages.map((img) => img.path);
+    }
 
     // create new product
     try {
       const newProduct = await this.productModel.create(createProductDto);
       return newProduct;
     } catch (error) {
-      throw new RequestTimeoutException(this.t('service.ERROR_OCCURRED'), {
-        description:
-          error.message || this.t('service.DATABASE_CONNECTION_FAILED'),
-      });
+      throw new RequestTimeoutException(
+        this.t('service.DATABASE_CONNECTION_FAILED', {
+          args: {
+            error: error.message,
+          },
+        }),
+        {
+          description: error.message,
+        },
+      );
     }
   }
 

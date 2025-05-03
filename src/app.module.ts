@@ -9,7 +9,7 @@ import databaseConfig from './config/database.config';
 import environmentValidation from './config/environment.validation';
 import jwtConfig from './config/jwt.config';
 import { DataResponseInterceptor } from './common/interceptors/data-response/data-response.interceptor';
-import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { PaginationModule } from './common/pagination/pagination.module';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import securityConfig from './config/security.config';
@@ -27,14 +27,13 @@ import { ReviewModule } from './review/review.module';
 import { CartModule } from './cart/cart.module';
 import { OrderModule } from './order/order.module';
 import paymentGatewayConfig from './config/payment-gateway.config';
+import { UploadsModule } from './uploads/uploads.module';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 
 const ENV = process.env.NODE_ENV;
 //console.log({ ENV });
 @Module({
   imports: [
-    UserModule,
-    AuthModule,
-    PaginationModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: !ENV ? '.env' : `.env.${ENV}`,
@@ -46,6 +45,17 @@ const ENV = process.env.NODE_ENV;
         paymentGatewayConfig,
       ],
       validationSchema: environmentValidation,
+    }),
+    ThrottlerModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => ({
+        throttlers: [
+          {
+            ttl: config.get<number>('security.throttle.ttl'),
+            limit: config.get<number>('security.throttle.limit'),
+          },
+        ],
+      }),
     }),
     MongooseModule.forRootAsync({
       inject: [ConfigService],
@@ -67,8 +77,8 @@ const ENV = process.env.NODE_ENV;
         },
       }),
     }),
-    MailModule,
-    LocalizationModule,
+    UserModule,
+    AuthModule,
     CategoryModule,
     SubCategoryModule,
     BrandModule,
@@ -80,6 +90,10 @@ const ENV = process.env.NODE_ENV;
     ReviewModule,
     CartModule,
     OrderModule,
+    MailModule,
+    LocalizationModule,
+    PaginationModule,
+    UploadsModule,
   ],
   controllers: [],
   providers: [
@@ -90,6 +104,10 @@ const ENV = process.env.NODE_ENV;
     {
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
     },
   ],
 })

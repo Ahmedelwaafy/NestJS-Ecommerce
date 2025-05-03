@@ -18,7 +18,7 @@ import { CreateOrderDto } from './dto/create-order.dto';
 import { Order } from './schemas/order.schema';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { Role } from 'src/auth/enums/role.enum';
-import { AuthGuard } from 'src/auth/gaurds/auth.guard';
+import { AuthGuard } from 'src/auth/guards/auth.guard';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
 import { ActiveUser } from 'src/auth/decorators/active-user.decorator';

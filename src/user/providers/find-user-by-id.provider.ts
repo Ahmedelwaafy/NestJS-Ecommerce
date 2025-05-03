@@ -15,7 +15,7 @@ export class FindUserByIdProvider {
   ) {}
 
   async findById(id: string) {
-     let user: UserDocument;
+    let user: UserDocument;
     try {
       user = await this.userModel.findById(id).select(ExcludedUserFields());
     } catch (error) {

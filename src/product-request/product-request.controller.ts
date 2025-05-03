@@ -15,7 +15,7 @@ import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { ActiveUser } from 'src/auth/decorators/active-user.decorator';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { Role } from 'src/auth/enums/role.enum';
-import { AuthGuard } from 'src/auth/gaurds/auth.guard';
+import { AuthGuard } from 'src/auth/guards/auth.guard';
 import { ActiveUserData } from 'src/auth/interfaces/active-user.interface';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
 import { PaginationAndFiltersDto } from 'src/common/dto/base-filters.dto';
