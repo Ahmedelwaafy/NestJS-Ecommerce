@@ -9,15 +9,17 @@ import { User, UserDocument } from '../schemas/user.schema';
 import { ExcludedUserFields } from '../utils';
 
 @Injectable()
-export class FindUserByIdProvider {
+export class FindUserByGoogleIdProvider {
   constructor(
     @InjectModel(User.name) private readonly userModel: Model<User>,
   ) {}
 
-  async findById(id: string) {
+  async findById(googleId: string) {
     let user: UserDocument;
     try {
-      user = await this.userModel.findById(id).select(ExcludedUserFields());
+      user = await this.userModel
+        .findOne({ googleId })
+        .select(ExcludedUserFields());
     } catch (error) {
       throw new RequestTimeoutException('an error occurred', {
         description: error.message || 'unable to connect to the database',

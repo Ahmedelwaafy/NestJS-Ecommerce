@@ -16,5 +16,5 @@ git push origin development
 git checkout security-feature
 
 
-# Step 5: ./git-automation.sh "chore: merge security-feature branch to development branch"
+# Step 5: ./git-automation.sh "feat:(auth): add outh 'google'"
 #git merge development

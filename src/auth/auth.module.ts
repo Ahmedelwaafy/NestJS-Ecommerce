@@ -10,6 +10,7 @@ import { GenerateTokensProvider } from './providers/generate-tokens.provider';
 import { SignOutProvider } from './providers/sign-out.provider';
 import { RefreshTokenProvider } from './providers/refresh-token.provider';
 import { ForgetPasswordProvider } from './providers/forget-password.provider';
+import { GoogleAuthenticationService } from './OAuth/providers/google-authentication.service';
 
 @Module({
   controllers: [AuthController],
@@ -25,6 +26,7 @@ import { ForgetPasswordProvider } from './providers/forget-password.provider';
     GenerateTokensProvider,
     RefreshTokenProvider,
     ForgetPasswordProvider,
+    GoogleAuthenticationService,
   ],
   imports: [forwardRef(() => UserModule)],
   exports: [AuthService, HashingProvider, AuthGuard],
