@@ -23,10 +23,16 @@ export class User {
   email: string;
 
   @Prop({
-    required: true,
+    required: false,
     type: String,
   })
-  password: string;
+  password?: string;
+
+  @Prop({
+    required: false,
+    type: String,
+  })
+  googleId?: string;
 
   @Prop({
     required: true,

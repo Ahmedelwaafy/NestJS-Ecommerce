@@ -1,24 +1,26 @@
-import { User } from './schemas/user.schema';
 import {
   forwardRef,
   Inject,
   Injectable,
-  NotFoundException,
-  RequestTimeoutException,
+  RequestTimeoutException
 } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateUserProvider } from './providers/create-user.provider';
-import { PaginationService } from 'src/common/pagination/providers/pagination.service';
+import { HashingProvider } from 'src/auth/providers/hashing.provider';
 import { PaginationQueryDto } from 'src/common/pagination/dto/pagination-query.dto';
 import { Paginated } from 'src/common/pagination/interfaces/paginated.interface';
-import { GetUsersBaseDto, GetUsersDto } from './dto/get-users.dto';
-import { FindUserByIdProvider } from './providers/find-user-by-id.provider';
-import { HashingProvider } from 'src/auth/providers/hashing.provider';
+import { PaginationService } from 'src/common/pagination/providers/pagination.service';
+import { CreateUserDto } from './dto/create-user.dto';
+import { GetUsersBaseDto } from './dto/get-users.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { CreateUserProvider } from './providers/create-user.provider';
 import { FindUserByEmailProvider } from './providers/find-user-by-email.provider';
-import { ExcludedUserFields, ExcludedFields } from './utils';
+import { FindUserByGoogleIdProvider } from './providers/find-user-by-google-id.provider';
+import { User } from './schemas/user.schema';
+import { ExcludedFields, ExcludedUserFields } from './utils';
+import { FindUserByIdProvider } from './providers/find-user-by-id.provider';
+import { CreateGoogleUserProvider } from './providers/create-google-user.provider';
+import { GoogleUser } from './interfaces';
 
 /**
  * UserService
@@ -30,7 +32,9 @@ export class UserService {
     @InjectModel(User.name) private readonly userModel: Model<User>,
     private readonly createUserProvider: CreateUserProvider,
     private readonly findUserByIdProvider: FindUserByIdProvider,
+    private readonly findUserByGoogleIdProvider: FindUserByGoogleIdProvider,
     private readonly findUserByEmailProvider: FindUserByEmailProvider,
+    private readonly createGoogleUserProvider: CreateGoogleUserProvider,
     private readonly paginationService: PaginationService,
     @Inject(forwardRef(() => HashingProvider))
     private readonly hashingProvider: HashingProvider,
@@ -123,5 +127,13 @@ export class UserService {
         description: 'unable to connect to the database',
       });
     }
+  }
+
+  public async findOneByGoogleId(googleId: string) {
+    return this.findUserByGoogleIdProvider.findById(googleId);
+  }
+
+  public async createGoogleUser(googleUser: GoogleUser) {
+    return this.createGoogleUserProvider.createGoogleUser(googleUser);
   }
 }
